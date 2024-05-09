@@ -1,0 +1,15 @@
+---
+# See https://pandoc.org/MANUAL.html#epub-metadata for full set of options
+---
+cover-image: ./images/cover-epub.png
+creator:
+- role: collector
+  text: Adam Shannon
+# identifier:
+# - scheme: DOI
+#   text: doi:10.234234.234/33
+publisher: TODO
+# rights: © 2007 John Smith, CC BY-NC
+ibooks:
+  version: 0.1.0
+---
