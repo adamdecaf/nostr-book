@@ -1,7 +1,9 @@
 #!/bin/bash
 
-chapters=(
+inputs=(
     include/intro.md
+
+    # TODO: Will need to add sections inbetween groups of NIPs
 
     nips/01.md   # Basic protocol flow description
     nips/02.md   # Follow List
@@ -67,6 +69,12 @@ chapters=(
 
     include/conclusion.md
 )
+
+chapters=()
+for input in "${inputs[@]}"
+do
+    chapters+=("include/pagebreak.md" "$input")
+done
 
 function create_epub() {
     # TODO(adam): Add epub flags
