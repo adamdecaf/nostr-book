@@ -4,7 +4,7 @@
 
 ## Get the Book
 
-nostr-book is available in [ePUB](nostr-book.epub) or [PDF](nostr-book.pdf).
+nostr-book is available in [ePUB](https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub) or [PDF](https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf).
 
 ## Contributing
 
