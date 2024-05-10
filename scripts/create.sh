@@ -70,10 +70,18 @@ inputs=(
     include/conclusion.md
 )
 
+format=$1
+
 chapters=()
 for input in "${inputs[@]}"
 do
-    chapters+=("include/pagebreak.md" "$input")
+    if [[ "$format" == "pdf" ]];
+    then
+        # The PDF engine needs page breaks inserted so each section is separated a bit more.
+        chapters+=("include/pagebreak.md" "$input")
+    else
+        chapters+=("$input")
+    fi
 done
 
 function create_epub() {
@@ -103,7 +111,6 @@ function create_pdf() {
            "${chapters[@]}"
 }
 
-format=$1
 case "$format" in
     epub)
         echo "Building ePUB"
