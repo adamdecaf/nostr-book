@@ -81,6 +81,7 @@ function create_epub() {
     # https://pandoc.org/MANUAL.html#option--epub-chapter-level
     pandoc --metadata-file=metadata.yml \
            --epub-metadata=./metadata-epub.yml \
+           --highlight-style=monochrome \
            -s -o nostr-book.epub \
            "${chapters[@]}"
 }
@@ -92,9 +93,12 @@ function create_pdf() {
     pandoc --metadata-file=metadata.yml \
            --toc --toc-depth 3 \
            --pdf-engine=xelatex \
-           --highlight-style=monochrome \
            --columns=72 --wrap=auto \
-           -V geometry:margin=0.75in \
+           --listings -H listings-settings.tex \
+           -V fontsize="10pt" \
+           -V mainfont="Palatino" \
+           -V monofont="Monaco" \
+           -V geometry:margin="0.75in" \
            -s -o nostr-book.pdf \
            "${chapters[@]}"
 }
