@@ -5,7 +5,7 @@ inputs=(
 
     include/01-overview.md
     nips/01.md # Basic protocol flow description
-
+    # TODO: explain metadata more
 
     include/02-communication.md
     nips/10.md # Conventions for clients' use of e and p tags in text events
@@ -67,7 +67,7 @@ inputs=(
     nips/75.md # Zap Goals
 
 
-    include/09-third-parties.md # TODO(adam): pages have some Latex errors
+    include/09-third-parties.md
     nips/26.md # Delegated Event Signing
     nips/59.md # Gift Wrap
     nips/46.md # Nostr Connect
@@ -141,6 +141,9 @@ function create_pdf() {
            -V geometry:margin="0.75in" \
            -s -o nostr-book.pdf \
            "${chapters[@]}"
+
+    # -V mainfontfallback="Apple Color Emoji"
+    # -V monofontfallback="Apple Color Emoji"
 }
 
 case "$format" in
