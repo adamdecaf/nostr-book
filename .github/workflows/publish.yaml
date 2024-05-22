@@ -1,4 +1,4 @@
-name: Go
+name: Publish Book
 
 on:
   schedule:
@@ -10,7 +10,7 @@ jobs:
     name: Publish Book
     runs-on: macos-latest
     steps:
-    - name: Check out code into the Go module directory
+    - name: Check out code
       uses: actions/checkout@v4
 
     - name: Install Dependencies
