@@ -33,6 +33,6 @@ jobs:
 
     - name: Commit and Push
       run: |
-        git commit -A nostr-book.*
+        git add -A nostr-book.*
         git commit -m "chore: automated publishing"
         git push origin master
