@@ -15,9 +15,9 @@ jobs:
 
     - name: Install Dependencies
       run: |
-        brew install basictex pandoc
-        echo 'eval "$(/usr/libexec/path_helper)"' >> ~/.bashrc
-        source ~/.bashrc
+        brew install pandoc
+        brew install --cask basictex
+        eval "$(/usr/libexec/path_helper)"
 
     - name: Download NIPs
       run: |
@@ -28,6 +28,7 @@ jobs:
 
     - name: Create books
       run: |
+        export PATH="/Library/TeX/texbin:$PATH"
         make all
 
     - name: Commit and Push
