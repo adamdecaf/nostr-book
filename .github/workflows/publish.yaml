@@ -5,6 +5,9 @@ on:
     - cron: "0 12 * * *" # "12:00 UTC" - https://crontab.guru/#0_12_*_*_*e
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     name: Publish Book
