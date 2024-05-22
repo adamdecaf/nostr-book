@@ -16,7 +16,8 @@ jobs:
     - name: Install Dependencies
       run: |
         brew install basictex pandoc
-        eval "$(/usr/libexec/path_helper)"
+        echo 'eval "$(/usr/libexec/path_helper)"' >> ~/.bashrc
+        source ~/.bashrc
 
     - name: Download NIPs
       run: |
