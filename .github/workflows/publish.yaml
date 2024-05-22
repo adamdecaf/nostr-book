@@ -36,6 +36,9 @@ jobs:
 
     - name: Commit and Push
       run: |
+        git config user.name "github-actions[bot]"
+        git config user.email "support@github.com"
+
         git add -A nostr-book.*
         git commit -m "chore: automated publishing"
         git push origin master
