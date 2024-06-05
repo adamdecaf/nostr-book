@@ -2,6 +2,7 @@
 
 inputs=(
     include/intro.md
+    include/git.md
 
     include/01-overview.md
     nips/01.md # Basic protocol flow description
