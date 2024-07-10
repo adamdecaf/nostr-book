@@ -2,29 +2,33 @@
 To provide readers with the most up-to-date information, this page showcases the latest git commit from the nostr-protocol/nips repository on GitHub. This commit log offers a snapshot of the most recent changes, updates, and enhancements made to the Nostr Improvement Proposals (NIPs). By incorporating this information, readers can gain insight into the ongoing development and evolution of the Nostr protocol, ensuring they are informed about the latest contributions and modifications from the community. This inclusion underscores the dynamic nature of the project and highlights the collaborative efforts driving its progress.
 
 ```shell
-commit 8c47577ecb6b3ae6ad840e5b4d187a3f3a6b97c8
-Author: Cody Casterline <cody.casterline@gmail.com>
-Date:   Fri Jul 5 09:31:23 2024 -0700
+commit ae1906ec7943a6bd756f05d2cd2fb2a041398921
+Author: fiatjaf_ <fiatjaf@gmail.com>
+Date:   Wed Jul 10 09:00:26 2024 -0300
 
-    More precisely document since/until bounds. (#1284)
+    relay-based event access-control with the `["-"]` tag (#1030)
     
-    * More precisely document since/until bounds.
+    * `["protected"]` tag.
     
-    Lower in this document, this is expressed as "since <= created_at <= until".
+    * add note about default case for most relays.
     
-    But the English description said that these values had to be "newer than" or "older than".
+    * rename tag to ["-"] and reword spec.
     
-    These two were in conflict. I assume the inclusive behavior is the intended one, since that documentation was added later to clarify. This just makes both cases match.
+    * something
     
-    * Update 01.md
+    Co-authored-by: monlovesmango <96307647+monlovesmango@users.noreply.github.com>
     
-    Co-authored-by: Alex Gleason <alex@alexgleason.me>
+    * mention NIP-42
     
-    * Update 01.md
+    Co-authored-by: monlovesmango <96307647+monlovesmango@users.noreply.github.com>
     
-    Co-authored-by: Alex Gleason <alex@alexgleason.me>
+    * user -> client
+    
+    Co-authored-by: monlovesmango <96307647+monlovesmango@users.noreply.github.com>
+    
+    * simplify text.
     
     ---------
     
-    Co-authored-by: Alex Gleason <alex@alexgleason.me>
+    Co-authored-by: monlovesmango <96307647+monlovesmango@users.noreply.github.com>
 ```
