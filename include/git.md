@@ -2,9 +2,9 @@
 To provide readers with the most up-to-date information, this page showcases the latest git commit from the nostr-protocol/nips repository on GitHub. This commit log offers a snapshot of the most recent changes, updates, and enhancements made to the Nostr Improvement Proposals (NIPs). By incorporating this information, readers can gain insight into the ongoing development and evolution of the Nostr protocol, ensuring they are informed about the latest contributions and modifications from the community. This inclusion underscores the dynamic nature of the project and highlights the collaborative efforts driving its progress.
 
 ```shell
-commit 93d9a12f1693582b1a6231f8fe3e3832ba4fa8b3
-Author: AsaiToshiya <to.asai.60@gmail.com>
-Date:   Thu Feb 20 21:11:22 2025 +0900
+commit 7cc120ecb01963e37f9adcd3b57b8efc1dd9e828
+Author: cypherhoodlum <82510823+cypherhoodlum@users.noreply.github.com>
+Date:   Fri Feb 21 13:57:03 2025 +0000
 
-    Update BREAKING.md
+    Optional t tag to git repository announcements (#1798)
 ```
