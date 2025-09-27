@@ -13,6 +13,7 @@ inputs=(
     nips/14.md # Subject tag in text events
     nips/23.md # Long-form Content
     nips/24.md # Extra metadata fields and tags
+    nips/EE.md # E2EE Messaging using MLS Protocol
     nips/17.md # Private Direct Messages
     nips/04.md # Encrypted Direct Message --- unrecommended: deprecated in favor of NIP-17
     nips/40.md # Expiration Timestamp
@@ -84,7 +85,8 @@ inputs=(
     nips/54.md # Wiki
     nips/34.md # git stuff
     nips/94.md # File Metadata
-    nips/96.md # HTTP File Storage Integration
+    nips/96.md # HTTP File Storage Integration --- unrecommwnded: deprecated in favor of NIP-B7
+    nips/B7.md # Blossom
     nips/78.md # Application-specific data
 
 
