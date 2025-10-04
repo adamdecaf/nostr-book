@@ -1,6 +1,6 @@
 ## Introduction
 
-Welcome to the nostr-book, which is a streamlined guide to the [Nostr Notes in Progress (NIPs)](https://github.com/nostr-protocol/nips). Instead of sticking to the original numerical order, I’ve grouped similar NIPs together to make them easier to understand and more practical to use. Whether you’re new to Nostr or a seasoned participant, this reorganized format should help you get a better grip on how things work and what’s being developed.
+Welcome to the Nostr Books of NIPs, which is a streamlined guide to the [Nostr Implementation Possibilities (NIPs)](https://github.com/nostr-protocol/nips). Instead of sticking to the original numerical order, I’ve grouped similar NIPs together to make them easier to understand and more practical to use. Whether you’re new to Nostr or a seasoned participant, this reorganized format should help you get a better grip on how things work and what’s being developed.
 
 I want to be clear: I didn’t write the NIPs. All the credit goes to the original authors and contributors of these notes. My contribution has been to sort these NIPs into a flow that makes sense and brings out the connections between them, making everything more accessible.
 
