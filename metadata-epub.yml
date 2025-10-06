@@ -1,7 +1,7 @@
 ---
 # See https://pandoc.org/MANUAL.html#epub-metadata for full set of options
 ---
-cover-image: ./images/cover-epub.png
+cover-image: ./images/cover.png
 creator:
 - role: collector
   text: Adam Shannon
