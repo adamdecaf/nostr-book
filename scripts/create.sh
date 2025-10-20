@@ -28,7 +28,7 @@ inputs=(
     nips/30.md # Custom Emoji
     nips/18.md # Reposts
     nips/27.md # Text Note References
-    nips/08.md # Handling Mentions --- unrecommended: deprecated in favor of NIP-17
+    nips/08.md # Handling Mentions --- unrecommended: deprecated in favor of NIP-27
     nips/38.md # User Statuses
     nips/58.md # Badges
     nips/39.md # External Identities in Profiles
