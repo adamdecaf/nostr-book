@@ -26,7 +26,7 @@ jobs:
         run: make epub
 
       - name: Upload EPUB
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nostr-book.epub
           path: nostr-book.epub
@@ -58,7 +58,7 @@ jobs:
           make pdf
 
       - name: Upload PDF
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: nostr-book.pdf
           path: nostr-book.pdf
