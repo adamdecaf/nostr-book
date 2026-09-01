@@ -4,7 +4,9 @@ The [Nostr Implementation Possibilities (NIPs)](https://github.com/nostr-protoco
 
 NIPs are the community's specs for how Nostr clients and relays interoperate. Upstream they live as numbered markdown files. This project leaves that text alone, groups related NIPs into chapters, and builds an ebook from the result.
 
-The book is compiled by Adam Shannon. The NIPs are written by their original authors.
+The book is compiled by Adam Shannon. The NIPs are written by their original authors. Cover image by [@stl1988](https://github.com/stl1988), generated with Seedream v4.
+
+![The web reader, with a chapter list on the left and NIP-01 on the right](images/web-reader.png)
 
 ## Get the book
 
@@ -30,6 +32,14 @@ Chapters, not NIP numbers:
 12. Developers — browser and Android signers, app handlers
 
 Unrecommended NIPs stay in the book, marked as such in the chapter intros. You will still meet them in the wild.
+
+## Other books
+
+Same idea, different specs. The spec text in each book is unchanged from upstream.
+
+- [Lightning Book of BOLTs](https://github.com/adamdecaf/lightning-bolt-book) ([read](https://adamdecaf.github.io/lightning-bolt-book/))
+- [Cashu Book of NUTs](https://github.com/adamdecaf/cashu-nuts-book) ([read](https://adamdecaf.github.io/cashu-nuts-book/))
+- [Bitcoin Book of BIPs](https://github.com/adamdecaf/bitcoin-bips-book) ([read](https://adamdecaf.github.io/bitcoin-bips-book/))
 
 ## Contributing
 
