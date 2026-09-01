@@ -8,7 +8,7 @@ The book is compiled by Adam Shannon. The NIPs are written by their original aut
 
 ## Get the book
 
-- Website: [nostr-book.org](https://nostr-book.org)
+- Website: [adamdecaf.github.io/nostr-book](https://adamdecaf.github.io/nostr-book/)
 - [ePUB](https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub)
 - [PDF](https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf)
 

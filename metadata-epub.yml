@@ -8,7 +8,7 @@ creator:
 # identifier:
 # - scheme: DOI
 #   text: doi:10.234234.234/33
-publisher: nostr-book.org
+publisher: https://adamdecaf.github.io/nostr-book/
 # rights: © 2007 John Smith, CC BY-NC
 ibooks:
   version: 0.1.0
