@@ -1,10 +1,15 @@
 ---
-title:  'Nostr Book of NIPs'
+title: 'Nostr Book of NIPs'
 author:
-  - TODO
-keywords: [nostr, nips, decentralized]
+  - compiled by Adam Shannon
+keywords: [nostr, nips, decentralized, protocol, relays]
 abstract: |
-  This is the abstract.
+  The Nostr Book of NIPs is a readable compilation of Nostr Implementation
+  Possibilities, the specifications that describe how Nostr clients and
+  relays talk to each other. Instead of the original numerical order,
+  related NIPs are grouped into chapters on communication, social features,
+  groups, relays, payments, and more.
 
-  It consists of two paragraphs.
+  The NIP text is unchanged from the community-maintained
+  nostr-protocol/nips repository. Compiled by Adam Shannon.
 ---

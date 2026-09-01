@@ -1,18 +1,103 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
-    <title>Nostr By the NIPs</title>
+    <meta charset="utf-8" />
+    <title>Nostr Book of NIPs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Nostr Implementation Possibilities, compiled into a readable book. Available as ePUB and PDF." />
+    <style>
+      :root {
+        color-scheme: light;
+        --bg: #f6f1e8;
+        --ink: #1c1916;
+        --muted: #5c564e;
+        --rule: #d7cfc2;
+        --link: #8a3b12;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 18px/1.55 Georgia, "Times New Roman", serif;
+      }
+      main {
+        max-width: 36rem;
+        margin: 0 auto;
+        padding: 3.5rem 1.25rem 4rem;
+      }
+      h1 {
+        font-size: 2rem;
+        font-weight: normal;
+        letter-spacing: 0.01em;
+        margin: 0 0 0.35rem;
+      }
+      .byline {
+        color: var(--muted);
+        font-size: 0.95rem;
+        margin: 0 0 1.75rem;
+      }
+      p { margin: 0 0 1rem; }
+      .downloads {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem 0.75rem;
+        margin: 1.5rem 0 2rem;
+      }
+      .downloads a {
+        display: inline-block;
+        padding: 0.45rem 0.9rem;
+        border: 1px solid var(--ink);
+        color: var(--ink);
+        text-decoration: none;
+        font-size: 0.95rem;
+      }
+      .downloads a:hover {
+        background: var(--ink);
+        color: var(--bg);
+      }
+      a { color: var(--link); }
+      footer {
+        margin-top: 2.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      footer a { color: var(--muted); }
+    </style>
   </head>
   <body>
-    <h3>nostr book</h3>
+    <main>
+      <h1>Nostr Book of NIPs</h1>
+      <p class="byline">compiled by Adam Shannon</p>
 
-    <p>
-      nostr-book is available in <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a> or <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a> formats.
-    </p>
+      <p>
+        The Nostr Implementation Possibilities, grouped by theme and bound as a book.
+        The NIP text is unchanged from the community repository; the reading order
+        and chapter introductions are new.
+      </p>
 
-    <p>
-      <a href="mailto:contact@nostr-book.org">contact@nostr-book.org</a>
-    </p>
+      <p>
+        Start with NIP-01 if you are new. Skip around once you know the event shape.
+      </p>
+
+      <div class="downloads">
+        <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">Download ePUB</a>
+        <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">Download PDF</a>
+        <a href="https://github.com/adamdecaf/nostr-book">Source on GitHub</a>
+      </div>
+
+      <footer>
+        <p>
+          NIP changes belong upstream at
+          <a href="https://github.com/nostr-protocol/nips">nostr-protocol/nips</a>.
+        </p>
+        <p>
+          <a href="mailto:contact@nostr-book.org">contact@nostr-book.org</a>
+        </p>
+      </footer>
+    </main>
   </body>
 </html>

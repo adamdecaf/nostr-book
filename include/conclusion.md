@@ -1,9 +1,9 @@
 ## Conclusion
 
-Thank you for exploring the nostr-book. My hope is that this reorganized collection of Nostr Notes in Progress (NIPs) has provided you with a clearer and more structured understanding of the Nostr protocol. By grouping similar NIPs together, the aim was to create a logical flow that enhances comprehension and makes the information more accessible to everyone.
+That's the book. The NIPs themselves will keep changing — new kinds, better encryption, ideas that get tried and later marked unrecommended. This compilation is a map of the territory at one point in time, not the territory.
 
-As we wrap up this book, remember that the journey with Nostr doesn’t end here. The protocol is continuously evolving, and your engagement and contributions are crucial for its growth and refinement. I encourage you to participate in the discussions, contribute your ideas, and help in developing this open and decentralized platform.
+If you want to change a NIP, do not open a pull request here. Go to [nostr-protocol/nips](https://github.com/nostr-protocol/nips) and talk to the people who implement this stuff. This repository is only the binding: chapter intros, reading order, and the scripts that turn the specs into an ebook.
 
-Once again, all the credit for the content in this book goes to the original authors of the NIPs. This compilation is merely a tool to assist in navigating their innovative work. Whether you’re a developer, researcher, or enthusiast, your insights and enthusiasm are what will propel Nostr forward.
+If a grouping feels wrong, or a chapter intro undersells a NIP, those words are mine and I am happy to hear about them.
 
-Let’s keep the spirit of innovation and collaboration alive. Here's to building a more connected and decentralized future together!
+Thanks for reading. Credit for the protocol belongs to the NIP authors. I hope having their work in one place, in an order that tells a story, makes it easier to build the next client, relay, or weird little kind that nobody expected.
