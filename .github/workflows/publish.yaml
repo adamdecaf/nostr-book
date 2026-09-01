@@ -49,7 +49,7 @@ jobs:
           fi
 
       - name: GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: book-${{ github.run_id }}
           name: Nostr Book of NIPs (${{ github.run_number }})
