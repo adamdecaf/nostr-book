@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-59 · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="third-parties.html" accesskey="p" rel="prev">Third Parties</a>
+        <a class="pager-next" href="nip-46.html" accesskey="n" rel="next">NIP-46</a>
+      </nav>
+      <h2 data-number="12.1" id="nip-59">NIP-59</h2>
+      <h3 data-number="12.1.1" id="nip-59-gift-wrap">Gift Wrap</h3>
+      <p><code>optional</code> <code>relay</code></p>
+      <p>This NIP defines a protocol for encapsulating any nostr event.
+      This makes it possible to obscure most metadata for a given event,
+      perform collaborative signing, and more.</p>
+      <p>This NIP <em>does not</em> define any messaging protocol.
+      Applications of this NIP should be defined separately.</p>
+      <p>This NIP relies on <a href="nip-44.html">NIP-44</a>’s versioned
+      encryption algorithms.</p>
+      <h3 data-number="12.1.2" id="nip-59-overview">Overview</h3>
+      <p>This protocol uses three main concepts to protect the
+      transmission of a target event: <code>rumor</code>s,
+      <code>seal</code>s, and <code>gift wrap</code>s.</p>
+      <ul>
+      <li>A <code>rumor</code> is a regular nostr event, but is
+      <strong>not signed</strong>. This means that if it is leaked, it
+      cannot be verified.</li>
+      <li>A <code>rumor</code> is serialized to JSON, encrypted, and
+      placed in the <code>content</code> field of a <code>seal</code>.
+      The <code>seal</code> is then signed by the author of the note.
+      The only information publicly available on a <code>seal</code> is
+      who signed it, but not what was said.</li>
+      <li>A <code>seal</code> is serialized to JSON, encrypted, and
+      placed in the <code>content</code> field of a
+      <code>gift wrap</code>.</li>
+      </ul>
+      <p>This allows the isolation of concerns across layers:</p>
+      <ul>
+      <li>A rumor carries the content but is unsigned, which means if
+      leaked it will be rejected by relays and clients, and can’t be
+      authenticated. This provides a measure of deniability.</li>
+      <li>A seal identifies the author without revealing the content or
+      the recipient.</li>
+      <li>A gift wrap can add metadata (recipient, tags, a different
+      author) without revealing the true author.</li>
+      </ul>
+      <h3 data-number="12.1.3" id="nip-59-protocol-description">Protocol
+      Description</h3>
+      <h4 data-number="12.1.3.1" id="nip-59-the-rumor-event-kind">1. The
+      Rumor Event Kind</h4>
+      <p>A <code>rumor</code> is the same thing as an unsigned event.
+      Any event kind can be made a <code>rumor</code> by removing the
+      signature.</p>
+      <h4 data-number="12.1.3.2" id="nip-59-the-seal-event-kind">2. The
+      Seal Event Kind</h4>
+      <p>A <code>seal</code> is a <code>kind:13</code> event that wraps
+      a <code>rumor</code> with the sender’s regular key. The
+      <code>seal</code> is <strong>always</strong> encrypted to a
+      receiver’s pubkey but there is no <code>p</code> tag pointing to
+      the receiver. There is no way to know who the rumor is for without
+      the receiver’s or the sender’s private key. The only public
+      information in this event is who is signing it.</p>
+      <pre class="json"><code>{
+  &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+  &quot;pubkey&quot;: &quot;&lt;real author&#39;s pubkey&gt;&quot;,
+  &quot;content&quot;: &quot;&lt;encrypted rumor&gt;&quot;,
+  &quot;kind&quot;: 13,
+  &quot;created_at&quot;: 1686840217,
+  &quot;tags&quot;: [],
+  &quot;sig&quot;: &quot;&lt;real author&#39;s pubkey signature&gt;&quot;
+}</code></pre>
+      <p>Tags MUST always be empty in a <code>kind:13</code>. The inner
+      event MUST always be unsigned.</p>
+      <h4 data-number="12.1.3.3" id="nip-59-gift-wrap-event-kind">3.
+      Gift Wrap Event Kind</h4>
+      <p>A <code>gift wrap</code> event is a <code>kind:1059</code>
+      event that wraps any other event. <code>tags</code> SHOULD include
+      any information needed to route the event to its intended
+      recipient, including the recipient’s <code>p</code> tag or <a
+      href="nip-13.html">NIP-13</a> proof of work.</p>
+      <pre class="json"><code>{
+  &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+  &quot;pubkey&quot;: &quot;&lt;random, one-time-use pubkey&gt;&quot;,
+  &quot;content&quot;: &quot;&lt;encrypted kind 13&gt;&quot;,
+  &quot;kind&quot;: 1059,
+  &quot;created_at&quot;: 1686840217,
+  &quot;tags&quot;: [[&quot;p&quot;, &quot;&lt;recipient pubkey&gt;&quot;]],
+  &quot;sig&quot;: &quot;&lt;random, one-time-use pubkey signature&gt;&quot;
+}</code></pre>
+      <h4 data-number="12.1.3.4"
+      id="nip-59-ephemeral-gift-wrap-event-kind">4. Ephemeral Gift Wrap
+      Event Kind</h4>
+      <p>An ephemeral gift wrap is a <code>kind:21059</code> event. It
+      has the same structure as <code>kind:1059</code> but follows
+      ephemeral event semantics (relays MUST NOT store it).</p>
+      <pre class="json"><code>{
+  &quot;id&quot;: &quot;&lt;id&gt;&quot;,
+  &quot;pubkey&quot;: &quot;&lt;random, one-time-use pubkey&gt;&quot;,
+  &quot;content&quot;: &quot;&lt;encrypted kind 13&gt;&quot;,
+  &quot;kind&quot;: 21059,
+  &quot;created_at&quot;: 1686840217,
+  &quot;tags&quot;: [[&quot;p&quot;, &quot;&lt;recipient pubkey&gt;&quot;]],
+  &quot;sig&quot;: &quot;&lt;random, one-time-use pubkey signature&gt;&quot;
+}</code></pre>
+      <p><code>kind:1059</code> is intended for regular direct messages
+      and asynchronous communication where message persistence and
+      offline delivery are expected, such as in NIP-17.
+      <code>kind:21059</code> is intended for real-time applications
+      that do not require asynchronous operations and where messages are
+      only relevant to currently connected recipients, such as live chat
+      or real-time gaming.</p>
+      <h3 data-number="12.1.4"
+      id="nip-59-encrypting-payloads">Encrypting Payloads</h3>
+      <p>Encryption is done following <a href="nip-44.html">NIP-44</a>
+      on the JSON-encoded event. Place the encryption payload in the
+      <code>.content</code> of the wrapper event (either a
+      <code>seal</code> or a <code>gift wrap</code>).</p>
+      <h3 data-number="12.1.5" id="nip-59-spam-protection">Spam
+      Protection</h3>
+      <p>Gift wrap events are signed by random one-time keys, so relays
+      cannot rely on pubkey-based anti-spam or anti-sybil measures
+      (e.g. reputation, trust scores, rate limits by key). To mitigate
+      this, a relay may enforce a <a href="nip-42.html">NIP-42</a>
+      <code>auth-required</code> policy and authenticate clients before
+      accepting gift wraps. Therefore clients SHOULD support
+      authenticating to such relays using the user’s real identity.
+      Because NIP-42 authentication is ephemeral (it is not recorded in
+      the event signature), it does not fully undermine the privacy or
+      deniability properties of gift wrapping.</p>
+      <h3 data-number="12.1.6" id="nip-59-other-considerations">Other
+      Considerations</h3>
+      <p>If a <code>rumor</code> is intended for more than one party, or
+      if the author wants to retain an encrypted copy, a single
+      <code>rumor</code> may be wrapped and addressed for each recipient
+      individually.</p>
+      <p>The canonical <code>created_at</code> time belongs to the
+      <code>rumor</code>. All other timestamps SHOULD be tweaked to
+      thwart time-analysis attacks. Note that some relays don’t serve
+      events dated in the future, so all timestamps SHOULD be in the
+      past.</p>
+      <p>Relays may choose not to store gift wrapped events due to them
+      not being publicly useful. Clients MAY choose to attach a certain
+      amount of proof-of-work to the wrapper event per <a
+      href="nip-13.html">NIP-13</a> in a bid to demonstrate that the
+      event is not spam or a denial-of-service attack.</p>
+      <p>To protect recipient metadata, relays SHOULD guard access to
+      <code>kind 1059</code> events based on user AUTH. When possible,
+      clients should only send wrapped events to relays that offer this
+      protection.</p>
+      <p>To protect recipient metadata, relays SHOULD only serve
+      <code>kind 1059</code> events intended for the marked recipient.
+      When possible, clients should only send wrapped events to
+      <code>read</code> relays for the recipient that implement AUTH,
+      and refuse to serve wrapped events to non-recipients.</p>
+      <p>When adding expiration tags to both <code>seal</code> and
+      <code>gift wrap</code> layers, implementations SHOULD use
+      independent random timestamps for each layer. Using different
+      <code>created_at</code> values increases timing variance and helps
+      protect against metadata correlation attacks.</p>
+      <p>Since signing keys are random, relays SHOULD delete
+      <code>kind:1059</code> events whose p-tag matches the signer of <a
+      href="nip-09.html">NIP-09</a> deletions or <a
+      href="nip-62.html">NIP-62</a> vanish requests.</p>
+      <h3 data-number="12.1.7" id="nip-59-an-example">An Example</h3>
+      <p>Let’s send a wrapped <code>kind 1</code> message between two
+      parties asking “Are you going to the party tonight?”</p>
+      <ul>
+      <li>Author private key:
+      <code>0beebd062ec8735f4243466049d7747ef5d6594ee838de147f8aab842b15e273</code></li>
+      <li>Recipient private key:
+      <code>e108399bd8424357a710b606ae0c13166d853d327e47a6e5e038197346bdbf45</code></li>
+      <li>Ephemeral wrapper key:
+      <code>4f02eac59266002db5801adc5270700ca69d5b8f761d8732fab2fbf233c90cbd</code></li>
+      </ul>
+      <p>Note that this messaging protocol should not be used in
+      practice, this is just an example. Refer to other NIPs for
+      concrete messaging protocols that depend on gift wraps.</p>
+      <h4 data-number="12.1.7.1" id="nip-59-create-an-event">1. Create
+      an event</h4>
+      <p>Create a <code>kind 1</code> event with the message, the
+      receivers, and any other tags you want, signed by the author. Do
+      not sign the event.</p>
+      <pre class="json"><code>{
+  &quot;created_at&quot;: 1691518405,
+  &quot;content&quot;: &quot;Are you going to the party tonight?&quot;,
+  &quot;tags&quot;: [],
+  &quot;kind&quot;: 1,
+  &quot;pubkey&quot;: &quot;611df01bfcf85c26ae65453b772d8f1dfd25c264621c0277e1fc1518686faef9&quot;,
+  &quot;id&quot;: &quot;9dd003c6d3b73b74a85a9ab099469ce251653a7af76f523671ab828acd2a0ef9&quot;
+}</code></pre>
+      <h4 data-number="12.1.7.2" id="nip-59-seal-the-rumor">2. Seal the
+      rumor</h4>
+      <p>Encrypt the JSON-encoded <code>rumor</code> with a conversation
+      key derived using the author’s private key and the recipient’s
+      public key. Place the result in the <code>content</code> field of
+      a <code>kind 13</code> <code>seal</code> event. Sign it with the
+      author’s key.</p>
+      <pre class="json"><code>{
+  &quot;content&quot;: &quot;AqBCdwoS7/tPK+QGkPCadJTn8FxGkd24iApo3BR9/M0uw6n4RFAFSPAKKMgkzVMoRyR3ZS/aqATDFvoZJOkE9cPG/TAzmyZvr/WUIS8kLmuI1dCA+itFF6+ULZqbkWS0YcVU0j6UDvMBvVlGTzHz+UHzWYJLUq2LnlynJtFap5k8560+tBGtxi9Gx2NIycKgbOUv0gEqhfVzAwvg1IhTltfSwOeZXvDvd40rozONRxwq8hjKy+4DbfrO0iRtlT7G/eVEO9aJJnqagomFSkqCscttf/o6VeT2+A9JhcSxLmjcKFG3FEK3Try/WkarJa1jM3lMRQqVOZrzHAaLFW/5sXano6DqqC5ERD6CcVVsrny0tYN4iHHB8BHJ9zvjff0NjLGG/v5Wsy31+BwZA8cUlfAZ0f5EYRo9/vKSd8TV0wRb9DQ=&quot;,
+  &quot;kind&quot;: 13,
+  &quot;created_at&quot;: 1703015180,
+  &quot;pubkey&quot;: &quot;611df01bfcf85c26ae65453b772d8f1dfd25c264621c0277e1fc1518686faef9&quot;,
+  &quot;tags&quot;: [],
+  &quot;id&quot;: &quot;28a87d7c074d94a58e9e89bb3e9e4e813e2189f285d797b1c56069d36f59eaa7&quot;,
+  &quot;sig&quot;: &quot;02fc3facf6621196c32912b1ef53bac8f8bfe9db51c0e7102c073103586b0d29c3f39bdaa1e62856c20e90b6c7cc5dc34ca8bb6a528872cf6e65e6284519ad73&quot;
+}</code></pre>
+      <h4 data-number="12.1.7.3" id="nip-59-wrap-the-seal">3. Wrap the
+      seal</h4>
+      <p>Encrypt the JSON-encoded <code>kind 13</code> event with your
+      ephemeral, single-use random key. Place the result in the
+      <code>content</code> field of a <code>kind 1059</code>. Add a
+      single <code>p</code> tag containing the recipient’s public key.
+      Sign the <code>gift wrap</code> using the random key generated in
+      the previous step.</p>
+      <pre class="json"><code>{
+  &quot;content&quot;: &quot;AhC3Qj/QsKJFWuf6xroiYip+2yK95qPwJjVvFujhzSguJWb/6TlPpBW0CGFwfufCs2Zyb0JeuLmZhNlnqecAAalC4ZCugB+I9ViA5pxLyFfQjs1lcE6KdX3euCHBLAnE9GL/+IzdV9vZnfJH6atVjvBkNPNzxU+OLCHO/DAPmzmMVx0SR63frRTCz6Cuth40D+VzluKu1/Fg2Q1LSst65DE7o2efTtZ4Z9j15rQAOZfE9jwMCQZt27rBBK3yVwqVEriFpg2mHXc1DDwHhDADO8eiyOTWF1ghDds/DxhMcjkIi/o+FS3gG1dG7gJHu3KkGK5UXpmgyFKt+421m5o++RMD/BylS3iazS1S93IzTLeGfMCk+7IKxuSCO06k1+DaasJJe8RE4/rmismUvwrHu/HDutZWkvOAhd4z4khZo7bJLtiCzZCZ74lZcjOB4CYtuAX2ZGpc4I1iOKkvwTuQy9BWYpkzGg3ZoSWRD6ty7U+KN+fTTmIS4CelhBTT15QVqD02JxfLF7nA6sg3UlYgtiGw61oH68lSbx16P3vwSeQQpEB5JbhofW7t9TLZIbIW/ODnI4hpwj8didtk7IMBI3Ra3uUP7ya6vptkd9TwQkd/7cOFaSJmU+BIsLpOXbirJACMn+URoDXhuEtiO6xirNtrPN8jYqpwvMUm5lMMVzGT3kMMVNBqgbj8Ln8VmqouK0DR+gRyNb8fHT0BFPwsHxDskFk5yhe5c/2VUUoKCGe0kfCcX/EsHbJLUUtlHXmTqaOJpmQnW1tZ/siPwKRl6oEsIJWTUYxPQmrM2fUpYZCuAo/29lTLHiHMlTbarFOd6J/ybIbICy2gRRH/LFSryty3Cnf6aae+A9uizFBUdCwTwffc3vCBae802+R92OL78bbqHKPbSZOXNC+6ybqziezwG+OPWHx1Qk39RYaF0aFsM4uZWrFic97WwVrH5i+/Nsf/OtwWiuH0gV/SqvN1hnkxCTF/+XNn/laWKmS3e7wFzBsG8+qwqwmO9aVbDVMhOmeUXRMkxcj4QreQkHxLkCx97euZpC7xhvYnCHarHTDeD6nVK+xzbPNtzeGzNpYoiMqxZ9bBJwMaHnEoI944Vxoodf51cMIIwpTmmRvAzI1QgrfnOLOUS7uUjQ/IZ1Qa3lY08Nqm9MAGxZ2Ou6R0/Z5z30ha/Q71q6meAs3uHQcpSuRaQeV29IASmye2A2Nif+lmbhV7w8hjFYoaLCRsdchiVyNjOEM4VmxUhX4VEvw6KoCAZ/XvO2eBF/SyNU3Of4SO&quot;,
+  &quot;kind&quot;: 1059,
+  &quot;created_at&quot;: 1703021488,
+  &quot;pubkey&quot;: &quot;18b1a75918f1f2c90c23da616bce317d36e348bcf5f7ba55e75949319210c87c&quot;,
+  &quot;id&quot;: &quot;5c005f3ccf01950aa8d131203248544fb1e41a0d698e846bd419cec3890903ac&quot;,
+  &quot;sig&quot;: &quot;35fabdae4634eb630880a1896a886e40fd6ea8a60958e30b89b33a93e6235df750097b04f9e13053764251b8bc5dd7e8e0794a3426a90b6bcc7e5ff660f54259&quot;,
+  &quot;tags&quot;: [[&quot;p&quot;, &quot;166bf3765ebd1fc55decfe395beff2ea3b2a4e0a8946e7eb578512b555737c99&quot;]],
+}</code></pre>
+      <h4 data-number="12.1.7.4" id="nip-59-broadcast-selectively">4.
+      Broadcast Selectively</h4>
+      <p>Broadcast the <code>kind:1059</code> or <code>kind:21059</code>
+      event to the recipient’s relays only. Delete all the other
+      events.</p>
+      <h3 data-number="12.1.8" id="nip-59-code-samples">Code
+      Samples</h3>
+      <h4 data-number="12.1.8.1" id="nip-59-javascript">JavaScript</h4>
+      <pre class="javascript"><code>import {bytesToHex} from &quot;@noble/hashes/utils&quot;
+import type {EventTemplate, UnsignedEvent, Event} from &quot;nostr-tools&quot;
+import {getPublicKey, getEventHash, nip19, nip44, finalizeEvent, generateSecretKey} from &quot;nostr-tools&quot;
+
+type Rumor = UnsignedEvent &amp; {id: string}
+
+const TWO_DAYS = 2 * 24 * 60 * 60
+
+const now = () =&gt; Math.round(Date.now() / 1000)
+const randomNow = () =&gt; Math.round(now() - (Math.random() * TWO_DAYS))
+
+const nip44ConversationKey = (privateKey: Uint8Array, publicKey: string) =&gt;
+  nip44.v2.utils.getConversationKey(bytesToHex(privateKey), publicKey)
+
+const nip44Encrypt = (data: EventTemplate, privateKey: Uint8Array, publicKey: string) =&gt;
+  nip44.v2.encrypt(JSON.stringify(data), nip44ConversationKey(privateKey, publicKey))
+
+const nip44Decrypt = (data: Event, privateKey: Uint8Array) =&gt;
+  JSON.parse(nip44.v2.decrypt(data.content, nip44ConversationKey(privateKey, data.pubkey)))
+
+const createRumor = (event: Partial&lt;UnsignedEvent&gt;, privateKey: Uint8Array) =&gt; {
+  const rumor = {
+    created_at: now(),
+    content: &quot;&quot;,
+    tags: [],
+    ...event,
+    pubkey: getPublicKey(privateKey),
+  } as any
+
+  rumor.id = getEventHash(rumor)
+
+  return rumor as Rumor
+}
+
+const createSeal = (rumor: Rumor, privateKey: Uint8Array, recipientPublicKey: string) =&gt; {
+  return finalizeEvent(
+    {
+      kind: 13,
+      content: nip44Encrypt(rumor, privateKey, recipientPublicKey),
+      created_at: randomNow(),
+      tags: [],
+    },
+    privateKey
+  ) as Event
+}
+
+const createWrap = (event: Event, recipientPublicKey: string) =&gt; {
+  const randomKey = generateSecretKey()
+
+  return finalizeEvent(
+    {
+      kind: 1059,
+      content: nip44Encrypt(event, randomKey, recipientPublicKey),
+      created_at: randomNow(),
+      tags: [[&quot;p&quot;, recipientPublicKey]],
+    },
+    randomKey
+  ) as Event
+}
+
+const createEphemeralWrap = (event: Event, recipientPublicKey: string) =&gt; {
+  const randomKey = generateSecretKey()
+
+  return finalizeEvent(
+    {
+      kind: 21059,
+      content: nip44Encrypt(event, randomKey, recipientPublicKey),
+      created_at: randomNow(),
+      tags: [[&quot;p&quot;, recipientPublicKey]],
+    },
+    randomKey
+  ) as Event
+}
+
+// Test case using the above example
+const senderPrivateKey = nip19.decode(`nsec1p0ht6p3wepe47sjrgesyn4m50m6avk2waqudu9rl324cg2c4ufesyp6rdg`).data
+const recipientPrivateKey = nip19.decode(`nsec1uyyrnx7cgfp40fcskcr2urqnzekc20fj0er6de0q8qvhx34ahazsvs9p36`).data
+const recipientPublicKey = getPublicKey(recipientPrivateKey)
+
+const rumor = createRumor(
+  {
+    kind: 1,
+    content: &quot;Are you going to the party tonight?&quot;,
+  },
+  senderPrivateKey
+)
+
+const seal = createSeal(rumor, senderPrivateKey, recipientPublicKey)
+const wrap = createWrap(seal, recipientPublicKey)
+
+// Recipient unwraps with their private key.
+
+const unwrappedSeal = nip44Decrypt(wrap, recipientPrivateKey)
+const unsealedRumor = nip44Decrypt(unwrappedSeal, recipientPrivateKey)</code></pre>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="third-parties.html" rel="prev">Third Parties</a>
+        <a class="pager-next" href="nip-46.html" rel="next">NIP-46</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

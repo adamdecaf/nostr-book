@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-CC · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-64.html" accesskey="p" rel="prev">NIP-64</a>
+        <a class="pager-next" href="nip-78.html" accesskey="n" rel="next">NIP-78</a>
+      </nav>
+      <h2 data-number="13.17" id="nip-cc">NIP-CC</h2>
+      <h3 data-number="13.17.1" id="nip-cc-geocaching-events">Geocaching
+      Events</h3>
+      <p><code>draft</code> <code>optional</code></p>
+      <p>This NIP defines event kinds for geocaching on Nostr. These
+      events allow users to create, share, and log geocaches in a
+      decentralized manner.</p>
+      <h3 data-number="13.17.2"
+      id="nip-cc-geocache-listing-event-kind-37516">Geocache Listing
+      Event (Kind 37516)</h3>
+      <p>Geocache listing events are addressable events of kind
+      <code>37516</code> with the following structure:</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37516,
+  &quot;content&quot;: &quot;&lt;cache description&gt;&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;&lt;cache-identifier&gt;&quot;],
+    [&quot;name&quot;, &quot;&lt;cache-name&gt;&quot;],
+    [&quot;g&quot;, &quot;&lt;geohash&gt;&quot;],
+    [&quot;D&quot;, &quot;&lt;1-5&gt;&quot;],
+    [&quot;T&quot;, &quot;&lt;1-5&gt;&quot;],
+    [&quot;S&quot;, &quot;&lt;size&gt;&quot;],
+    [&quot;t&quot;, &quot;&lt;type&gt;&quot;],
+    [&quot;n&quot;, &quot;&lt;type-modifier&gt;&quot;],
+    [&quot;hint&quot;, &quot;&lt;plaintext hint&gt;&quot;],
+    [&quot;mission&quot;, &quot;&lt;key quest mission&gt;&quot;],
+    [&quot;image&quot;, &quot;&lt;image-url&gt;&quot;],
+    [&quot;r&quot;, &quot;&lt;relay-url&gt;&quot;],
+    [&quot;verification&quot;, &quot;&lt;verification-pubkey-hex&gt;&quot;]
+  ]
+}</code></pre>
+      <p>Listing events require all information about the cache and
+      information relevant to finding the cache. These include the
+      <code>name</code>, location (<code>g</code>), difficulty
+      (<code>D</code>) and terrain (<code>T</code>) scores, and size
+      (<code>S</code>). The type of cache (<code>t</code>) is optional
+      and defaults to <code>traditional</code> if not specified.</p>
+      <p>Cache types are determined by individual clients, with common
+      types including <code>traditional</code>, <code>multi</code>, and
+      <code>mystery</code>. Clients should decide which cache types they
+      support based on their implementation needs.</p>
+      <p>These requirements are well-known and follow existing
+      standards, such as those outlined on <a
+      href="https://www.geocaching.com/help/index.php?pg=kb.chapter&amp;id=97">geocaching.com</a>.</p>
+      <p>These events are assumed to be owned by the submitter of the
+      cache, and core details should be maintained by that submitter.
+      However, community logs should also provide context on the current
+      state and validity of the cache.</p>
+      <h4 data-number="13.17.2.1" id="nip-cc-content">Content</h4>
+      <p>The content field contains the cache description and any
+      additional information about the cache.</p>
+      <h4 data-number="13.17.2.2" id="nip-cc-tags">Tags</h4>
+      <ul>
+      <li><code>d</code> (required) - unique identifier for the
+      cache</li>
+      <li><code>name</code> (required) - human-readable name for the
+      cache<br />
+      </li>
+      <li><code>g</code> (required) - geohash of cache location. To
+      allow for a proximity search, include multiple geohash tags at
+      different precision levels (3-9 characters)</li>
+      <li><code>D</code> (required) - integer 1-5 indicating
+      puzzle/finding difficulty (indexed)</li>
+      <li><code>T</code> (required) - integer 1-5 indicating terrain
+      difficulty (indexed)</li>
+      <li><code>S</code> (required) - one of: <code>micro</code>,
+      <code>small</code>, <code>regular</code>, <code>large</code>,
+      <code>other</code> (indexed)</li>
+      <li><code>t</code> (optional) - cache type, with common values
+      including: <code>traditional</code>, <code>multi</code>,
+      <code>mystery</code>. Defaults to <code>traditional</code> if not
+      specified</li>
+      <li><code>n</code> (optional) - type modifier(s) that affect
+      lifecycle, claim semantics, or prize nature. See <a
+      href="nip-cc.html#nip-cc-type-modifiers">Type Modifiers</a>.
+      Multiple <code>n</code> tags MAY be present, but at most one per
+      modifier category</li>
+      <li><code>hint</code> (optional) - plaintext hint to help find the
+      cache</li>
+      <li><code>mission</code> (optional) - plaintext “Key Quest”
+      mission that finders are expected to complete to legitimately
+      claim the cache (e.g. a passphrase, riddle answer, or item to
+      bring). A treasure MUST NOT include more than one
+      <code>mission</code> tag; if multiple are present, clients SHOULD
+      use the first and ignore the rest. When present, clients SHOULD
+      restrict found-log submission to finders who have proof of
+      physical presence (typically the verification key from the cache
+      location). Completions of the mission MAY be recorded as <a
+      href="NIP-GD.md">NIP-GD</a> Good Deed events whose <code>a</code>
+      tag references the cache</li>
+      <li><code>image</code> (optional) - image URLs related to the
+      cache</li>
+      <li><code>r</code> (optional) - preferred relay URLs for logs</li>
+      <li><code>verification</code> (optional) - hex-encoded public key
+      for verifying finds at this cache</li>
+      <li><code>F</code> (optional) - locks in the first-to-find winner.
+      Only valid when the treasure carries the
+      <code>first-to-find</code> <code>n</code> modifier. Format:
+      <code>["F", "&lt;winner-pubkey-hex&gt;"]</code>. See <a
+      href="nip-cc.html#nip-cc-claim-semantics">Type Modifiers ›
+      <code>first-to-find</code></a>. At most one <code>F</code> tag
+      SHOULD be present</li>
+      </ul>
+      <h3 data-number="13.17.3"
+      id="nip-cc-found-log-event-kind-7516">Found Log Event (Kind
+      7516)</h3>
+      <p>Found log events record successful visits to geocaches:</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 7516,
+  &quot;content&quot;: &quot;&lt;log message&gt;&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;37516:&lt;pubkey&gt;:&lt;d-tag&gt;&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.3.1" id="nip-cc-tags-1">Tags</h4>
+      <ul>
+      <li><code>a</code> (required) - reference to the geocache being
+      logged</li>
+      <li><code>image</code> (optional) - photos from the visit</li>
+      <li><code>verification</code> (optional) - embedded verification
+      event (see Verified Finds section)</li>
+      </ul>
+      <h3 data-number="13.17.4"
+      id="nip-cc-comment-log-events-kind-1111">Comment Log Events (Kind
+      1111)</h3>
+      <p>Non-found logs use comment events (kind <code>1111</code>)
+      following NIP-22 comment structure:</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 1111,
+  &quot;content&quot;: &quot;&lt;log message&gt;&quot;,
+  &quot;tags&quot;: [
+    [&quot;A&quot;, &quot;37516:&lt;pubkey&gt;:&lt;d-tag&gt;&quot;],
+    [&quot;K&quot;, &quot;37516&quot;],
+    [&quot;P&quot;, &quot;&lt;cache-owner-pubkey&gt;&quot;],
+    [&quot;a&quot;, &quot;37516:&lt;pubkey&gt;:&lt;d-tag&gt;&quot;],
+    [&quot;k&quot;, &quot;37516&quot;],
+    [&quot;p&quot;, &quot;&lt;cache-owner-pubkey&gt;&quot;],
+    [&quot;t&quot;, &quot;&lt;log-type&gt;&quot;]
+  ]
+}</code></pre>
+      <p>These events capture failures, notes, and status-related
+      information about the cache via human reporting, following the
+      NIP-22 comment threading model where the geocache listing is both
+      the root and parent content.</p>
+      <p>Comment log types include <code>dnf</code> (did not find),
+      <code>note</code> (helpful or neutral context), and
+      <code>maintenance</code> (cache needs attention). If no
+      <code>t</code> tag is present, the comment is assumed to be a
+      general note.</p>
+      <p>Owners of the cache can officially retire caches using an
+      <code>archived</code> tag value in the tag <code>t</code>, thus
+      allowing the cache’s history to be preserved without fully
+      deleting it.</p>
+      <h4 data-number="13.17.4.1" id="nip-cc-tags-2">Tags</h4>
+      <p>The <code>A</code>/<code>K</code>/<code>P</code> (root) and
+      <code>a</code>/<code>k</code>/<code>p</code> (parent) tags follow
+      <a href="nip-22.html">NIP-22</a>. For these top-level comments,
+      the root and parent are identical: they reference the geocache
+      listing (<code>37516:&lt;pubkey&gt;:&lt;d-tag&gt;</code>), kind
+      <code>37516</code>, and the cache owner’s pubkey.</p>
+      <ul>
+      <li><code>t</code> (optional) - log type: <code>dnf</code>,
+      <code>note</code>, <code>maintenance</code>,
+      <code>archived</code>. If omitted, assumed to be
+      <code>note</code></li>
+      <li><code>image</code> (optional) - photos from the visit</li>
+      </ul>
+      <h3 data-number="13.17.5"
+      id="nip-cc-geocache-verification-event-kind-7517">Geocache
+      Verification Event (Kind 7517)</h3>
+      <p>Verification events provide cryptographic proof that someone
+      physically located a geocache. These events are signed by the
+      cache’s verification private key.</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 7517,
+  &quot;content&quot;: &quot;Geocache verification for &lt;finder-npub&gt;&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;&lt;finder-pubkey-hex&gt;:&lt;geocache-naddr&gt;&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.5.1" id="nip-cc-content-1">Content</h4>
+      <p>The content field must follow the static format:
+      <code>"Geocache verification for &lt;finder-npub&gt;"</code> where
+      <code>&lt;finder-npub&gt;</code> is the NIP-19 encoded public key
+      (npub) of the person who found the cache.</p>
+      <h4 data-number="13.17.5.2" id="nip-cc-tags-3">Tags</h4>
+      <ul>
+      <li><code>a</code> (required) - composite identifier containing
+      the finder’s pubkey in hex format and the geocache naddr being
+      verified</li>
+      </ul>
+      <h4 data-number="13.17.5.3" id="nip-cc-usage">Usage</h4>
+      <p>Verification events are created when a finder obtains access to
+      the cache’s verification private key (typically via QR code at the
+      cache location). The event must be signed by the cache’s
+      verification private key and can be:</p>
+      <ol type="1">
+      <li>Embedded in the <code>verification</code> tag as a JSON string
+      in the Verified Found Log event (kind 7516).</li>
+      <li>Published to relays as standalone events</li>
+      <li>Both embedded and published for redundancy</li>
+      </ol>
+      <h3 data-number="13.17.6" id="nip-cc-verified-finds">Verified
+      Finds</h3>
+      <p>Geocaches with verification enabled can provide cryptographic
+      proof that a finder physically located the cache. This is
+      accomplished through a verification event (kind 7517) signed by
+      the cache’s verification key.</p>
+      <h4 data-number="13.17.6.1"
+      id="nip-cc-verification-process">Verification Process</h4>
+      <p>When a cache has a <code>verification</code> tag containing a
+      public key, finders can create a verified log by:</p>
+      <ol type="1">
+      <li>Obtaining the cache’s verification private key (typically via
+      QR code at the cache location)</li>
+      <li>Creating a verification event (kind 7517) signed by this
+      key</li>
+      <li>Embedding the verification event in their log entry</li>
+      </ol>
+      <h4 data-number="13.17.6.2"
+      id="nip-cc-verification-validation">Verification Validation</h4>
+      <p>To validate a verified find:</p>
+      <ol type="1">
+      <li>Check that the verification event is signed by the expected
+      verification public key</li>
+      <li>Verify that the finder pubkey in the <code>a</code> tag
+      matches the log author</li>
+      <li>Confirm the geocache naddr in the <code>a</code> tag correctly
+      references the target cache</li>
+      <li>Validate the event signature using standard Nostr
+      verification</li>
+      </ol>
+      <h3 data-number="13.17.7" id="nip-cc-type-modifiers">Type
+      Modifiers</h3>
+      <p>Geocache listings MAY include one or more <code>n</code> tags
+      that classify the geocache with additional type modifiers. Unlike
+      the <code>t</code> cache-type tag (which describes <em>how</em> a
+      cache is found), <code>n</code> modifiers describe <em>how the
+      cache behaves</em> once published — its lifecycle, claim
+      semantics, or prize nature.</p>
+      <p>The <code>mission</code> tag is also a type modifier in the
+      broader sense, but it uses its own dedicated tag because it
+      carries a payload (the mission text). Clients SHOULD treat
+      <code>mission</code> and <code>n</code> modifiers consistently for
+      display purposes (badges, filters, etc.).</p>
+      <h4 data-number="13.17.7.1" id="nip-cc-rules">Rules</h4>
+      <ol type="1">
+      <li>Each modifier value belongs to exactly one
+      <strong>category</strong> (see below).</li>
+      <li>A geocache SHOULD include at most one <code>n</code> tag per
+      category. If multiple values from the same category are present,
+      clients SHOULD use the first occurrence and ignore the rest.</li>
+      <li>Modifiers from different categories compose freely. Any
+      combination is valid unless a specific modifier’s definition
+      states otherwise.</li>
+      <li>Clients SHOULD ignore <code>n</code> values they do not
+      recognize, allowing forward compatibility as new modifiers are
+      defined.</li>
+      </ol>
+      <h4 data-number="13.17.7.2"
+      id="nip-cc-categories-and-modifiers">Categories and Modifiers</h4>
+      <h5 data-number="13.17.7.2.1" id="nip-cc-claim-semantics">Claim
+      semantics</h5>
+      <p>Modifiers that affect how claims on the treasure are
+      interpreted.</p>
+      <ul>
+      <li><p><code>first-to-find</code> — Single-claim geocache listing.
+      The first verified found log (kind 7516 with valid embedded kind
+      7517) constitutes the exclusive claim. Subsequent verified found
+      logs remain valid records of physical presence at the location but
+      do not constitute additional claims. Clients SHOULD render the
+      geocache listing as effectively archived once any valid verified
+      found log exists, hiding find-submission affordances and
+      displaying the winning finder prominently. Requires a
+      <code>verification</code> tag on the geocache listing event.</p>
+      <p>Determining the winning log (provisional, before lock-in):</p>
+      <ul>
+      <li>The winning log is the verified found log with the earliest
+      <code>created_at</code> value.</li>
+      <li>Ties on <code>created_at</code> are broken by ascending
+      lexicographic comparison of the event <code>id</code>.</li>
+      <li>All verified logs are evidence of physical presence (QR access
+      was required to produce them); the exclusive claim is attributed
+      only to the earliest one.</li>
+      </ul>
+      <p>Locking in the winner (<code>F</code> tag):</p>
+      <ul>
+      <li>Once the geocache listing creator has confirmed the claim, the
+      creator SHOULD publish a new revision of the geocache listing
+      event that BOTH archives the listing (adds
+      <code>["t", "archived"]</code>) AND locks the winner in by
+      appending an <code>F</code> tag:
+      <code>["F", "&lt;winner-pubkey-hex&gt;"]</code></li>
+      <li>The value is the winning finder’s pubkey (lowercase hex). The
+      specific winning verified found log is recoverable by querying for
+      verified found logs whose <code>a</code> tag references this
+      treasure and whose author matches the <code>F</code> pubkey.</li>
+      <li>At most one <code>F</code> tag SHOULD be present. If multiple
+      are present, clients SHOULD use the first.</li>
+      <li>When an <code>F</code> tag is present, clients MUST attribute
+      the exclusive claim to the pubkey in the <code>F</code> tag,
+      regardless of which verified found log currently appears earliest.
+      Because <code>created_at</code> is author-supplied and forgeable,
+      this protects the locked-in claim from being displaced by a later
+      log carrying a forged earlier timestamp.</li>
+      </ul></li>
+      </ul>
+      <h5 data-number="13.17.7.2.2" id="nip-cc-prize-nature">Prize
+      nature</h5>
+      <p>Modifiers that describe what the physical treasure IS.</p>
+      <ul>
+      <li><code>art</code> — The geocache itself is a physical work of
+      art (a print, sculpture, sticker, zine, painted object, mural,
+      installation, etc.). Whether the work is takeable, viewable in
+      place, photographable only, or otherwise interacted with is
+      determined by other modifiers and by the treasure’s
+      <code>content</code> description.</li>
+      </ul>
+      <h4 data-number="13.17.7.3"
+      id="nip-cc-forward-compatibility">Forward Compatibility</h4>
+      <p>New modifiers MAY be defined in future revisions of this NIP or
+      in supplementary NIPs. New categories MAY also be introduced.
+      Clients implementing this NIP SHOULD ignore unknown <code>n</code>
+      values rather than rejecting the event.</p>
+      <h3 data-number="13.17.8"
+      id="nip-cc-geocache-curation-list-event-kind-37517">Geocache
+      Curation List Event (Kind 37517)</h3>
+      <p>Curation list events are addressable events of kind
+      <code>37517</code> that group geocaches into curated collections.
+      Clients may present these as adventures, trails, treasure hunts,
+      or any other themed experience.</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37517,
+  &quot;content&quot;: &quot;&lt;full description&gt;&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;&lt;list-identifier&gt;&quot;],
+    [&quot;title&quot;, &quot;&lt;list-title&gt;&quot;],
+    [&quot;description&quot;, &quot;&lt;short summary&gt;&quot;],
+    [&quot;image&quot;, &quot;&lt;banner-image-url&gt;&quot;],
+    [&quot;g&quot;, &quot;&lt;geohash&gt;&quot;],
+    [&quot;theme&quot;, &quot;&lt;page-theme&gt;&quot;],
+    [&quot;map&quot;, &quot;&lt;map-style&gt;&quot;],
+    [&quot;a&quot;, &quot;37516:&lt;pubkey&gt;:&lt;d-tag&gt;&quot;],
+    [&quot;a&quot;, &quot;37516:&lt;pubkey&gt;:&lt;d-tag&gt;&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.8.1" id="nip-cc-content-2">Content</h4>
+      <p>The content field contains the full description of the curation
+      list — rules, tips, narrative, or any other context the creator
+      wants to provide.</p>
+      <h4 data-number="13.17.8.2" id="nip-cc-tags-4">Tags</h4>
+      <ul>
+      <li><code>d</code> (required) - unique identifier for the
+      list</li>
+      <li><code>title</code> (required) - human-readable name for the
+      list</li>
+      <li><code>a</code> (required, 1+) - references to geocache listing
+      events (kind 37516 or 37515). Order is preserved and
+      meaningful</li>
+      <li><code>description</code> (optional) - short summary shown in
+      browse/card views</li>
+      <li><code>image</code> (optional) - banner image URL</li>
+      <li><code>g</code> (optional) - geohash of list center location.
+      Include multiple precision levels (3-6 characters) for
+      discovery</li>
+      <li><code>theme</code> (optional) - default page theme for the
+      list. Clients should apply this theme when displaying the list,
+      unless the user has explicitly chosen a different theme. Supported
+      values: <code>adventure</code>, <code>mojave</code></li>
+      <li><code>map</code> (optional) - default map style for the list.
+      Clients should use this as the initial map style when displaying
+      the list, but allow the user to change it. Supported values:
+      <code>original</code>, <code>dark</code>, <code>satellite</code>,
+      <code>adventure</code></li>
+      </ul>
+      <h4 data-number="13.17.8.3"
+      id="nip-cc-cross-author-references">Cross-Author References</h4>
+      <p>Curation lists can reference any public geocache regardless of
+      author. The <code>a</code> tags use standard Nostr addressable
+      event coordinates
+      (<code>&lt;kind&gt;:&lt;pubkey&gt;:&lt;d-tag&gt;</code>), allowing
+      a single list to span geocaches from multiple creators.</p>
+      <h3 data-number="13.17.9" id="nip-cc-clients">Clients</h3>
+      <p>For the best Geocaching experience, clients implementing
+      geocaching support should:</p>
+      <ul>
+      <li>Support hint encoding, such as ROT13, to prevent
+      spoilers.</li>
+      <li>Determine cache status from recent log patterns. Multiple DNF
+      entries and/or maintenance notes would indicate an issue with the
+      cache.</li>
+      <li>Publish logs to relays specified in the cache’s <code>r</code>
+      tags when available.</li>
+      <li>Validate geohash precision meets minimum requirements (8+
+      characters, 9+ for micro caches) before accepting cache
+      submissions.</li>
+      </ul>
+      <h3 data-number="13.17.10" id="nip-cc-examples">Examples</h3>
+      <h4 data-number="13.17.10.1" id="nip-cc-basic-cache">Basic
+      Cache</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37516,
+  &quot;content&quot;: &quot;The first Nostr treasure, left in the aftermath of Oslo Freedom Forum!&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;first-treasure-1748619568668&quot;],
+    [&quot;name&quot;, &quot;First Treasure&quot;], 
+    [&quot;g&quot;, &quot;u4x&quot;],
+    [&quot;g&quot;, &quot;u4xs&quot;],
+    [&quot;g&quot;, &quot;u4xsu&quot;],
+    [&quot;g&quot;, &quot;u4xsu6&quot;],
+    [&quot;g&quot;, &quot;u4xsu6r&quot;],
+    [&quot;g&quot;, &quot;u4xsu6ry&quot;],
+    [&quot;g&quot;, &quot;u4xsu6ryb&quot;],
+    [&quot;D&quot;, &quot;1&quot;],
+    [&quot;T&quot;, &quot;1&quot;],
+    [&quot;S&quot;, &quot;small&quot;],
+    [&quot;t&quot;, &quot;traditional&quot;],
+    [&quot;hint&quot;, &quot;In the branches&quot;],
+    [&quot;image&quot;, &quot;https://blossom.primal.net/74efe01a767b27dead71b8a9bb8278a108360438e78e55194ed9ab14a9382dd3.jpg&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.2" id="nip-cc-verified-cache">Verified
+      Cache</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37516,
+  &quot;content&quot;: &quot;High-security treasure requiring physical verification!&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;verified-treasure-1748619568669&quot;],
+    [&quot;name&quot;, &quot;Verified Treasure&quot;], 
+    [&quot;g&quot;, &quot;u4xsu6ry&quot;],
+    [&quot;D&quot;, &quot;3&quot;],
+    [&quot;T&quot;, &quot;2&quot;],
+    [&quot;S&quot;, &quot;small&quot;],
+    [&quot;t&quot;, &quot;traditional&quot;],
+    [&quot;hint&quot;, &quot;Look for the secret code&quot;],
+    [&quot;verification&quot;, &quot;6805d4e5c0df48b4f76e2fdcb67a2acb1d97567b01c6fe17a236dc32f34f1c07&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.3"
+      id="nip-cc-cache-with-key-quest">Cache with Key Quest</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37516,
+  &quot;content&quot;: &quot;Solve the riddle to claim your prize.&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;key-quest-treasure-1748619568670&quot;],
+    [&quot;name&quot;, &quot;Riddle of the Old Oak&quot;],
+    [&quot;g&quot;, &quot;u4xsu6ry&quot;],
+    [&quot;D&quot;, &quot;4&quot;],
+    [&quot;T&quot;, &quot;2&quot;],
+    [&quot;S&quot;, &quot;small&quot;],
+    [&quot;t&quot;, &quot;mystery&quot;],
+    [&quot;hint&quot;, &quot;Count the rings on the fallen log&quot;],
+    [&quot;mission&quot;, &quot;Bring a token of nature you found along the way&quot;],
+    [&quot;verification&quot;, &quot;6805d4e5c0df48b4f76e2fdcb67a2acb1d97567b01c6fe17a236dc32f34f1c07&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.4"
+      id="nip-cc-first-to-find-art">First-to-Find Art</h4>
+      <p>A single-claim treasure where the cache itself is a physical
+      artwork. The first verified finder is the exclusive claimant; how
+      the work is fulfilled (taken home, photographed, etc.) is
+      described in the cache content.</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37516,
+  &quot;content&quot;: &quot;Hand-pulled linocut, edition of 1, signed on the back next to the QR. Whoever finds it keeps it.&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;linocut-aftermath-1748619568671&quot;],
+    [&quot;name&quot;, &quot;Aftermath (Linocut #1)&quot;],
+    [&quot;g&quot;, &quot;u4xsu6ry&quot;],
+    [&quot;D&quot;, &quot;2&quot;],
+    [&quot;T&quot;, &quot;2&quot;],
+    [&quot;S&quot;, &quot;small&quot;],
+    [&quot;t&quot;, &quot;traditional&quot;],
+    [&quot;n&quot;, &quot;first-to-find&quot;],
+    [&quot;n&quot;, &quot;art&quot;],
+    [&quot;hint&quot;, &quot;Behind glass, but not in a frame&quot;],
+    [&quot;image&quot;, &quot;https://blossom.primal.net/example-linocut.jpg&quot;],
+    [&quot;verification&quot;, &quot;6805d4e5c0df48b4f76e2fdcb67a2acb1d97567b01c6fe17a236dc32f34f1c07&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.5" id="nip-cc-found-log">Found Log</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 7516,
+  &quot;content&quot;: &quot;Found it! Great hiding spot.&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.6" id="nip-cc-dnf-log">DNF Log</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 1111,
+  &quot;content&quot;: &quot;Searched for 30 minutes but couldn&#39;t find it. Maybe it&#39;s missing?&quot;,
+  &quot;tags&quot;: [
+    [&quot;A&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;],
+    [&quot;K&quot;, &quot;37516&quot;],
+    [&quot;P&quot;, &quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd&quot;],
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;],
+    [&quot;k&quot;, &quot;37516&quot;],
+    [&quot;p&quot;, &quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd&quot;],
+    [&quot;t&quot;, &quot;dnf&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.7" id="nip-cc-note-log">Note Log</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 1111,
+  &quot;content&quot;: &quot;Lots of muggles around during the day. Best to visit in the evening.&quot;,
+  &quot;tags&quot;: [
+    [&quot;A&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;],
+    [&quot;K&quot;, &quot;37516&quot;],
+    [&quot;P&quot;, &quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd&quot;],
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;],
+    [&quot;k&quot;, &quot;37516&quot;],
+    [&quot;p&quot;, &quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd&quot;],
+    [&quot;t&quot;, &quot;note&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.8"
+      id="nip-cc-verification-event">Verification Event</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 7517,
+  &quot;content&quot;: &quot;Geocache verification for npub1qc0lc5lxnhxnfxlw2lxkv4x4vp6xsf4d5qwvlhfx6qmz6x4nfhqd8h2z3&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:naddr1qqxnzd3e8q6n2dfk8qcnjve48qmnsw3jsqgswaehxw309aex2mrp0yhx6tpdsek6w309aex2mrp0yh56tnwdus8vatjvs6kzdrz956k7tjzw6qzypzgd2dmgxhxf34hnlw2y03nckr8f4g6mw9flxqq65v94zkp77rqfgrf8&quot;]
+  ],
+  &quot;pubkey&quot;: &quot;6805d4e5c0df48b4f76e2fdcb67a2acb1d97567b01c6fe17a236dc32f34f1c07&quot;,
+  &quot;created_at&quot;: 1672531200,
+  &quot;sig&quot;: &quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789012345678901234567890abcdef1234567890abcdef1234567890abcdef12&quot;
+}</code></pre>
+      <h4 data-number="13.17.10.9"
+      id="nip-cc-verified-found-log">Verified Found Log</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 7516,
+  &quot;content&quot;: &quot;Found it! Great hiding spot.&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:verified-treasure-1748619568669&quot;],
+    [&quot;verification&quot;, &quot;{\&quot;kind\&quot;:7517,\&quot;content\&quot;:\&quot;Geocache verification for npub1qc0lc5lxnhxnfxlw2lxkv4x4vp6xsf4d5qwvlhfx6qmz6x4nfhqd8h2z3\&quot;,\&quot;tags\&quot;:[[\&quot;a\&quot;,\&quot;0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:naddr1qqxnzd3e8q6n2dfk8qcnjve48qmnsw3jsqgswaehxw309aex2mrp0yhx6tpdsek6w309aex2mrp0yh56tnwdus8vatjvs6kzdrz956k7tjzw6qzypzgd2dmgxhxf34hnlw2y03nckr8f4g6mw9flxqq65v94zkp77rqfgrf8\&quot;]],\&quot;pubkey\&quot;:\&quot;6805d4e5c0df48b4f76e2fdcb67a2acb1d97567b01c6fe17a236dc32f34f1c07\&quot;,\&quot;created_at\&quot;:1672531200,\&quot;sig\&quot;:\&quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456789012345678901234567890abcdef1234567890abcdef1234567890abcdef12\&quot;}&quot;]
+  ]
+}</code></pre>
+      <h4 data-number="13.17.10.10"
+      id="nip-cc-geocache-curation-list">Geocache Curation List</h4>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 37517,
+  &quot;content&quot;: &quot;Explore the festival grounds and find all hidden treasures before the jousting tournament!&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;ren-fest-hunt-1748619568670&quot;],
+    [&quot;title&quot;, &quot;Texas Ren Fest Treasure Hunt&quot;],
+    [&quot;description&quot;, &quot;Find all the hidden treasures at the festival!&quot;],
+    [&quot;image&quot;, &quot;https://blossom.primal.net/banner-example.jpg&quot;],
+    [&quot;g&quot;, &quot;9vk&quot;],
+    [&quot;g&quot;, &quot;9vk5&quot;],
+    [&quot;g&quot;, &quot;9vk5b&quot;],
+    [&quot;g&quot;, &quot;9vk5b7&quot;],
+    [&quot;theme&quot;, &quot;adventure&quot;],
+    [&quot;map&quot;, &quot;adventure&quot;],
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:first-treasure-1748619568668&quot;],
+    [&quot;a&quot;, &quot;37516:0461fcbecc4c3374439932d6b8f11269ccdb7cc973ad7a50ae362db135a474dd:verified-treasure-1748619568669&quot;]
+  ]
+}</code></pre>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-64.html" rel="prev">NIP-64</a>
+        <a class="pager-next" href="nip-78.html" rel="next">NIP-78</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

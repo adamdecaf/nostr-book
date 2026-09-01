@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>Conclusion · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-31.html" accesskey="p" rel="prev">NIP-31</a>
+        <span class="pager-next"></span>
+      </nav>
+      <h1 data-number="16" id="conclusion">Conclusion</h1>
+      <p>That’s the book. The NIPs themselves will keep changing — new
+      kinds, better encryption, ideas that get tried and later marked
+      unrecommended. This compilation is a map of the territory at one
+      point in time, not the territory.</p>
+      <p>If you want to change a NIP, do not open a pull request here.
+      Go to <a
+      href="https://github.com/nostr-protocol/nips">nostr-protocol/nips</a>
+      and talk to the people who implement this stuff. This repository
+      is only the binding: chapter intros, reading order, and the
+      scripts that turn the specs into an ebook.</p>
+      <p>If a grouping feels wrong, or a chapter intro undersells a NIP,
+      those words are mine and I am happy to hear about them.</p>
+      <p>Thanks for reading. Credit for the protocol belongs to the NIP
+      authors. I hope having their work in one place, in an order that
+      tells a story, makes it easier to build the next client, relay, or
+      weird little kind that nobody expected.</p>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-31.html" rel="prev">NIP-31</a>
+        <span class="pager-next"></span>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

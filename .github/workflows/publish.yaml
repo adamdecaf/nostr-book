@@ -31,16 +31,21 @@ jobs:
         timeout-minutes: 10
         run: make pdf
 
+      - name: Build HTML
+        run: make html
+
       - name: Require outputs
         run: |
           test -s nostr-book.epub
           test -s nostr-book.pdf
+          test -s docs/book/index.html
+          test -s docs/book/nip-01.html
 
       - name: Commit and Push
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "support@github.com"
-          git add -A nostr-book.epub nostr-book.pdf ./include/git.md
+          git add -A nostr-book.epub nostr-book.pdf ./include/git.md docs/book docs/cover.png
           if git diff --cached --quiet; then
             echo "No published book changes"
           else

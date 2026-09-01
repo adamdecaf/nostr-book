@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-5A · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-34.html" accesskey="p" rel="prev">NIP-34</a>
+        <a class="pager-next" href="nip-15.html" accesskey="n" rel="next">NIP-15</a>
+      </nav>
+      <h2 data-number="13.9" id="nip-5a">NIP-5A</h2>
+      <h3 data-number="13.9.1" id="nip-5a-static-websites-nsites">Static
+      Websites (nsites)</h3>
+      <p><code>draft</code> <code>optional</code></p>
+      <p>This NIP describes a method by which static websites can be
+      hosted from Blossom assets.</p>
+      <h4 data-number="13.9.1.1" id="nip-5a-site-manifests">Site
+      Manifests</h4>
+      <p>A site manifest event MUST be a regular, replaceable, or an
+      addressable event as defined in <a
+      href="nip-01.html">NIP-01</a>.</p>
+      <p>There are two types of nsite manifest event kinds:</p>
+      <ul>
+      <li><strong>Root site</strong>: Uses kind <code>15128</code> and
+      MUST NOT include a <code>d</code> tag. This is a single
+      replaceable event per pubkey and serves as the root site for the
+      pubkey.</li>
+      <li><strong>Named sites</strong>: Uses kind <code>35128</code>.
+      These can be smaller websites under a pubkey and can be thought of
+      as subdomains.</li>
+      </ul>
+      <h4 data-number="13.9.1.2" id="nip-5a-named-sites">Named
+      Sites</h4>
+      <p>A named site uses kind <code>35128</code> and MUST include a
+      <code>d</code> tag containing the site identifier.</p>
+      <p>The <code>d</code> tag identifies the named site and is used as
+      the site’s identifier within the author’s namespace.</p>
+      <p>For canonical named-site URLs, the <code>d</code> tag value
+      MUST match <code>^[a-z0-9-]{1,13}$</code> and MUST NOT end with
+      <code>-</code>.</p>
+      <p>Because DNS labels are limited to 63 characters and
+      <code>pubkeyB36</code> uses 50 of them, the <code>d</code> tag
+      value MUST be 1-13 characters.</p>
+      <h5 data-number="13.9.1.2.1" id="nip-5a-nsite-event-tags">Nsite
+      Event Tags</h5>
+      <table>
+      <colgroup>
+      <col style="width: 9%" />
+      <col style="width: 69%" />
+      <col style="width: 21%" />
+      </colgroup>
+      <thead>
+      <tr>
+      <th>Tag</th>
+      <th>Role</th>
+      <th>Required</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>path</code></td>
+      <td>Maps an absolute path to the sha256 hash of the file served at
+      that path.</td>
+      <td>Yes, one or more</td>
+      </tr>
+      <tr>
+      <td><code>x</code></td>
+      <td>Provides the aggregate hash of the full manifest so the site
+      version is indexable and discoverable.</td>
+      <td>Optional, recommended</td>
+      </tr>
+      <tr>
+      <td><code>d</code></td>
+      <td>Short identifier for the named site. This tag is used only for
+      kind <code>35128</code> events.</td>
+      <td>Required for named sites only</td>
+      </tr>
+      <tr>
+      <td><code>a</code></td>
+      <td>References the immediate parent nsite from which this copied
+      site was made.</td>
+      <td>Required for copied sites only</td>
+      </tr>
+      <tr>
+      <td><code>A</code></td>
+      <td>References the origin nsite of a copied site’s lineage.</td>
+      <td>Required for copied sites only</td>
+      </tr>
+      <tr>
+      <td><code>server</code></td>
+      <td>Hints which blossom servers can be used to retrieve the
+      blobs.</td>
+      <td>No</td>
+      </tr>
+      <tr>
+      <td><code>title</code></td>
+      <td>Provides a human-readable site title.</td>
+      <td>No</td>
+      </tr>
+      <tr>
+      <td><code>description</code></td>
+      <td>Provides a short human-readable description of the site.</td>
+      <td>No</td>
+      </tr>
+      <tr>
+      <td><code>source</code></td>
+      <td>Points to the site’s source code repository or source
+      archive.</td>
+      <td>No</td>
+      </tr>
+      </tbody>
+      </table>
+      <p>The event MUST include one or more <code>path</code> tags that
+      map absolute paths to sha256 hashes. Each <code>path</code> tag
+      MUST have the format
+      <code>["path", "/absolute/path", "sha256hash"]</code> where:</p>
+      <ul>
+      <li>The first element is the literal string
+      <code>"path"</code></li>
+      <li>The second element is an absolute path ending with a filename
+      and extension</li>
+      <li>The third element is the sha256 hash of the file that will be
+      served under this path</li>
+      </ul>
+      <p>The event SHOULD include an <code>x</code> tag containing the
+      site aggregate hash as defined below. The <code>x</code> tag MUST
+      have the format
+      <code>["x", "&lt;sha256-hex&gt;", "aggregate"]</code>, where
+      <code>&lt;sha256-hex&gt;</code> is the lowercase hexadecimal
+      aggregate hash.</p>
+      <p>The event MAY include <code>server</code> tags that hint at
+      which blossom servers can be used to find the blobs associated
+      with the hashes.</p>
+      <p>The event MAY include <code>title</code> and
+      <code>description</code> tags that provide simple site
+      information.</p>
+      <p>The event MAY include a <code>source</code> tag that links to
+      the site’s source code repository or source archive. The
+      <code>source</code> tag MUST have the format
+      <code>["source", "&lt;url&gt;"]</code>. For source code
+      repositories, <code>&lt;url&gt;</code> MAY be a
+      <code>nostr://</code> git URL as defined by <a
+      href="nip-34.html">NIP-34</a>, or an absolute
+      <code>https://</code> git URL. For source archives,
+      <code>&lt;url&gt;</code> MUST be an absolute <code>https://</code>
+      URL.</p>
+      <h4 data-number="13.9.1.3" id="nip-5a-manifest-snapshots">Manifest
+      Snapshots</h4>
+      <p>A manifest snapshot uses kind <code>5128</code> and is a
+      regular event. Its purpose is to capture the state of a root site
+      or named site at a particular point in time.</p>
+      <p>When publishing root sites or named sites, authors MAY also
+      publish manifest snapshot events alongside them as additional
+      events in order to preserve version history and make historical
+      versions addressable by snapshot event id. For a given site, the
+      snapshot event’s <code>created_at</code> timestamp is the version
+      timestamp of that snapshot.</p>
+      <p>For snapshotting an existing root site or named site, the
+      manifest snapshot event MUST copy the source manifest’s
+      <code>path</code> tags, MUST include exactly one <code>x</code>
+      tag whose value exactly matches the source manifest’s aggregate
+      <code>x</code> tag, and MUST include exactly one <code>a</code>
+      tag referencing the source root site or named site. If the source
+      manifest includes an <code>A</code> tag, the snapshot event MUST
+      copy that <code>A</code> tag unchanged. If the source manifest
+      does not include an <code>A</code> tag, the snapshot event SHOULD
+      omit it. The referenced site identifies the snapshotted nsite,
+      while the snapshot event’s own <code>created_at</code> identifies
+      the version. Other valid nsite tags such as <code>title</code>,
+      <code>description</code>, <code>source</code>, <code>app</code>,
+      <code>server</code>, or relay hints MAY also be copied if the
+      author intends to preserve them, but they are optional.</p>
+      <h4 data-number="13.9.1.4" id="nip-5a-aggregate-hash">Aggregate
+      Hash</h4>
+      <p>The site aggregate hash is a deterministic hash of the site’s
+      <code>path</code> tags. It identifies a specific site version and
+      can be used to identify equivalent site manifests published by
+      different pubkeys.</p>
+      <p>The aggregate hash MUST be computed using only
+      <code>path</code> tags. It MUST NOT depend on the order of tags in
+      the manifest, and it MUST ignore all other tags and event fields,
+      including <code>app</code> tags.</p>
+      <p>Two site manifest events are equivalent if and only if they
+      produce the same aggregate hash.</p>
+      <p>A site manifest SHOULD include this value in an <code>x</code>
+      tag with the format
+      <code>["x", "&lt;sha256-hex&gt;", "aggregate"]</code> so the
+      aggregate hash is indexable for discoverability and lookup.
+      Manifest snapshot events of kind <code>5128</code> MUST include
+      exactly one such tag, and it MUST exactly match the parent nsite’s
+      aggregate <code>x</code> tag.</p>
+      <p>To compute the aggregate hash:</p>
+      <ol type="1">
+      <li>Collect every <code>path</code> tag.</li>
+      <li>For each tag, produce a line in the exact format
+      <code>&lt;sha256hash&gt; &lt;absolute-path&gt;\n</code>.</li>
+      <li>Sort all lines in ascending lexicographic order.</li>
+      <li>Concatenate the sorted lines as UTF-8 bytes.</li>
+      <li>Compute the SHA-256 hash of the concatenated bytes.</li>
+      </ol>
+      <p>The resulting digest MUST be encoded as lowercase
+      hexadecimal.</p>
+      <p>Example inputs:</p>
+      <pre class="text"><code>186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99 /index.html
+fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321 /favicon.ico</code></pre>
+      <p>Example calculations:</p>
+      <pre class="bash"><code>nak req -k 15128 -a &lt;pubkey&gt; --limit 1 wss://relay.example.com | jq -r &#39;.tags[] | select(.[0] == &quot;path&quot;) | &quot;\(.[2]) \(.[1])&quot;&#39; | sort | sha256sum</code></pre>
+      <pre class="javascript"><code>const aggregateHash = sha256(event.tags.filter(t =&gt; t[0] === &quot;path&quot;).map(([, path, hash]) =&gt; `${hash} ${path}\n`).sort().join(&quot;&quot;))</code></pre>
+      <h4 data-number="13.9.1.5"
+      id="nip-5a-upstream-app-descriptors">Upstream App Descriptors</h4>
+      <p>An nsite MAY include one or more <code>app</code> tags that
+      reference upstream app descriptor events that the manifest is part
+      of. The <code>app</code> tag MUST have the format
+      <code>["app", "&lt;kind&gt;:&lt;pubkey&gt;:&lt;d-tag&gt;", "&lt;relay&gt;"]</code>,
+      where the second element is an addressable event reference to an
+      app descriptor and the third element is a relay hint for locating
+      that event.</p>
+      <p>This linkage is optional. It is intended to make room for
+      application-level discovery and packaging flows without requiring
+      app creators to extend nsite manifests themselves or overload them
+      with non-manifest concerns.</p>
+      <p>The referenced app descriptor kind is intentionally generic so
+      nsites can reference <a href="nip-89.html">NIP-89</a> applications
+      and other present or future forms of app descriptors.
+      Discoverability, app store metadata, runtime compatibility, and
+      similar application-level concerns belong in those app descriptor
+      events, while the nsite manifest remains focused on describing the
+      site’s files.</p>
+      <h4 data-number="13.9.1.6" id="nip-5a-copying-nsites">Copying
+      nsites</h4>
+      <p>An nsite MAY be created by copying another root site or named
+      site in order to pin that site under a different author’s
+      namespace at a specific state.</p>
+      <p>The purpose of copying is to preserve and republish an existing
+      nsite while allowing the new author to maintain it independently.
+      For this reason, authors creating a copied nsite SHOULD copy all
+      tags from the source nsite whenever they remain applicable,
+      including <code>path</code>, <code>x</code>, <code>app</code>,
+      <code>server</code>, <code>title</code>, <code>description</code>,
+      and <code>source</code>.</p>
+      <p>Copying an nsite does not require preserving the original
+      site’s kind or identifier. A copied root site MAY become a named
+      site, a copied named site MAY become a root site, and a copied
+      named site MAY use a different <code>d</code> tag than its
+      parent.</p>
+      <p>When a site is copied from another nsite, the new manifest MUST
+      include exactly one lowercase <code>a</code> tag referencing the
+      immediate parent nsite from which it was copied.</p>
+      <p>Copied sites MUST also include exactly one uppercase
+      <code>A</code> tag referencing the origin nsite of the copy
+      lineage. If a site is copied directly from an original nsite, the
+      <code>a</code> and <code>A</code> tags MAY reference the same
+      nsite. If a site is copied from another copied site, the
+      <code>A</code> tag MUST be copied unchanged from the parent
+      site.</p>
+      <p>Because copied sites may change kind or identifier, the
+      <code>a</code> and <code>A</code> tags are the stable, indexable
+      references that preserve the lineage of the copied site.</p>
+      <p>Sites that were not copied from another nsite SHOULD NOT
+      include <code>a</code> or <code>A</code> tags.</p>
+      <h4 data-number="13.9.1.7"
+      id="nip-5a-host-server-implementation">Host server
+      implementation</h4>
+      <p>A host server is a HTTP server that is responsible for serving
+      pubkey static websites</p>
+      <h5 data-number="13.9.1.7.1" id="nip-5a-address-formats">Address
+      Formats</h5>
+      <p>For interoperability, host servers SHOULD use the following
+      canonical URL formats:</p>
+      <ul>
+      <li>Root site: <code>&lt;npub&gt;.nsite-host.com</code></li>
+      <li>Snapshot:
+      <code>v&lt;snapshotIdB36&gt;.nsite-host.com</code></li>
+      <li>Named site:
+      <code>&lt;pubkeyB36&gt;&lt;dTag&gt;.nsite-host.com</code></li>
+      </ul>
+      <p><code>pubkeyB36</code> is the author’s raw 32-byte pubkey
+      encoded with base36 (lowercase, digits <code>0-9</code> then
+      letters <code>a-z</code>, no padding) and is always exactly 50
+      characters.</p>
+      <p><code>snapshotIdB36</code> is the raw 32-byte snapshot event id
+      encoded with base36 (lowercase, digits <code>0-9</code> then
+      letters <code>a-z</code>, no padding) and is always exactly 50
+      characters.</p>
+      <p><code>dTag</code> is the site identifier (<code>d</code> tag
+      value) as plain text. It is appended directly after
+      <code>pubkeyB36</code> with no separator.</p>
+      <p>This single-label format avoids wildcard certificate
+      limitations with multi-level subdomains.</p>
+      <p>If the host server is using subdomain routing it MAY serve
+      anything at its own root domain <code>nsite-host.com</code> (a
+      landing page for example).</p>
+      <p>Example subdomains:</p>
+      <ul>
+      <li>Root site:
+      <code>npub10phxfsms72rhafrklqdyhempujs9h67nye0p67qe424dyvcx0dkqgvap0e.nsite-host.com</code></li>
+      <li>Snapshot:
+      <code>v&lt;50-char-snapshotIdB36&gt;.nsite-host.com</code></li>
+      <li>Named site:
+      <code>&lt;50-char-pubkeyB36&gt;&lt;dTag&gt;.nsite-host.com</code></li>
+      </ul>
+      <p>For canonical subdomain formats, the host server MUST parse the
+      left-most DNS label as follows:</p>
+      <ol type="1">
+      <li>If the label is a valid <code>npub</code>, decode it and
+      resolve the root site manifest.</li>
+      <li>Otherwise, if the label matches <code>^v[0-9a-z]{50}$</code>,
+      treat it as a snapshot label where:</li>
+      </ol>
+      <ul>
+      <li><code>snapshotIdB36</code> is the final 50 characters after
+      the leading <code>v</code></li>
+      <li>decode <code>snapshotIdB36</code> to the 32-byte event id</li>
+      <li>resolve the manifest snapshot for that event id</li>
+      </ul>
+      <ol start="3" type="1">
+      <li>Otherwise, if the label matches
+      <code>^[0-9a-z]{50}[a-z0-9-]{1,13}$</code> and does not end with
+      <code>-</code>, treat it as a named-site label where:</li>
+      </ol>
+      <ul>
+      <li><code>pubkeyB36</code> is the first 50 characters</li>
+      <li><code>dTag</code> is the remaining 1-13 characters</li>
+      <li>decode <code>pubkeyB36</code> to a 32-byte pubkey</li>
+      <li>use <code>dTag</code> as the identifier (<code>d</code> tag
+      value)</li>
+      <li>resolve the named site manifest for that pubkey and
+      identifier</li>
+      </ul>
+      <p>If parsing fails, the host server MUST treat the site as not
+      found.</p>
+      <h5 data-number="13.9.1.7.2" id="nip-5a-resolving-paths">Resolving
+      Paths</h5>
+      <p>Once the site manifest event is found, the host server MUST
+      extract the path-to-hash mappings from the <code>path</code> tags
+      in the manifest. The host server SHOULD look for a
+      <code>path</code> tag where the second element matches the
+      requested path.</p>
+      <p>The host server SHOULD verify that the sha256 hash of any
+      served blob matches the hash in the corresponding
+      <code>path</code> tag. If the blob hash does not match, the host
+      server SHOULD treat the site as not found.</p>
+      <h6 data-number="13.9.1.7.2.1" id="nip-5a-index-pages">Index
+      Pages</h6>
+      <p>If the request path does not end with a filename, the host
+      server MUST fall back to using the <code>index.html</code>
+      filename.</p>
+      <p>For example: <code>/</code> -&gt; <code>/index.html</code> or
+      <code>/blog/</code> -&gt; <code>/blog/index.html</code></p>
+      <p>Once the host server has found the site manifest event and
+      located the matching <code>path</code> tag for the requested path,
+      it should use the sha256 hash defined in the third element of the
+      <code>path</code> tag to retrieve the file.</p>
+      <p>The host server SHOULD prioritize using <code>server</code>
+      tags from the site manifest event as hints for which blossom
+      servers to query. If the manifest includes <code>server</code>
+      tags, the host server SHOULD attempt to retrieve the file from
+      those servers first.</p>
+      <p>If the pubkey has a <code>10063</code> <a
+      href="nip-03.html">BUD-03 user servers</a> event, the server MUST
+      attempt to retrieve the file from the listed servers using the
+      path defined in <a
+      href="nip-01.html#nip-01-get-sha256---get-blob">BUD-01</a>.</p>
+      <p>If a pubkey does not have a <code>10063</code> event and no
+      <code>server</code> tags are found in the manifest, the host
+      server MUST respond with a status code 404.</p>
+      <p>The host server MUST forward the <code>Content-Type</code> and
+      <code>Content-Length</code> headers from the Blossom server. If
+      neither is defined, the host server MAY set
+      <code>Content-Type</code> from the file extension in the requested
+      path.</p>
+      <h6 data-number="13.9.1.7.2.2" id="nip-5a-not-found">Not
+      Found</h6>
+      <p>If a host server is unable to find a site manifest event or a
+      matching <code>path</code> tag for the requested path, it MUST use
+      <code>/404.html</code> as a fallback path.</p>
+      <h4 data-number="13.9.1.8" id="nip-5a-examples">Examples</h4>
+      <h5 data-number="13.9.1.8.1" id="nip-5a-root-site-manifest">Root
+      Site Manifest</h5>
+      <pre class="yaml"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727373475,
+  &quot;id&quot;: &quot;5324d695ed7abf7cdd2a48deb881c93b7f4e43de702989bbfb55a1b97b35a3de&quot;,
+  &quot;kind&quot;: 15128,
+  &quot;pubkey&quot;: &quot;266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/about.html&quot;, &quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;path&quot;, &quot;/favicon.ico&quot;, &quot;fedcba0987654321fedcba0987654321fedcba0987654321fedcba0987654321&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;app&quot;, &quot;31990:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:my-app&quot;, &quot;wss://relay.example.com&quot;],
+    [&quot;app&quot;, &quot;32267:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:com.example.webapp&quot;, &quot;wss://relay.example.com&quot;],
+    [&quot;server&quot;, &quot;https://blossom.example.com&quot;],
+    [&quot;title&quot;, &quot;My Nostr Site&quot;],
+    [&quot;description&quot;, &quot;A static website hosted on Nostr&quot;],
+    [&quot;source&quot;, &quot;https://github.com/example/my-nostr-site&quot;]
+  ]
+}</code></pre>
+      <h5 data-number="13.9.1.8.2" id="nip-5a-named-site-manifest">Named
+      Site Manifest</h5>
+      <pre class="yaml"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727373475,
+  &quot;id&quot;: &quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;,
+  &quot;kind&quot;: 35128,
+  &quot;pubkey&quot;: &quot;266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;blog&quot;],
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/post.html&quot;, &quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;app&quot;, &quot;31990:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:my-blog-app&quot;, &quot;wss://relay.example.com&quot;],
+    [&quot;app&quot;, &quot;32267:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:com.example.blog&quot;, &quot;wss://relay.example.com&quot;],
+    [&quot;server&quot;, &quot;https://blossom.example.com&quot;],
+    [&quot;title&quot;, &quot;My Blog&quot;],
+    [&quot;description&quot;, &quot;A blog hosted on Nostr&quot;],
+    [&quot;source&quot;, &quot;https://github.com/example/my-nostr-blog&quot;]
+  ]
+}</code></pre>
+      <h5 data-number="13.9.1.8.3"
+      id="nip-5a-copied-named-site-manifest">Copied Named Site
+      Manifest</h5>
+      <pre class="jsonc"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727373475,
+  &quot;id&quot;: &quot;b1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;,
+  &quot;kind&quot;: 35128,
+  &quot;pubkey&quot;: &quot;9f6815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd4000ff&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;blog&quot;],
+    // copied directly from the original named site
+    [&quot;a&quot;, &quot;35128:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:blog&quot;],
+    // origin of this copy lineage; same as `a` for a direct copy
+    [&quot;A&quot;, &quot;35128:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:blog&quot;],
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/post.html&quot;, &quot;b1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;title&quot;, &quot;My Copied Blog&quot;],
+    [&quot;description&quot;, &quot;A copy of another named nsite&quot;]
+  ]
+}</code></pre>
+      <h5 data-number="13.9.1.8.4"
+      id="nip-5a-copied-site-derived-from-another-copied-site">Copied
+      Site Derived From Another Copied Site</h5>
+      <pre class="jsonc"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727374475,
+  &quot;id&quot;: &quot;c1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;,
+  &quot;kind&quot;: 35128,
+  &quot;pubkey&quot;: &quot;7a6815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd4bbbb&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;blog&quot;],
+    // copied from another copied site, not directly from the origin
+    [&quot;a&quot;, &quot;35128:9f6815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd4000ff:blog&quot;],
+    // still points at the original site where this lineage began
+    [&quot;A&quot;, &quot;35128:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:blog&quot;],
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/post.html&quot;, &quot;c1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;title&quot;, &quot;My Derived Blog&quot;],
+    [&quot;description&quot;, &quot;A copy of a copied nsite that preserves the original lineage&quot;]
+  ]
+}</code></pre>
+      <h5 data-number="13.9.1.8.5"
+      id="nip-5a-manifest-snapshot">Manifest Snapshot</h5>
+      <pre class="jsonc"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727373475,
+  &quot;id&quot;: &quot;9f8e7d6c5b4a39281716151413121110ffeeddccbbaa99887766554433221100&quot;,
+  &quot;kind&quot;: 5128,
+  &quot;pubkey&quot;: &quot;266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    [&quot;a&quot;, &quot;35128:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:blog&quot;],
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/post.html&quot;, &quot;a1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;server&quot;, &quot;https://blossom.example.com&quot;],
+    [&quot;title&quot;, &quot;My Blog v1&quot;],
+    [&quot;description&quot;, &quot;An immutable snapshot of a blog hosted on Nostr&quot;],
+    [&quot;source&quot;, &quot;https://github.com/example/my-nostr-blog&quot;]
+  ]
+}</code></pre>
+      <h5 data-number="13.9.1.8.6"
+      id="nip-5a-manifest-snapshot-of-a-copied-site">Manifest Snapshot
+      Of A Copied Site</h5>
+      <pre class="jsonc"><code>{
+  &quot;content&quot;: &quot;&quot;,
+  &quot;created_at&quot;: 1727375475,
+  &quot;id&quot;: &quot;8f8e7d6c5b4a39281716151413121110ffeeddccbbaa99887766554433221100&quot;,
+  &quot;kind&quot;: 5128,
+  &quot;pubkey&quot;: &quot;9f6815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd4000ff&quot;,
+  &quot;sig&quot;: &quot;f4e4a9e785f70e9fcaa855d769438fea10781e84cd889e3fcb823774f83d094cf2c05d5a3ac4aebc1227a4ebc3d56867286c15a6df92d55045658bb428fd5fb5&quot;,
+  &quot;tags&quot;: [
+    // the site manifest this snapshot captures
+    [&quot;a&quot;, &quot;35128:9f6815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd4000ff:blog&quot;],
+    // copied unchanged from the snapshotted site&#39;s origin lineage
+    [&quot;A&quot;, &quot;35128:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:blog&quot;],
+    [&quot;path&quot;, &quot;/index.html&quot;, &quot;186ea5fd14e88fd1ac49351759e7ab906fa94892002b60bf7f5a428f28ca1c99&quot;],
+    [&quot;path&quot;, &quot;/post.html&quot;, &quot;b1b2c3d4e5f6789012345678901234567890abcdef1234567890abcdef123456&quot;],
+    [&quot;x&quot;, &quot;&lt;site-aggregate-sha256&gt;&quot;, &quot;aggregate&quot;],
+    [&quot;app&quot;, &quot;31990:266815e0c9210dfa324c6cba3573b14bee49da4209a9456f9484e5106cd408a5:my-blog-app&quot;, &quot;wss://relay.example.com&quot;],
+    [&quot;title&quot;, &quot;My Copied Blog v1&quot;],
+    [&quot;description&quot;, &quot;An immutable snapshot of a copied nsite&quot;]
+  ]
+}</code></pre>
+      <blockquote>
+      <p><strong>Warning</strong> <code>unrecommended</code>: too
+      complicated, try <a href="nip-99.html">NIP-99</a> instead</p>
+      </blockquote>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-34.html" rel="prev">NIP-34</a>
+        <a class="pager-next" href="nip-15.html" rel="next">NIP-15</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

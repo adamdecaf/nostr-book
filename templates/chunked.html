@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="$lang$" xml:lang="$lang$"$if(dir)$ dir="$dir$"$endif$>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(keywords)$
+  <meta name="keywords" content="$for(keywords)$$keywords$$sep$, $endfor$" />
+$endif$
+$if(description-meta)$
+  <meta name="description" content="$description-meta$" />
+$endif$
+$if(top)$
+  <title>$pagetitle$ · Nostr Book of NIPs</title>
+$else$
+  <title>$pagetitle$</title>
+$endif$
+  <style>
+    $styles.html()$
+  </style>
+$for(css)$
+  <link rel="stylesheet" href="$css$" />
+$endfor$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+</head>
+<body class="book">
+$for(include-before)$
+$include-before$
+$endfor$
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+$if(toc)$
+    <nav id="$idprefix$TOC" role="doc-toc">
+$if(toc-title)$
+      <h2 id="$idprefix$toc-title">$toc-title$</h2>
+$endif$
+      $table-of-contents$
+    </nav>
+$endif$
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+$if(previous.url)$
+        <a class="pager-prev" href="$previous.url$" accesskey="p" rel="prev">$previous.title$</a>
+$else$
+        <span class="pager-prev"></span>
+$endif$
+$if(next.url)$
+        <a class="pager-next" href="$next.url$" accesskey="n" rel="next">$next.title$</a>
+$else$
+        <span class="pager-next"></span>
+$endif$
+      </nav>
+$if(top)$
+$else$
+$if(title)$
+      <header id="title-block-header">
+        <h1 class="title">$title$</h1>
+$for(author)$
+        <p class="author">$author$</p>
+$endfor$
+$if(abstract)$
+        <div class="abstract">
+          <div class="abstract-title">$abstract-title$</div>
+          $abstract$
+        </div>
+$endif$
+      </header>
+$endif$
+$endif$
+      $body$
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+$if(previous.url)$
+        <a class="pager-prev" href="$previous.url$" rel="prev">$previous.title$</a>
+$else$
+        <span class="pager-prev"></span>
+$endif$
+$if(next.url)$
+        <a class="pager-next" href="$next.url$" rel="next">$next.title$</a>
+$else$
+        <span class="pager-next"></span>
+$endif$
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+$for(include-after)$
+$include-after$
+$endfor$
+</body>
+</html>

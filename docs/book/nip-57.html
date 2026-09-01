@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-57 · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="payments.html" accesskey="p" rel="prev">Payments</a>
+        <a class="pager-next" href="nip-75.html" accesskey="n" rel="next">NIP-75</a>
+      </nav>
+      <h2 data-number="11.1" id="nip-57">NIP-57</h2>
+      <h3 data-number="11.1.1" id="nip-57-lightning-zaps">Lightning
+      Zaps</h3>
+      <p><code>draft</code> <code>optional</code></p>
+      <p>This NIP defines two new event types for recording lightning
+      payments between users. <code>9734</code> is a
+      <code>zap request</code>, representing a payer’s request to a
+      recipient’s lightning wallet for an invoice. <code>9735</code> is
+      a <code>zap receipt</code>, representing the confirmation by the
+      recipient’s lightning wallet that the invoice issued in response
+      to a <code>zap request</code> has been paid.</p>
+      <p>Having lightning receipts on nostr allows clients to display
+      lightning payments from entities on the network. These can be used
+      for fun or for spam deterrence.</p>
+      <h3 data-number="11.1.2" id="nip-57-protocol-flow">Protocol
+      flow</h3>
+      <ol type="1">
+      <li>Client calculates a recipient’s lnurl pay request url from the
+      <code>zap</code> tag on the event being zapped (see Appendix G),
+      or by decoding their lud16 field on their profile according to the
+      <a href="https://github.com/lnurl/luds">lnurl specifications</a>.
+      The client MUST send a GET request to this url and parse the
+      response. If <code>allowsNostr</code> exists and it is
+      <code>true</code>, and if <code>nostrPubkey</code> exists and is a
+      valid BIP 340 public key in hex, the client should associate this
+      information with the user, along with the response’s
+      <code>callback</code>, <code>minSendable</code>, and
+      <code>maxSendable</code> values.</li>
+      <li>Clients may choose to display a lightning zap button on each
+      post or on a user’s profile. If the user’s lnurl pay request
+      endpoint supports nostr, the client SHOULD use this NIP to request
+      a <code>zap receipt</code> rather than a normal lnurl
+      invoice.</li>
+      <li>When a user (the “sender”) indicates they want to send a zap
+      to another user (the “recipient”), the client should create a
+      <code>zap request</code> event as described in Appendix A of this
+      NIP and sign it.</li>
+      <li>Instead of publishing the <code>zap request</code>, the
+      <code>9734</code> event should instead be sent to the
+      <code>callback</code> url received from the lnurl pay endpoint for
+      the recipient using a GET request. See Appendix B for details and
+      an example.</li>
+      <li>The recipient’s lnurl server will receive this
+      <code>zap request</code> and validate it. See Appendix C for
+      details on how to properly configure an lnurl server to support
+      zaps, and Appendix D for details on how to validate the
+      <code>nostr</code> query parameter.</li>
+      <li>If the <code>zap request</code> is valid, the server should
+      fetch a description hash invoice where the description is this
+      <code>zap request</code> note and this note only. No additional
+      lnurl metadata is included in the description. This will be
+      returned in the response according to <a
+      href="nip-06.html">LUD06</a>.</li>
+      <li>On receiving the invoice, the client MAY pay it or pass it to
+      an app that can pay the invoice.</li>
+      <li>Once the invoice is paid, the recipient’s lnurl server MUST
+      generate a <code>zap receipt</code> as described in Appendix E,
+      and publish it to the <code>relays</code> specified in the
+      <code>zap request</code>.</li>
+      <li>Clients MAY fetch <code>zap receipt</code>s on posts and
+      profiles, but MUST authorize their validity as described in
+      Appendix F. If the <code>zap request</code> note contains a
+      non-empty <code>content</code>, it may display a zap comment.
+      Generally clients should show users the <code>zap request</code>
+      note, and use the <code>zap receipt</code> to show “zap authorized
+      by …” but this is optional.</li>
+      </ol>
+      <h3 data-number="11.1.3"
+      id="nip-57-reference-and-examples">Reference and examples</h3>
+      <h4 data-number="11.1.3.1"
+      id="nip-57-appendix-a-zap-request-event">Appendix A: Zap Request
+      Event</h4>
+      <p>A <code>zap request</code> is an event of kind
+      <code>9734</code> that is <em>not</em> published to relays, but is
+      instead sent to a recipient’s lnurl pay <code>callback</code> url.
+      This event’s <code>content</code> MAY be an optional message to
+      send along with the payment. The event MUST include the following
+      tags:</p>
+      <ul>
+      <li><code>relays</code> is a list of relays the recipient’s wallet
+      should publish its <code>zap receipt</code> to. Note that relays
+      should not be nested in an additional list, but should be included
+      as shown in the example below.</li>
+      <li><code>amount</code> is the amount in <em>millisats</em> the
+      sender intends to pay, formatted as a string. This is recommended,
+      but optional.</li>
+      <li><code>lnurl</code> is the lnurl pay url of the recipient,
+      encoded using bech32 with the prefix <code>lnurl</code>. This is
+      recommended, but optional.</li>
+      <li><code>p</code> is the hex-encoded pubkey of the
+      recipient.</li>
+      </ul>
+      <p>In addition, the event MAY include the following tags:</p>
+      <ul>
+      <li><code>e</code> is an optional hex-encoded event id. Clients
+      MUST include this if zapping an event rather than a person.</li>
+      <li><code>a</code> is an optional event coordinate that allows
+      tipping addressable events such as NIP-23 long-form notes.</li>
+      <li><code>k</code> is the stringified kind of the target
+      event.</li>
+      </ul>
+      <p>Example:</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 9734,
+  &quot;content&quot;: &quot;Zap!&quot;,
+  &quot;tags&quot;: [
+    [&quot;relays&quot;, &quot;wss://nostr-pub.wellorder.com&quot;, &quot;wss://anotherrelay.example.com&quot;],
+    [&quot;amount&quot;, &quot;21000&quot;],
+    [&quot;lnurl&quot;, &quot;lnurl1dp68gurn8ghj7um5v93kketj9ehx2amn9uh8wetvdskkkmn0wahz7mrww4excup0dajx2mrv92x9xp&quot;],
+    [&quot;p&quot;, &quot;04c915daefee38317fa734444acee390a8269fe5810b2241e5e6dd343dfbecc9&quot;],
+    [&quot;e&quot;, &quot;9ae37aa68f48645127299e9453eb5d908a0cbb6058ff340d528ed4d37c8994fb&quot;],
+    [&quot;k&quot;, &quot;1&quot;]
+  ],
+  &quot;pubkey&quot;: &quot;97c70a44366a6535c145b333f973ea86dfdc2d7a99da618c40c64705ad98e322&quot;,
+  &quot;created_at&quot;: 1679673265,
+  &quot;id&quot;: &quot;30efed56a035b2549fcaeec0bf2c1595f9a9b3bb4b1a38abaf8ee9041c4b7d93&quot;,
+  &quot;sig&quot;: &quot;f2cb581a84ed10e4dc84937bd98e27acac71ab057255f6aa8dfa561808c981fe8870f4a03c1e3666784d82a9c802d3704e174371aa13d63e2aeaf24ff5374d9d&quot;
+}</code></pre>
+      <h4 data-number="11.1.3.2"
+      id="nip-57-appendix-b-zap-request-http-request">Appendix B: Zap
+      Request HTTP Request</h4>
+      <p>A signed <code>zap request</code> event is not published, but
+      is instead sent using a HTTP GET request to the recipient’s
+      <code>callback</code> url, which was provided by the recipient’s
+      lnurl pay endpoint. This request should have the following query
+      parameters defined:</p>
+      <ul>
+      <li><code>amount</code> is the amount in <em>millisats</em> the
+      sender intends to pay</li>
+      <li><code>nostr</code> is the <code>9734</code>
+      <code>zap request</code> event, JSON encoded then URI encoded</li>
+      <li><code>lnurl</code> is the lnurl pay url of the recipient,
+      encoded using bech32 with the prefix <code>lnurl</code></li>
+      </ul>
+      <p>This request should return a JSON response with a
+      <code>pr</code> key, which is the invoice the sender must pay to
+      finalize their zap. Here is an example flow in javascript:</p>
+      <pre class="javascript"><code>const senderPubkey // The sender&#39;s pubkey
+const recipientPubkey = // The recipient&#39;s pubkey
+const callback = // The callback received from the recipients lnurl pay endpoint
+const lnurl = // The recipient&#39;s lightning address, encoded as a lnurl
+const sats = 21
+
+const amount = sats * 1000
+const relays = [&#39;wss://nostr-pub.wellorder.net&#39;]
+const event = encodeURI(JSON.stringify(await signEvent({
+  kind: 9734,
+  content: &quot;&quot;,
+  pubkey: senderPubkey,
+  created_at: Math.round(Date.now() / 1000),
+  tags: [
+    [&quot;relays&quot;, ...relays],
+    [&quot;amount&quot;, amount.toString()],
+    [&quot;lnurl&quot;, lnurl],
+    [&quot;p&quot;, recipientPubkey],
+  ],
+})))
+
+const {pr: invoice} = await fetchJson(`${callback}?amount=${amount}&amp;nostr=${event}&amp;lnurl=${lnurl}`)</code></pre>
+      <h4 data-number="11.1.3.3"
+      id="nip-57-appendix-c-lnurl-server-configuration">Appendix C:
+      LNURL Server Configuration</h4>
+      <p>The lnurl server will need some additional pieces of
+      information so that clients can know that zap invoices are
+      supported:</p>
+      <ol type="1">
+      <li>Add a <code>nostrPubkey</code> to the lnurl-pay static
+      endpoint <code>/.well-known/lnurlp/&lt;user&gt;</code>, where
+      <code>nostrPubkey</code> is the nostr pubkey your server will use
+      to sign <code>zap receipt</code> events. Clients will use this to
+      validate <code>zap receipt</code>s.</li>
+      <li>Add an <code>allowsNostr</code> field and set it to true.</li>
+      </ol>
+      <h4 data-number="11.1.3.4"
+      id="nip-57-appendix-d-lnurl-server-zap-request-validation">Appendix
+      D: LNURL Server Zap Request Validation</h4>
+      <p>When a client sends a <code>zap request</code> event to a
+      server’s lnurl-pay callback URL, there will be a
+      <code>nostr</code> query parameter whose value is that event which
+      is URI- and JSON-encoded. If present, the <code>zap request</code>
+      event must be validated in the following ways:</p>
+      <ol type="1">
+      <li>It MUST have a valid nostr signature</li>
+      <li>It MUST have tags</li>
+      <li>It MUST have only one <code>p</code> tag</li>
+      <li>It MUST have 0 or 1 <code>e</code> tags</li>
+      <li>There should be a <code>relays</code> tag with the relays to
+      send the <code>zap receipt</code> to.</li>
+      <li>If there is an <code>amount</code> tag, it MUST be equal to
+      the <code>amount</code> query parameter.</li>
+      <li>If there is an <code>a</code> tag, it MUST be a valid event
+      coordinate</li>
+      <li>There MUST be 0 or 1 <code>P</code> tags. If there is one, it
+      MUST be equal to the <code>zap receipt</code>’s
+      <code>pubkey</code>.</li>
+      </ol>
+      <p>The event MUST then be stored for use later, when the invoice
+      is paid.</p>
+      <h4 data-number="11.1.3.5"
+      id="nip-57-appendix-e-zap-receipt-event">Appendix E: Zap Receipt
+      Event</h4>
+      <p>A <code>zap receipt</code> is created by a lightning node when
+      an invoice generated by a <code>zap request</code> is paid.
+      <code>Zap receipt</code>s are only created when the invoice
+      description (committed to the description hash) contains a
+      <code>zap request</code> note.</p>
+      <p>When receiving a payment, the following steps are executed:</p>
+      <ol type="1">
+      <li>Get the description for the invoice. This needs to be saved
+      somewhere during the generation of the description hash invoice.
+      It is saved automatically for you with CLN, which is the reference
+      implementation used here.</li>
+      <li>Parse the bolt11 description as a JSON nostr event. This
+      SHOULD be validated based on the requirements in Appendix D,
+      either when it is received, or before the invoice is paid.</li>
+      <li>Create a nostr event of kind <code>9735</code> as described
+      below, and publish it to the <code>relays</code> declared in the
+      <code>zap request</code>.</li>
+      </ol>
+      <p>The following should be true of the <code>zap receipt</code>
+      event:</p>
+      <ul>
+      <li>The <code>content</code> SHOULD be empty.</li>
+      <li>The <code>created_at</code> date SHOULD be set to the invoice
+      <code>paid_at</code> date for idempotency.</li>
+      <li><code>tags</code> MUST include the <code>p</code> tag (zap
+      recipient) AND optional <code>e</code> tag from the
+      <code>zap request</code> AND optional <code>a</code> tag from the
+      <code>zap request</code> AND optional <code>P</code> tag from the
+      pubkey of the zap request (zap sender).</li>
+      <li>The <code>zap receipt</code> MUST have a <code>bolt11</code>
+      tag containing the description hash bolt11 invoice.</li>
+      <li>The <code>zap receipt</code> MUST contain a
+      <code>description</code> tag which is the JSON-encoded zap
+      request.</li>
+      <li><code>SHA256(description)</code> SHOULD match the description
+      hash in the bolt11 invoice.</li>
+      <li>The <code>zap receipt</code> MAY contain a
+      <code>preimage</code> tag to match against the payment hash of the
+      bolt11 invoice. This isn’t really a payment proof, there is no
+      real way to prove that the invoice is real or has been paid. You
+      are trusting the author of the <code>zap receipt</code> for the
+      legitimacy of the payment.</li>
+      </ul>
+      <p>The <code>zap receipt</code> is not a proof of payment, all it
+      proves is that some nostr user fetched an invoice. The existence
+      of the <code>zap receipt</code> implies the invoice as paid, but
+      it could be a lie given a rogue implementation.</p>
+      <p>A reference implementation for a zap-enabled lnurl server can
+      be found <a
+      href="https://github.com/jb55/cln-nostr-zapper">here</a>.</p>
+      <p>Example <code>zap receipt</code>:</p>
+      <pre class="json"><code>{
+    &quot;id&quot;: &quot;67b48a14fb66c60c8f9070bdeb37afdfcc3d08ad01989460448e4081eddda446&quot;,
+    &quot;pubkey&quot;: &quot;9630f464cca6a5147aa8a35f0bcdd3ce485324e732fd39e09233b1d848238f31&quot;,
+    &quot;created_at&quot;: 1674164545,
+    &quot;kind&quot;: 9735,
+    &quot;tags&quot;: [
+      [&quot;p&quot;, &quot;32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245&quot;],
+      [&quot;P&quot;, &quot;97c70a44366a6535c145b333f973ea86dfdc2d7a99da618c40c64705ad98e322&quot;],
+      [&quot;e&quot;, &quot;3624762a1274dd9636e0c552b53086d70bc88c165bc4dc0f9e836a1eaf86c3b8&quot;],
+      [&quot;k&quot;, &quot;1&quot;],
+      [&quot;bolt11&quot;, &quot;lnbc10u1p3unwfusp5t9r3yymhpfqculx78u027lxspgxcr2n2987mx2j55nnfs95nxnzqpp5jmrh92pfld78spqs78v9euf2385t83uvpwk9ldrlvf6ch7tpascqhp5zvkrmemgth3tufcvflmzjzfvjt023nazlhljz2n9hattj4f8jq8qxqyjw5qcqpjrzjqtc4fc44feggv7065fqe5m4ytjarg3repr5j9el35xhmtfexc42yczarjuqqfzqqqqqqqqlgqqqqqqgq9q9qxpqysgq079nkq507a5tw7xgttmj4u990j7wfggtrasah5gd4ywfr2pjcn29383tphp4t48gquelz9z78p4cq7ml3nrrphw5w6eckhjwmhezhnqpy6gyf0&quot;],
+      [&quot;description&quot;, &quot;{\&quot;pubkey\&quot;:\&quot;97c70a44366a6535c145b333f973ea86dfdc2d7a99da618c40c64705ad98e322\&quot;,\&quot;content\&quot;:\&quot;\&quot;,\&quot;id\&quot;:\&quot;d9cc14d50fcb8c27539aacf776882942c1a11ea4472f8cdec1dea82fab66279d\&quot;,\&quot;created_at\&quot;:1674164539,\&quot;sig\&quot;:\&quot;77127f636577e9029276be060332ea565deaf89ff215a494ccff16ae3f757065e2bc59b2e8c113dd407917a010b3abd36c8d7ad84c0e3ab7dab3a0b0caa9835d\&quot;,\&quot;kind\&quot;:9734,\&quot;tags\&quot;:[[\&quot;e\&quot;,\&quot;3624762a1274dd9636e0c552b53086d70bc88c165bc4dc0f9e836a1eaf86c3b8\&quot;],[\&quot;p\&quot;,\&quot;32e1827635450ebb3c5a7d12c1f8e7b2b514439ac10a67eef3d9fd9c5c68e245\&quot;],[\&quot;relays\&quot;,\&quot;wss://relay.damus.io\&quot;,\&quot;wss://nostr-relay.wlvs.space\&quot;,\&quot;wss://nostr.fmt.wiz.biz\&quot;,\&quot;wss://relay.nostr.bg\&quot;,\&quot;wss://nostr.oxtr.dev\&quot;,\&quot;wss://nostr.v0l.io\&quot;,\&quot;wss://brb.io\&quot;,\&quot;wss://nostr.bitcoiner.social\&quot;,\&quot;ws://monad.jb55.com:8080\&quot;,\&quot;wss://relay.snort.social\&quot;]]}&quot;],
+      [&quot;preimage&quot;, &quot;5d006d2cf1e73c7148e7519a4c68adc81642ce0e25a432b2434c99f97344c15f&quot;]
+    ],
+    &quot;content&quot;: &quot;&quot;,
+  }</code></pre>
+      <h4 data-number="11.1.3.6"
+      id="nip-57-appendix-f-validating-zap-receipts">Appendix F:
+      Validating Zap Receipts</h4>
+      <p>A client can retrieve <code>zap receipt</code>s on events and
+      pubkeys using a NIP-01 filter, for example
+      <code>{"kinds": [9735], "#e": [...]}</code>. Zaps MUST be
+      validated using the following steps:</p>
+      <ul>
+      <li>The <code>zap receipt</code> event’s <code>pubkey</code> MUST
+      be the same as the recipient’s lnurl provider’s
+      <code>nostrPubkey</code> (retrieved in step 1 of the protocol
+      flow).</li>
+      <li>The <code>invoiceAmount</code> contained in the
+      <code>bolt11</code> tag of the <code>zap receipt</code> MUST equal
+      the <code>amount</code> tag of the <code>zap request</code> (if
+      present).</li>
+      <li>The <code>lnurl</code> tag of the <code>zap request</code> (if
+      present) SHOULD equal the recipient’s <code>lnurl</code>.</li>
+      </ul>
+      <h4 data-number="11.1.3.7"
+      id="nip-57-appendix-g-zap-tag-on-other-events">Appendix G:
+      <code>zap</code> tag on other events</h4>
+      <p>When an event includes one or more <code>zap</code> tags,
+      clients wishing to zap it SHOULD calculate the lnurl pay request
+      based on the tags value instead of the event author’s profile
+      field. The tag’s second argument is the <code>hex</code> string of
+      the receiver’s pub key and the third argument is the relay to
+      download the receiver’s metadata (Kind-0). An optional fourth
+      parameter specifies the weight (a generalization of a percentage)
+      assigned to the respective receiver. Clients should parse all
+      weights, calculate a sum, and then a percentage to each receiver.
+      If weights are not present, CLIENTS should equally divide the zap
+      amount to all receivers. If weights are only partially present,
+      receivers without a weight should not be zapped
+      (<code>weight = 0</code>).</p>
+      <pre class="yaml"><code>{
+    &quot;tags&quot;: [
+        [ &quot;zap&quot;, &quot;82341f882b6eabcd2ba7f1ef90aad961cf074af15b9ef44a09f9d2a8fbfbe6a2&quot;, &quot;wss://nostr.oxtr.dev&quot;, &quot;1&quot; ],  // 25%
+        [ &quot;zap&quot;, &quot;fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52&quot;, &quot;wss://nostr.wine/&quot;,    &quot;1&quot; ],  // 25%
+        [ &quot;zap&quot;, &quot;460c25e682fda7832b52d1f22d3d22b3176d972f60dcdc3212ed8c92ef85065c&quot;, &quot;wss://nos.lol/&quot;,       &quot;2&quot; ]   // 50%
+    ]
+}</code></pre>
+      <p>Clients MAY display the zap split configuration in the
+      note.</p>
+      <h3 data-number="11.1.4" id="nip-57-future-work">Future Work</h3>
+      <p>Zaps can be extended to be more private by encrypting
+      <code>zap request</code> notes to the target user, but for
+      simplicity it has been left out of this initial draft.</p>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="payments.html" rel="prev">Payments</a>
+        <a class="pager-next" href="nip-75.html" rel="next">NIP-75</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

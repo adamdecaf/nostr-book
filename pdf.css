@@ -21,6 +21,23 @@ img {
 h1, h2, h3 {
   page-break-after: avoid;
 }
+h1 { bookmark-level: 1; }
+h2 { bookmark-level: 2; }
+h3 { bookmark-level: 3; }
+nav#TOC {
+  page-break-after: always;
+}
+nav#TOC ul {
+  list-style: none;
+  padding-left: 1.1em;
+}
+nav#TOC > ul {
+  padding-left: 0;
+}
+nav#TOC a {
+  text-decoration: none;
+  color: #1c1916;
+}
 table {
   border-collapse: collapse;
   max-width: 100%;

@@ -1,4 +1,4 @@
-## How this book is organized
+# How this book is organized
 
 The NIPs in this book are the same documents you would find in the [nostr-protocol/nips](https://github.com/nostr-protocol/nips) repository. I have not rewritten them. I have grouped them by what they help you do, and written a short introduction to each group.
 

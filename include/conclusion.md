@@ -1,4 +1,4 @@
-## Conclusion
+# Conclusion
 
 That's the book. The NIPs themselves will keep changing — new kinds, better encryption, ideas that get tried and later marked unrecommended. This compilation is a map of the territory at one point in time, not the territory.
 

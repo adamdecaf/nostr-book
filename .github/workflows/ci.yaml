@@ -53,3 +53,31 @@ jobs:
         with:
           name: nostr-book.pdf
           path: nostr-book.pdf
+
+  html:
+    name: HTML
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v7
+
+      - name: Install pandoc
+        run: brew install pandoc
+
+      - name: Download NIPs
+        run: make setup
+
+      - name: Build HTML
+        run: make html
+
+      - name: Require outputs
+        run: |
+          test -s docs/book/index.html
+          test -s docs/book/nip-01.html
+          test -s docs/book/introduction.html
+
+      - name: Upload HTML
+        uses: actions/upload-artifact@v7
+        with:
+          name: nostr-book-html
+          path: docs/book

@@ -1,4 +1,4 @@
-## Introduction
+# Introduction
 
 Welcome to the Nostr Book of NIPs, a readable compilation of the [Nostr Implementation Possibilities](https://github.com/nostr-protocol/nips). NIPs are the community's notes on how clients and relays can interoperate. They are possibilities, not a checklist. Nothing forces any app to implement every NIP, and you should not implement one just because it exists.
 

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-46 · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-59.html" accesskey="p" rel="prev">NIP-59</a>
+        <a class="pager-next" href="nip-26.html" accesskey="n" rel="next">NIP-26</a>
+      </nav>
+      <h2 data-number="12.2" id="nip-46">NIP-46</h2>
+      <h3 data-number="12.2.1" id="nip-46-nostr-remote-signing">Nostr
+      Remote Signing</h3>
+      <h3 data-number="12.2.2" id="nip-46-changes">Changes</h3>
+      <p><code>remote-signer-key</code> is introduced, passed in bunker
+      url, clients must differentiate between
+      <code>remote-signer-pubkey</code> and <code>user-pubkey</code>,
+      must call <code>get_public_key</code> after connect, nip05 login
+      is removed, create_account moved to another NIP.</p>
+      <h3 data-number="12.2.3" id="nip-46-rationale">Rationale</h3>
+      <p>Private keys should be exposed to as few systems - apps,
+      operating systems, devices - as possible as each system adds to
+      the attack surface.</p>
+      <p>This NIP describes a method for 2-way communication between a
+      remote signer and a Nostr client. The remote signer could be, for
+      example, a hardware device dedicated to signing Nostr events,
+      while the client is a normal Nostr client.</p>
+      <h3 data-number="12.2.4" id="nip-46-terminology">Terminology</h3>
+      <ul>
+      <li><strong>user</strong>: A person that is trying to use
+      Nostr.</li>
+      <li><strong>client</strong>: A user-facing application that
+      <em>user</em> is looking at and clicking buttons in. This
+      application will send requests to <em>remote-signer</em>.</li>
+      <li><strong>remote-signer</strong>: A daemon or server running
+      somewhere that will answer requests from <em>client</em>, also
+      known as “bunker”.</li>
+      <li><strong>client-keypair/pubkey</strong>: The keys generated by
+      <em>client</em>. Used to encrypt content and communicate with
+      <em>remote-signer</em>.</li>
+      <li><strong>remote-signer-keypair/pubkey</strong>: The keys used
+      by <em>remote-signer</em> to encrypt content and communicate with
+      <em>client</em>. This keypair MAY be same as
+      <em>user-keypair</em>, but not necessarily.</li>
+      <li><strong>user-keypair/pubkey</strong>: The actual keys
+      representing <em>user</em> (that will be used to sign events in
+      response to <code>sign_event</code> requests, for example). The
+      <em>remote-signer</em> generally has control over these keys.</li>
+      </ul>
+      <p>All pubkeys specified in this NIP are in hex format.</p>
+      <h3 data-number="12.2.5" id="nip-46-overview">Overview</h3>
+      <ol type="1">
+      <li><em>client</em> generates <code>client-keypair</code>. This
+      keypair doesn’t need to be communicated to <em>user</em> since
+      it’s largely disposable. <em>client</em> might choose to store it
+      locally and they should delete it on logout;</li>
+      <li>A connection is established (see below),
+      <em>remote-signer</em> learns <code>client-pubkey</code>,
+      <em>client</em> learns <code>remote-signer-pubkey</code>.</li>
+      <li><em>client</em> uses <code>client-keypair</code> to send
+      requests to <em>remote-signer</em> by <code>p</code>-tagging and
+      encrypting to <code>remote-signer-pubkey</code>;</li>
+      <li><em>remote-signer</em> responds to <em>client</em> by
+      <code>p</code>-tagging and encrypting to the
+      <code>client-pubkey</code>.</li>
+      <li><em>client</em> requests <code>get_public_key</code> to learn
+      <code>user-pubkey</code>.</li>
+      </ol>
+      <h3 data-number="12.2.6"
+      id="nip-46-initiating-a-connection">Initiating a connection</h3>
+      <p>There are two ways to initiate a connection:</p>
+      <h4 data-number="12.2.6.1"
+      id="nip-46-direct-connection-initiated-by-remote-signer">Direct
+      connection initiated by <em>remote-signer</em></h4>
+      <p><em>remote-signer</em> provides connection token in the
+      form:</p>
+      <pre><code>bunker://&lt;remote-signer-pubkey&gt;?relay=&lt;wss://relay-to-connect-on&gt;&amp;relay=&lt;wss://another-relay-to-connect-on&gt;&amp;secret=&lt;optional-secret-value&gt;</code></pre>
+      <p><em>user</em> passes this token to <em>client</em>, which then
+      sends <code>connect</code> request to <em>remote-signer</em> via
+      the specified relays. When connecting this way <em>client</em>
+      SHOULD include <code>optional_client_metadata</code> in the
+      <code>connect</code> request (see <a
+      href="nip-46.html#nip-46-client-metadata">Client metadata</a>),
+      since unlike <code>nostrconnect://</code> this token carries no
+      information identifying <em>client</em>. Optional secret can be
+      used for single successfully established connection only,
+      <em>remote-signer</em> SHOULD ignore new attempts to establish
+      connection with old secret.</p>
+      <h4 data-number="12.2.6.2"
+      id="nip-46-direct-connection-initiated-by-the-client">Direct
+      connection initiated by the <em>client</em></h4>
+      <p><em>client</em> provides a connection token using
+      <code>nostrconnect://</code> as the protocol, and
+      <code>client-pubkey</code> as the origin. Additional information
+      should be passed as query parameters:</p>
+      <ul>
+      <li><code>relay</code> (required) - one or more relay urls on
+      which the <em>client</em> is listening for responses from the
+      <em>remote-signer</em>.</li>
+      <li><code>secret</code> (required) - a short random string that
+      the <em>remote-signer</em> should return as the
+      <code>result</code> field of its response.</li>
+      <li><code>perms</code> (optional) - a comma-separated list of
+      permissions the <em>client</em> is requesting be approved by the
+      <em>remote-signer</em></li>
+      <li><code>name</code> (optional) - the name of the <em>client</em>
+      application</li>
+      <li><code>url</code> (optional) - the canonical url of the
+      <em>client</em> application</li>
+      <li><code>image</code> (optional) - a small image representing the
+      <em>client</em> application</li>
+      </ul>
+      <p>Here’s an example:</p>
+      <pre><code>nostrconnect://83f3b2ae6aa368e8275397b9c26cf550101d63ebaab900d19dd4a4429f5ad8f5?relay=wss%3A%2F%2Frelay1.example.com&amp;perms=nip44_encrypt%2Cnip44_decrypt%2Csign_event%3A13%2Csign_event%3A14%2Csign_event%3A1059&amp;name=My+Client&amp;secret=0s8j2djs&amp;relay=wss%3A%2F%2Frelay2.example2.com</code></pre>
+      <p><em>user</em> passes this token to <em>remote-signer</em>,
+      which then sends <code>connect</code> <em>response</em> event to
+      the <code>client-pubkey</code> via the specified relays. Client
+      discovers <code>remote-signer-pubkey</code> from connect response
+      author. <code>secret</code> value MUST be provided to avoid
+      connection spoofing, <em>client</em> MUST validate the
+      <code>secret</code> returned by <code>connect</code> response.</p>
+      <h3 data-number="12.2.7"
+      id="nip-46-request-events-kind-24133">Request Events
+      <code>kind: 24133</code></h3>
+      <pre class="yaml"><code>{
+    &quot;kind&quot;: 24133,
+    &quot;pubkey&quot;: &lt;local_keypair_pubkey&gt;,
+    &quot;content&quot;: &lt;nip44(&lt;request&gt;)&gt;,
+    &quot;tags&quot;: [[&quot;p&quot;, &lt;remote-signer-pubkey&gt;]],
+}</code></pre>
+      <p>The <code>content</code> field is a JSON-RPC-like message that
+      is <a href="nip-44.html">NIP-44</a> encrypted and has the
+      following structure:</p>
+      <pre class="yaml"><code>{
+    &quot;id&quot;: &lt;random_string&gt;,
+    &quot;method&quot;: &lt;method_name&gt;,
+    &quot;params&quot;: [array_of_strings]
+}</code></pre>
+      <ul>
+      <li><code>id</code> is a random string that is a request ID. This
+      same ID will be sent back in the response payload.</li>
+      <li><code>method</code> is the name of the method/command
+      (detailed below).</li>
+      <li><code>params</code> is a positional array of string
+      parameters.</li>
+      </ul>
+      <h4 data-number="12.2.7.1"
+      id="nip-46-methodscommands">Methods/Commands</h4>
+      <p>Each of the following are methods that the <em>client</em>
+      sends to the <em>remote-signer</em>.</p>
+      <table>
+      <colgroup>
+      <col style="width: 16%" />
+      <col style="width: 34%" />
+      <col style="width: 48%" />
+      </colgroup>
+      <thead>
+      <tr>
+      <th>Command</th>
+      <th>Params</th>
+      <th>Result</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>connect</code></td>
+      <td><code>[&lt;remote-signer-pubkey&gt;, &lt;optional_secret&gt;, &lt;optional_requested_perms&gt;, &lt;optional_client_metadata&gt;]</code></td>
+      <td><code>"ack"</code> OR
+      <code>&lt;required-secret-value&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>sign_event</code></td>
+      <td><code>[&lt;{kind, content, tags, created_at}&gt;]</code></td>
+      <td><code>json_stringified(&lt;signed_event&gt;)</code></td>
+      </tr>
+      <tr>
+      <td><code>ping</code></td>
+      <td><code>[]</code></td>
+      <td><code>"pong"</code></td>
+      </tr>
+      <tr>
+      <td><code>get_public_key</code></td>
+      <td><code>[]</code></td>
+      <td><code>&lt;user-pubkey&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>nip04_encrypt</code></td>
+      <td><code>[&lt;third_party_pubkey&gt;, &lt;plaintext_to_encrypt&gt;]</code></td>
+      <td><code>&lt;nip04_ciphertext&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>nip04_decrypt</code></td>
+      <td><code>[&lt;third_party_pubkey&gt;, &lt;nip04_ciphertext_to_decrypt&gt;]</code></td>
+      <td><code>&lt;plaintext&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>nip44_encrypt</code></td>
+      <td><code>[&lt;third_party_pubkey&gt;, &lt;plaintext_to_encrypt&gt;]</code></td>
+      <td><code>&lt;nip44_ciphertext&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>nip44_decrypt</code></td>
+      <td><code>[&lt;third_party_pubkey&gt;, &lt;nip44_ciphertext_to_decrypt&gt;]</code></td>
+      <td><code>&lt;plaintext&gt;</code></td>
+      </tr>
+      <tr>
+      <td><code>switch_relays</code></td>
+      <td><code>[]</code></td>
+      <td><code>["&lt;relay-url&gt;", "&lt;relay-url&gt;", ...]</code>
+      OR <code>null</code></td>
+      </tr>
+      <tr>
+      <td><code>logout</code></td>
+      <td><code>[]</code></td>
+      <td><code>"ack"</code></td>
+      </tr>
+      </tbody>
+      </table>
+      <h4 data-number="12.2.7.2"
+      id="nip-46-requested-permissions">Requested permissions</h4>
+      <p>The <code>connect</code> method may be provided with
+      <code>optional_requested_perms</code> for user convenience. The
+      permissions are a comma-separated list of
+      <code>method[:params]</code>,
+      i.e. <code>nip44_encrypt,sign_event:4</code> meaning permissions
+      to call <code>nip44_encrypt</code> and to call
+      <code>sign_event</code> with <code>kind:4</code>. Optional
+      parameter for <code>sign_event</code> is the kind number,
+      parameters for other methods are to be defined later. Same
+      permission format may be used for <code>perms</code> field of
+      <code>metadata</code> in <code>nostrconnect://</code> string.</p>
+      <h4 data-number="12.2.7.3" id="nip-46-client-metadata">Client
+      metadata</h4>
+      <p>The <code>connect</code> method may be provided with
+      <code>optional_client_metadata</code> so that
+      <em>remote-signer</em> can identify and label the connection. It
+      is a JSON-stringified object whose fields mirror the
+      <code>nostrconnect://</code> query parameters, all optional:</p>
+      <ul>
+      <li><code>name</code> - the name of the <em>client</em>
+      application</li>
+      <li><code>url</code> - the canonical url of the <em>client</em>
+      application</li>
+      <li><code>image</code> - a small image representing the
+      <em>client</em> application</li>
+      </ul>
+      <p>This is most useful for a connection initiated by
+      <em>remote-signer</em> (the <code>bunker://</code> flow), where —
+      unlike <code>nostrconnect://</code> — <em>remote-signer</em> has
+      no other source for this information. To send metadata without
+      requesting permissions, an empty string MUST be passed for
+      <code>optional_requested_perms</code> so that the metadata
+      occupies the fourth position. The metadata is
+      <em>client</em>-supplied and unauthenticated;
+      <em>remote-signer</em> SHOULD treat it as a display hint only and
+      MUST NOT use it for authorization decisions.</p>
+      <h4 data-number="12.2.7.4" id="nip-46-switching-relays">Switching
+      relays</h4>
+      <p>At all times, the <em>remote-signer</em> should be in control
+      of what relays are being used for the connection between it and
+      the <em>client</em>. Therefore it should be possible for it to
+      evolve its set of relays over time as old relays go out of
+      operation and new ones appear. Even more importantly, in the case
+      of the connection initiated by the <em>client</em> the client may
+      pick relays completely foreign to the <em>remote-signer</em>’s
+      preferences, so it must be possible for it to switch those
+      immediately.</p>
+      <p>Therefore, compliant clients should send a
+      <code>switch_relays</code> request immediately upon establishing a
+      connection (always, or at reasonable intervals). Upon receiving
+      such requests, the <em>remote-signer</em> should reply with its
+      updated list of relays, or <code>null</code> if there is nothing
+      to be changed. Immediately upon receiving an updated relay list,
+      the <em>client</em> should update its local state and send further
+      requests on the new relays. The <code>remote-signer</code> should
+      then be free to disconnect from the previous relays if that is
+      desired.</p>
+      <h4 data-number="12.2.7.5" id="nip-46-ending-a-session">Ending a
+      session</h4>
+      <p>When the <em>user</em> logs out of the <em>client</em>, the
+      <em>client</em> MAY send a <code>logout</code> request to inform
+      the <em>remote-signer</em> that the session is no longer needed.
+      Upon receiving such a request, the <em>remote-signer</em> SHOULD
+      remove the session associated with the requesting
+      <code>client-pubkey</code> and reject any further requests from it
+      (a new <code>connect</code> would be required to re-establish a
+      session). The <em>remote-signer</em> should reply with
+      <code>"ack"</code> before removing the session.</p>
+      <p>The <code>logout</code> request is a courtesy hint and is not a
+      security boundary: the <em>remote-signer</em> MUST NOT rely on it
+      being sent, and the <em>client</em> MUST still delete its locally
+      stored <code>client-keypair</code> on logout regardless of whether
+      the request was acknowledged.</p>
+      <h3 data-number="12.2.8"
+      id="nip-46-response-events-kind24133">Response Events
+      <code>kind:24133</code></h3>
+      <pre class="json"><code>{
+    &quot;id&quot;: &lt;id&gt;,
+    &quot;kind&quot;: 24133,
+    &quot;pubkey&quot;: &lt;remote-signer-pubkey&gt;,
+    &quot;content&quot;: &lt;nip44(&lt;response&gt;)&gt;,
+    &quot;tags&quot;: [[&quot;p&quot;, &lt;client-pubkey&gt;]],
+    &quot;created_at&quot;: &lt;unix timestamp in seconds&gt;
+}</code></pre>
+      <p>The <code>content</code> field is a JSON-RPC-like message that
+      is <a href="nip-44.html">NIP-44</a> encrypted and has the
+      following structure:</p>
+      <pre class="json"><code>{
+    &quot;id&quot;: &lt;request_id&gt;,
+    &quot;result&quot;: &lt;results_string&gt;,
+    &quot;error&quot;: &lt;optional_error_string&gt;
+}</code></pre>
+      <ul>
+      <li><code>id</code> is the request ID that this response is
+      for.</li>
+      <li><code>results</code> is a string of the result of the call
+      (this can be either a string or a JSON stringified object)</li>
+      <li><code>error</code>, <em>optionally</em>, it is an error in
+      string form, if any. Its presence indicates an error with the
+      request.</li>
+      </ul>
+      <p>Requests made with unknown or unsupported methods MUST be
+      replied with an error.</p>
+      <h3 data-number="12.2.9"
+      id="nip-46-example-flow-for-signing-an-event">Example flow for
+      signing an event</h3>
+      <ul>
+      <li><code>remote-signer-pubkey</code> is
+      <code>fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52</code></li>
+      <li><code>user-pubkey</code> is also
+      <code>fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52</code></li>
+      <li><code>client-pubkey</code> is
+      <code>eff37350d839ce3707332348af4549a96051bd695d3223af4aabce4993531d86</code></li>
+      </ul>
+      <h4 data-number="12.2.9.1" id="nip-46-signature-request">Signature
+      request</h4>
+      <pre class="yaml"><code>{
+    &quot;kind&quot;: 24133,
+    &quot;pubkey&quot;: &quot;eff37350d839ce3707332348af4549a96051bd695d3223af4aabce4993531d86&quot;,
+    &quot;content&quot;: nip44({
+        &quot;id&quot;: &lt;random_string&gt;,
+        &quot;method&quot;: &quot;sign_event&quot;,
+        &quot;params&quot;: [json_stringified(&lt;{
+            content: &quot;Hello, I&#39;m signing remotely&quot;,
+            kind: 1,
+            tags: [],
+            created_at: 1714078911
+        }&gt;)]
+    }),
+    &quot;tags&quot;: [[&quot;p&quot;, &quot;fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52&quot;]], // p-tags the remote-signer-pubkey
+}</code></pre>
+      <h4 data-number="12.2.9.2" id="nip-46-response-event">Response
+      event</h4>
+      <pre class="yaml"><code>{
+    &quot;kind&quot;: 24133,
+    &quot;pubkey&quot;: &quot;fa984bd7dbb282f07e16e7ae87b26a2a7b9b90b7246a44771f0cf5ae58018f52&quot;,
+    &quot;content&quot;: nip44({
+        &quot;id&quot;: &lt;random_string&gt;,
+        &quot;result&quot;: json_stringified(&lt;signed-event&gt;)
+    }),
+    &quot;tags&quot;: [[&quot;p&quot;, &quot;eff37350d839ce3707332348af4549a96051bd695d3223af4aabce4993531d86&quot;]], // p-tags the client-pubkey
+}</code></pre>
+      <h4 data-number="12.2.9.3" id="nip-46-diagram">Diagram</h4>
+      <figure>
+      <img src="https://i.nostr.build/P3gW.png" alt="signing-example" />
+      <figcaption aria-hidden="true">signing-example</figcaption>
+      </figure>
+      <h3 data-number="12.2.10" id="nip-46-auth-challenges">Auth
+      Challenges</h3>
+      <p>An Auth Challenge is a response that a <em>remote-signer</em>
+      can send back when it needs the <em>user</em> to authenticate via
+      other means. The response <code>content</code> object will take
+      the following form:</p>
+      <pre class="json"><code>{
+    &quot;id&quot;: &lt;request_id&gt;,
+    &quot;result&quot;: &quot;auth_url&quot;,
+    &quot;error&quot;: &lt;URL_to_display_to_end_user&gt;
+}</code></pre>
+      <p><em>client</em> should display (in a popup or new tab) the URL
+      from the <code>error</code> field and then subscribe/listen for
+      another response from the <em>remote-signer</em> (reusing the same
+      request ID). This event will be sent once the user authenticates
+      in the other window (or will never arrive if the user doesn’t
+      authenticate).</p>
+      <h4 data-number="12.2.10.1"
+      id="nip-46-example-event-signing-request-with-auth-challenge">Example
+      event signing request with auth challenge</h4>
+      <figure>
+      <img src="https://i.nostr.build/W3aj.png"
+      alt="signing-example-with-auth-challenge" />
+      <figcaption
+      aria-hidden="true">signing-example-with-auth-challenge</figcaption>
+      </figure>
+      <h3 data-number="12.2.11" id="nip-46-appendix">Appendix</h3>
+      <h4 data-number="12.2.11.1"
+      id="nip-46-announcing-remote-signer-metadata">Announcing
+      <em>remote-signer</em> metadata</h4>
+      <p><em>remote-signer</em> MAY publish its metadata by using <a
+      href="nip-05.html">NIP-05</a> and <a
+      href="nip-89.html">NIP-89</a>. With NIP-05, a request to
+      <code>&lt;remote-signer&gt;/.well-known/nostr.json?name=_</code>
+      MAY return this:</p>
+      <pre class="yaml"><code>{
+    &quot;names&quot;:{
+        &quot;_&quot;: &lt;remote-signer-app-pubkey&gt;,
+    },
+    &quot;nip46&quot;: {
+        &quot;relays&quot;: [&quot;wss://relay1&quot;,&quot;wss://relay2&quot;...],
+        &quot;nostrconnect_url&quot;: &quot;https://remote-signer-domain.example/&lt;nostrconnect&gt;&quot;
+    }
+}</code></pre>
+      <p>The <code>&lt;remote-signer-app-pubkey&gt;</code> MAY be used
+      to verify the domain from <em>remote-signer</em>’s NIP-89 event
+      (see below). <code>relays</code> SHOULD be used to construct a
+      more precise <code>nostrconnect://</code> string for the specific
+      <code>remote-signer</code>. <code>nostrconnect_url</code> template
+      MAY be used to redirect users to <em>remote-signer</em>’s
+      connection flow by replacing <code>&lt;nostrconnect&gt;</code>
+      placeholder with an actual <code>nostrconnect://</code>
+      string.</p>
+      <h4 data-number="12.2.11.2"
+      id="nip-46-remote-signer-discovery-via-nip-89">Remote signer
+      discovery via NIP-89</h4>
+      <p><em>remote-signer</em> MAY publish a NIP-89
+      <code>kind: 31990</code> event with <code>k</code> tag of
+      <code>24133</code>, which MAY also include one or more
+      <code>relay</code> tags and MAY include
+      <code>nostrconnect_url</code> tag. The semantics of
+      <code>relay</code> and <code>nostrconnect_url</code> tags are the
+      same as in the section above.</p>
+      <p><em>client</em> MAY improve UX by discovering
+      <em>remote-signers</em> using their <code>kind: 31990</code>
+      events. <em>client</em> MAY then pre-generate
+      <code>nostrconnect://</code> strings for the
+      <em>remote-signers</em>, and SHOULD in that case verify that
+      <code>kind: 31990</code> event’s author is mentioned in signer’s
+      <code>nostr.json?name=_</code> file as
+      <code>&lt;remote-signer-app-pubkey&gt;</code>.</p>
+      <blockquote>
+      <p><strong>Warning</strong> <code>unrecommended</code>: adds
+      unnecessary burden for little gain</p>
+      </blockquote>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-59.html" rel="prev">NIP-59</a>
+        <a class="pager-next" href="nip-26.html" rel="next">NIP-26</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

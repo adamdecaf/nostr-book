@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-11 · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="relays.html" accesskey="p" rel="prev">Relays</a>
+        <a class="pager-next" href="nip-42.html" accesskey="n" rel="next">NIP-42</a>
+      </nav>
+      <h2 data-number="9.1" id="nip-11">NIP-11</h2>
+      <h3 data-number="9.1.1"
+      id="nip-11-relay-information-document">Relay Information
+      Document</h3>
+      <p><code>draft</code> <code>optional</code> <code>relay</code></p>
+      <p>Relays may provide server metadata to clients to inform them of
+      capabilities, administrative contacts, and various server
+      attributes. This is made available as a JSON document over HTTP,
+      on the same URI as the relay’s websocket.</p>
+      <p>When a relay receives an HTTP(s) request with an
+      <code>Accept</code> header of <code>application/nostr+json</code>
+      to a URI supporting WebSocket upgrades, they SHOULD return a
+      document with the following structure.</p>
+      <pre class="json"><code>{
+  &quot;name&quot;: &lt;string identifying relay&gt;,
+  &quot;description&quot;: &lt;string with detailed information&gt;,
+  &quot;banner&quot;: &lt;a link to an image (e.g. in .jpg, or .png format)&gt;,
+  &quot;icon&quot;: &lt;a link to an icon (e.g. in .jpg, or .png format&gt;,
+  &quot;pubkey&quot;: &lt;administrative contact pubkey&gt;,
+  &quot;self&quot;: &lt;relay&#39;s own pubkey&gt;,
+  &quot;contact&quot;: &lt;administrative alternate contact&gt;,
+  &quot;supported_nips&quot;: &lt;a list of NIP numbers supported by the relay&gt;,
+  &quot;software&quot;: &lt;string identifying relay software URL&gt;,
+  &quot;version&quot;: &lt;string version identifier&gt;,
+  &quot;terms_of_service&quot;: &lt;a link to a text file describing the relay&#39;s term of service&gt;
+}</code></pre>
+      <p>Any field may be omitted, and clients MUST ignore any
+      additional fields they do not understand. Relays MUST accept CORS
+      requests by sending <code>Access-Control-Allow-Origin</code>,
+      <code>Access-Control-Allow-Headers</code>, and
+      <code>Access-Control-Allow-Methods</code> headers.</p>
+      <h3 data-number="9.1.2" id="nip-11-field-descriptions">Field
+      Descriptions</h3>
+      <h4 data-number="9.1.2.1" id="nip-11-name">Name</h4>
+      <p>A relay may select a <code>name</code> for use in client
+      software. This is a string, and SHOULD be less than 30 characters
+      to avoid client truncation.</p>
+      <h4 data-number="9.1.2.2" id="nip-11-description">Description</h4>
+      <p>Detailed plain-text information about the relay may be
+      contained in the <code>description</code> string. It is
+      recommended that this contain no markup, formatting or line breaks
+      for word wrapping, and simply use double newline characters to
+      separate paragraphs. There are no limitations on length.</p>
+      <h4 data-number="9.1.2.3" id="nip-11-banner">Banner</h4>
+      <p>To make nostr relay management more user friendly, an effort
+      should be made by relay owners to communicate with non-dev
+      non-technical nostr end users. A banner is a visual representation
+      of the relay. It should aim to visually communicate the brand of
+      the relay, complementing the text <code>Description</code>. <a
+      href="https://image.nostr.build/232ddf6846e8aea5a61abcd70f9222ab521f711aa545b7ab02e430248fa3a249.png">Here
+      is an example banner</a> mockup as visualized in Damus iOS relay
+      view of the Damus relay.</p>
+      <h4 data-number="9.1.2.4" id="nip-11-icon">Icon</h4>
+      <p>Icon is a compact visual representation of the relay for use in
+      UI with limited real estate such as a nostr user’s relay list
+      view. Below is an example URL pointing to an image to be used as
+      an icon for the relay. Recommended to be squared in shape.</p>
+      <pre class="yaml"><code>{
+  &quot;icon&quot;: &quot;https://nostr.build/i/53866b44135a27d624e99c6165cabd76ac8f72797209700acb189fce75021f47.jpg&quot;,
+  // other fields...
+}</code></pre>
+      <h4 data-number="9.1.2.5" id="nip-11-pubkey">Pubkey</h4>
+      <p>An administrative contact may be listed with a
+      <code>pubkey</code>, in the same format as Nostr events (32-byte
+      hex for a <code>secp256k1</code> public key). If a contact is
+      listed, this provides clients with a recommended address to send
+      encrypted direct messages (See <a href="nip-17.html">NIP-17</a>)
+      to a system administrator. Expected uses of this address are to
+      report abuse or illegal content, file bug reports, or request
+      other technical assistance.</p>
+      <p>Relay operators have no obligation to respond to direct
+      messages.</p>
+      <h4 data-number="9.1.2.6" id="nip-11-self">Self</h4>
+      <p>A relay MAY maintain an identity independent from its
+      administrator using the <code>self</code> field, which MUST be a
+      32-byte hex public key. This allows relays to respond to requests
+      with events published either in advance or on demand by their own
+      key.</p>
+      <h4 data-number="9.1.2.7" id="nip-11-contact">Contact</h4>
+      <p>An alternative contact may be listed under the
+      <code>contact</code> field as well, with the same purpose as
+      <code>pubkey</code>. Use of a Nostr public key and direct message
+      SHOULD be preferred over this. Contents of this field SHOULD be a
+      URI, using schemes such as <code>mailto</code> or
+      <code>https</code> to provide users with a means of contact.</p>
+      <h4 data-number="9.1.2.8" id="nip-11-supported-nips">Supported
+      NIPs</h4>
+      <p>As the Nostr protocol evolves, some functionality may only be
+      available by relays that implement a specific <code>NIP</code>.
+      This field is an array of the integer identifiers of
+      <code>NIP</code>s that are implemented in the relay. Examples
+      would include <code>1</code>, for <code>"NIP-01"</code> and
+      <code>9</code>, for <code>"NIP-09"</code>. Client-side
+      <code>NIPs</code> SHOULD NOT be advertised, and can be ignored by
+      clients.</p>
+      <h4 data-number="9.1.2.9" id="nip-11-software">Software</h4>
+      <p>The relay server implementation MAY be provided in the
+      <code>software</code> attribute. If present, this MUST be a URL to
+      the project’s homepage.</p>
+      <h4 data-number="9.1.2.10" id="nip-11-version">Version</h4>
+      <p>The relay MAY choose to publish its software version as a
+      string attribute. The string format is defined by the relay
+      implementation. It is recommended this be a version number or
+      commit identifier.</p>
+      <h4 data-number="9.1.2.11" id="nip-11-terms-of-service">Terms of
+      Service</h4>
+      <p>The relay owner/admin MAY choose to link to a terms of service
+      document.</p>
+      <h3 data-number="9.1.3" id="nip-11-extra-fields">Extra Fields</h3>
+      <h4 data-number="9.1.3.1" id="nip-11-server-limitations">Server
+      Limitations</h4>
+      <p>These are limitations imposed by the relay on clients. Your
+      client should expect that requests exceed these <em>practical</em>
+      limitations are rejected or fail immediately.</p>
+      <pre class="yaml"><code>{
+  &quot;limitation&quot;: {
+    &quot;max_message_length&quot;: 16384,
+    &quot;max_subscriptions&quot;: 300,
+    &quot;max_limit&quot;: 5000,
+    &quot;max_subid_length&quot;: 100,
+    &quot;max_event_tags&quot;: 100,
+    &quot;max_content_length&quot;: 8196,
+    &quot;min_pow_difficulty&quot;: 30,
+    &quot;auth_required&quot;: true,
+    &quot;payment_required&quot;: true,
+    &quot;restricted_writes&quot;: true,
+    &quot;created_at_lower_limit&quot;: 31536000,
+    &quot;created_at_upper_limit&quot;: 3,
+    &quot;default_limit&quot;: 500
+  },
+  // other fields...
+}</code></pre>
+      <ul>
+      <li><p><code>max_message_length</code>: the maximum number of
+      bytes for incoming JSON that the relay will attempt to decode and
+      act upon. When you send large subscriptions, you will be limited
+      by this value. It also effectively limits the maximum size of any
+      event. Value is calculated from <code>[</code> to <code>]</code>
+      after UTF-8 serialization (so some unicode characters will cost
+      2-3 bytes). It is equal to the maximum size of the WebSocket
+      message frame.</p></li>
+      <li><p><code>max_subscriptions</code>: total number of
+      subscriptions that may be active on a single websocket connection
+      to this relay. Authenticated clients with a (paid) relationship to
+      the relay may have higher limits.</p></li>
+      <li><p><code>max_subid_length</code>: maximum length of
+      subscription id as a string.</p></li>
+      <li><p><code>max_limit</code>: the relay server will clamp each
+      filter’s <code>limit</code> value to this number. This means the
+      client won’t be able to get more than this number of events from a
+      single subscription filter. This clamping is typically done
+      silently by the relay, but with this number, you can know that
+      there are additional results if you narrow your filter’s time
+      range or other parameters.</p></li>
+      <li><p><code>max_event_tags</code>: in any event, this is the
+      maximum number of elements in the <code>tags</code> list.</p></li>
+      <li><p><code>max_content_length</code>: maximum number of
+      characters in the <code>content</code> field of any event. This is
+      a count of unicode characters. After serializing into JSON it may
+      be larger (in bytes), and is still subject to the
+      <code>max_message_length</code>, if defined.</p></li>
+      <li><p><code>min_pow_difficulty</code>: new events will require at
+      least this difficulty of PoW, based on <a
+      href="nip-13.html">NIP-13</a>, or they will be rejected by this
+      server.</p></li>
+      <li><p><code>auth_required</code>: this relay requires <a
+      href="nip-42.html">NIP-42</a> authentication to happen before a
+      new connection may perform any other action. Even if set to False,
+      authentication may be required for specific actions.</p></li>
+      <li><p><code>payment_required</code>: this relay requires payment
+      before a new connection may perform any action.</p></li>
+      <li><p><code>restricted_writes</code>: this relay requires some
+      kind of condition to be fulfilled to accept events (not
+      necessarily, but including <code>payment_required</code> and
+      <code>min_pow_difficulty</code>). This should only be set to
+      <code>true</code> when users are expected to know the relay policy
+      before trying to write to it – like belonging to a special
+      pubkey-based whitelist or writing only events of a specific niche
+      kind or content. Normal anti-spam heuristics, for example, do not
+      qualify.</p></li>
+      <li><p><code>created_at_lower_limit</code>: ‘created_at’ lower
+      limit</p></li>
+      <li><p><code>created_at_upper_limit</code>: ‘created_at’ upper
+      limit</p></li>
+      <li><p><code>default_limit</code>: The maximum returned events if
+      you send a filter without a <code>limit</code>.</p></li>
+      </ul>
+      <h4 data-number="9.1.3.2"
+      id="nip-11-pay-to-relay">Pay-to-Relay</h4>
+      <p>Relays that require payments may want to expose their fee
+      schedules.</p>
+      <pre class="yaml"><code>{
+  &quot;payments_url&quot;: &quot;https://my-relay/payments&quot;,
+  &quot;fees&quot;: {
+    &quot;admission&quot;: [{ &quot;amount&quot;: 1000000, &quot;unit&quot;: &quot;msats&quot; }],
+    &quot;subscription&quot;: [{ &quot;amount&quot;: 5000000, &quot;unit&quot;: &quot;msats&quot;, &quot;period&quot;: 2592000 }],
+    &quot;publication&quot;: [{ &quot;kinds&quot;: [4], &quot;amount&quot;: 100, &quot;unit&quot;: &quot;msats&quot; }],
+  },
+  // other fields...
+}</code></pre>
+      <h4 data-number="9.1.3.3" id="nip-11-examples">Examples</h4>
+      <pre class="yaml"><code>~&gt; curl -H &quot;Accept: application/nostr+json&quot; https://nostr.wine | jq
+{
+  &quot;contact&quot;: &quot;wino@nostr.wine&quot;,
+  &quot;description&quot;: &quot;A paid nostr relay for wine enthusiasts and everyone else.&quot;,
+  &quot;fees&quot;: {
+    &quot;admission&quot;: [
+      {
+        &quot;amount&quot;: 18888000,
+        &quot;unit&quot;: &quot;msats&quot;
+      }
+    ]
+  },
+  &quot;icon&quot;: &quot;https://image.nostr.build/30acdce4a81926f386622a07343228ae99fa68d012d54c538c0b2129dffe400c.png&quot;,
+  &quot;limitation&quot;: {
+    &quot;auth_required&quot;: false,
+    &quot;created_at_lower_limit&quot;: 94608000,
+    &quot;created_at_upper_limit&quot;: 300,
+    &quot;max_event_tags&quot;: 4000,
+    &quot;max_limit&quot;: 1000,
+    &quot;max_message_length&quot;: 524288,
+    &quot;max_subid_length&quot;: 71,
+    &quot;max_subscriptions&quot;: 50,
+    &quot;min_pow_difficulty&quot;: 0,
+    &quot;payment_required&quot;: true,
+    &quot;restricted_writes&quot;: true
+  },
+  &quot;name&quot;: &quot;nostr.wine&quot;,
+  &quot;payments_url&quot;: &quot;https://nostr.wine/invoices&quot;,
+  &quot;pubkey&quot;: &quot;4918eb332a41b71ba9a74b1dc64276cfff592e55107b93baae38af3520e55975&quot;,
+  &quot;software&quot;: &quot;https://nostr.wine&quot;,
+  &quot;supported_nips&quot;: [ 1, 2, 4, 9, 11, 40, 42, 50, 70, 77 ],
+  &quot;terms_of_service&quot;: &quot;https://nostr.wine/terms&quot;,
+  &quot;version&quot;: &quot;0.3.3&quot;
+}
+
+~&gt; curl -H &quot;Accept: application/nostr+json&quot; https://nostr.land | jq
+{
+  &quot;description&quot;: &quot;[✨ NFDB] nostr.land family of relays (fi-01 [tiger])&quot;,
+  &quot;name&quot;: &quot;[✨ NFDB] nostr.land&quot;,
+  &quot;pubkey&quot;: &quot;52b4a076bcbbbdc3a1aefa3735816cf74993b1b8db202b01c883c58be7fad8bd&quot;,
+  &quot;software&quot;: &quot;NFDB&quot;,
+  &quot;icon&quot;: &quot;https://i.nostr.build/b3thno790aodH8lE.jpg&quot;,
+  &quot;supported_nips&quot;: [ 1, 2, 4, 8, 9, 10, 11, 13, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 27, 28, 30, 31, 32, 34, 35, 36, 37, 38, 39, 40, 42, 44, 46, 47, 48, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 64, 65, 68, 69, 71, 72, 73, 75, 78, 84, 88, 89, 90, 92, 99 ],
+  &quot;version&quot;: &quot;1.0.0&quot;,
+  &quot;limitation&quot;: {
+    &quot;payment_required&quot;: true,
+    &quot;max_message_length&quot;: 65535,
+    &quot;max_event_tags&quot;: 2000,
+    &quot;max_subscriptions&quot;: 200,
+    &quot;auth_required&quot;: false
+  },
+  &quot;payments_url&quot;: &quot;https://nostr.land&quot;,
+  &quot;fees&quot;: {
+    &quot;subscription&quot;: [
+      {
+        &quot;amount&quot;: 4000000,
+        &quot;unit&quot;: &quot;msats&quot;,
+        &quot;period&quot;: 2592000
+      }
+    ]
+  },
+  &quot;terms_of_service&quot;: &quot;https://nostr.land/terms&quot;
+}</code></pre>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="relays.html" rel="prev">Relays</a>
+        <a class="pager-next" href="nip-42.html" rel="next">NIP-42</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

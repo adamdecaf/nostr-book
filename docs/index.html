@@ -4,74 +4,15 @@
     <meta charset="utf-8" />
     <title>Nostr Book of NIPs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="description" content="Nostr Implementation Possibilities, compiled into a readable book. Available as ePUB and PDF." />
-    <style>
-      :root {
-        color-scheme: light;
-        --bg: #f6f1e8;
-        --ink: #1c1916;
-        --muted: #5c564e;
-        --rule: #d7cfc2;
-        --link: #8a3b12;
-      }
-      * { box-sizing: border-box; }
-      html, body {
-        margin: 0;
-        padding: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font: 18px/1.55 Georgia, "Times New Roman", serif;
-      }
-      main {
-        max-width: 36rem;
-        margin: 0 auto;
-        padding: 3.5rem 1.25rem 4rem;
-      }
-      h1 {
-        font-size: 2rem;
-        font-weight: normal;
-        letter-spacing: 0.01em;
-        margin: 0 0 0.35rem;
-      }
-      .byline {
-        color: var(--muted);
-        font-size: 0.95rem;
-        margin: 0 0 1.75rem;
-      }
-      p { margin: 0 0 1rem; }
-      .downloads {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem 0.75rem;
-        margin: 1.5rem 0 2rem;
-      }
-      .downloads a {
-        display: inline-block;
-        padding: 0.45rem 0.9rem;
-        border: 1px solid var(--ink);
-        color: var(--ink);
-        text-decoration: none;
-        font-size: 0.95rem;
-      }
-      .downloads a:hover {
-        background: var(--ink);
-        color: var(--bg);
-      }
-      a { color: var(--link); }
-      footer {
-        margin-top: 2.5rem;
-        padding-top: 1rem;
-        border-top: 1px solid var(--rule);
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-      footer a { color: var(--muted); }
-    </style>
+    <meta name="description" content="Nostr Implementation Possibilities, compiled into a readable book. Read online, or download ePUB and PDF." />
+    <link rel="stylesheet" href="web.css" />
   </head>
-  <body>
+  <body class="home">
     <main>
       <h1>Nostr Book of NIPs</h1>
       <p class="byline">compiled by Adam Shannon</p>
+
+      <img class="cover" src="cover.png" alt="Cover of the Nostr Book of NIPs" width="1536" height="2048" />
 
       <p>
         The Nostr Implementation Possibilities, grouped by theme and bound as a book.
@@ -83,21 +24,39 @@
         Start with NIP-01 if you are new. Skip around once you know the event shape.
       </p>
 
-      <div class="downloads">
+      <div class="actions">
+        <a class="primary" href="book/introduction.html">Read online</a>
+        <a href="book/">Full contents</a>
         <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">Download ePUB</a>
         <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">Download PDF</a>
         <a href="https://github.com/adamdecaf/nostr-book">Source on GitHub</a>
       </div>
 
-      <p>
-        Site:
-        <a href="https://adamdecaf.github.io/nostr-book/">https://adamdecaf.github.io/nostr-book/</a>
-      </p>
+      <h2>Contents</h2>
+      <ol class="chapter-list">
+        <li><a href="book/introduction.html"><span class="n">1</span> Introduction</a></li>
+        <li><a href="book/how-this-book-is-organized.html"><span class="n">2</span> How this book is organized</a></li>
+        <li><a href="book/nostr-overview.html"><span class="n">3</span> Overview</a></li>
+        <li><a href="book/communication.html"><span class="n">4</span> Communication</a></li>
+        <li><a href="book/social.html"><span class="n">5</span> Social</a></li>
+        <li><a href="book/groups.html"><span class="n">6</span> Groups</a></li>
+        <li><a href="book/moderation.html"><span class="n">7</span> Moderation</a></li>
+        <li><a href="book/relays.html"><span class="n">8</span> Relays</a></li>
+        <li><a href="book/clients.html"><span class="n">9</span> Clients</a></li>
+        <li><a href="book/payments.html"><span class="n">10</span> Payments</a></li>
+        <li><a href="book/third-parties.html"><span class="n">11</span> Third Parties</a></li>
+        <li><a href="book/application-features.html"><span class="n">12</span> Application Features</a></li>
+        <li><a href="book/security.html"><span class="n">13</span> Security</a></li>
+        <li><a href="book/developers.html"><span class="n">14</span> Developers</a></li>
+        <li><a href="book/conclusion.html"><span class="n">15</span> Conclusion</a></li>
+      </ol>
 
       <footer>
         <p>
           NIP changes belong upstream at
           <a href="https://github.com/nostr-protocol/nips">nostr-protocol/nips</a>.
+          Further discussion of this book belongs on the
+          <a href="https://github.com/adamdecaf/nostr-book">nostr-book repository</a>.
         </p>
         <p>
           <a href="mailto:contact@nostr-book.org">contact@nostr-book.org</a>

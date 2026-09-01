@@ -160,10 +160,14 @@ do
     fi
 done
 
+lua_filter=scripts/book.lua
+
 function create_epub() {
     pandoc --metadata-file=metadata.yml \
            --epub-metadata=./metadata-epub.yml \
-           --split-level=1 \
+           --file-scope \
+           --lua-filter="$lua_filter" \
+           --split-level=2 \
            --toc --toc-depth=2 \
            --syntax-highlighting=monochrome \
            --resource-path=.:nips \
@@ -174,14 +178,19 @@ function create_epub() {
 function create_pdf() {
     if [[ "$pdf_engine" == "weasyprint" ]]; then
         pandoc --metadata-file=metadata.yml \
+               --file-scope \
+               --lua-filter="$lua_filter" \
                --pdf-engine=weasyprint \
                --css=pdf.css \
+               --toc --toc-depth=2 --metadata toc-title=Contents \
                --resource-path=.:nips \
                -s -o nostr-book.pdf \
                "${chapters[@]}"
         return
     fi
     pandoc --metadata-file=metadata.yml \
+           --file-scope \
+           --lua-filter="$lua_filter" \
            --pdf-engine=xelatex \
            --wrap=none \
            -f markdown-strikeout-footnotes \
@@ -197,6 +206,26 @@ function create_pdf() {
            "${chapters[@]}"
 }
 
+function create_html() {
+    mkdir -p docs
+    rm -rf docs/book
+    cp images/cover.png docs/cover.png
+    pandoc --metadata-file=metadata.yml \
+           --file-scope \
+           --lua-filter="$lua_filter" \
+           --to chunkedhtml \
+           --template=templates/chunked.html \
+           --split-level=2 \
+           --chunk-template='%i.html' \
+           --toc --toc-depth=2 --metadata toc-title=Contents \
+           --css=../web.css \
+           --syntax-highlighting=none \
+           --resource-path=.:nips \
+           -o docs/book \
+           "${chapters[@]}"
+    python3 scripts/inject-web-toc.py
+}
+
 case "$format" in
     epub)
         echo "Building ePUB"
@@ -206,9 +235,13 @@ case "$format" in
         echo "Building PDF"
         create_pdf
         ;;
+    html)
+        echo "Building HTML"
+        create_html
+        ;;
     *)
         echo "Unknown format ${format:-<none>}" >&2
-        echo "usage: $0 epub|pdf" >&2
+        echo "usage: $0 epub|pdf|html" >&2
         exit 1
         ;;
 esac

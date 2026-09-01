@@ -1,4 +1,4 @@
-## Source snapshot
+# Source snapshot
 
 This book was built from the following commit of [nostr-protocol/nips](https://github.com/nostr-protocol/nips). If something here disagrees with upstream, upstream wins.
 

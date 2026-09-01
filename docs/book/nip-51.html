@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <meta name="author" content="compiled by Adam Shannon" />
+  <meta name="keywords" content="nostr, nips, decentralized, protocol, relays" />
+  <title>NIP-51 · Nostr Book of NIPs</title>
+  <style>
+    /* Default styles provided by pandoc.
+    ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+    */
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: 1.5em;}
+    div.column{flex: auto;}
+    @media screen {
+    div.columns{gap: min(4vw, 1.5em);}
+    div.column{overflow-x: auto;}
+    }
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+  </style>
+  <link rel="stylesheet" href="../web.css" />
+</head>
+<body class="book">
+  <header class="site">
+    <a class="brand" href="../">Nostr Book of NIPs</a>
+    <button type="button" id="toc-toggle" aria-controls="TOC" aria-expanded="false">Contents</button>
+    <nav class="site-links">
+      <a href="index.html">Contents</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.epub">ePUB</a>
+      <a href="https://github.com/adamdecaf/nostr-book/raw/master/nostr-book.pdf">PDF</a>
+    </nav>
+  </header>
+  <div class="layout">
+    <nav id="TOC" role="doc-toc">
+      <h2 id="toc-title">Contents</h2>
+      <ul>
+      <li><a href="introduction.html#introduction"
+      id="toc-introduction">Introduction</a></li>
+      <li><a href="how-this-book-is-organized.html#how-this-book-is-organized"
+      id="toc-how-this-book-is-organized">How this book is organized</a></li>
+      <li><a href="source-snapshot.html#source-snapshot"
+      id="toc-source-snapshot">Source snapshot</a></li>
+      <li><a href="nostr-overview.html#nostr-overview"
+      id="toc-nostr-overview">Nostr Overview</a>
+      <ul>
+      <li><a href="nip-01.html#nip-01" id="toc-nip-01">NIP-01</a></li>
+      </ul></li>
+      <li><a href="communication.html#communication"
+      id="toc-communication">Communication</a>
+      <ul>
+      <li><a href="nip-10.html#nip-10" id="toc-nip-10">NIP-10</a></li>
+      <li><a href="nip-14.html#nip-14" id="toc-nip-14">NIP-14</a></li>
+      <li><a href="nip-23.html#nip-23" id="toc-nip-23">NIP-23</a></li>
+      <li><a href="nip-24.html#nip-24" id="toc-nip-24">NIP-24</a></li>
+      <li><a href="nip-22.html#nip-22" id="toc-nip-22">NIP-22</a></li>
+      <li><a href="nip-68.html#nip-68" id="toc-nip-68">NIP-68</a></li>
+      <li><a href="nip-71.html#nip-71" id="toc-nip-71">NIP-71</a></li>
+      <li><a href="nip-a0.html#nip-a0" id="toc-nip-a0">NIP-A0</a></li>
+      <li><a href="nip-92.html#nip-92" id="toc-nip-92">NIP-92</a></li>
+      <li><a href="nip-37.html#nip-37" id="toc-nip-37">NIP-37</a></li>
+      <li><a href="nip-a4.html#nip-a4" id="toc-nip-a4">NIP-A4</a></li>
+      <li><a href="nip-17.html#nip-17" id="toc-nip-17">NIP-17</a></li>
+      <li><a href="nip-04.html#nip-04" id="toc-nip-04">NIP-04</a></li>
+      <li><a href="nip-ee.html#nip-ee" id="toc-nip-ee">NIP-EE</a></li>
+      <li><a href="nip-40.html#nip-40" id="toc-nip-40">NIP-40</a></li>
+      <li><a href="nip-09.html#nip-09" id="toc-nip-09">NIP-09</a></li>
+      </ul></li>
+      <li><a href="social.html#social" id="toc-social">Social</a>
+      <ul>
+      <li><a href="nip-02.html#nip-02" id="toc-nip-02">NIP-02</a></li>
+      <li><a href="nip-05.html#nip-05" id="toc-nip-05">NIP-05</a></li>
+      <li><a href="nip-39.html#nip-39" id="toc-nip-39">NIP-39</a></li>
+      <li><a href="nip-25.html#nip-25" id="toc-nip-25">NIP-25</a></li>
+      <li><a href="nip-30.html#nip-30" id="toc-nip-30">NIP-30</a></li>
+      <li><a href="nip-18.html#nip-18" id="toc-nip-18">NIP-18</a></li>
+      <li><a href="nip-27.html#nip-27" id="toc-nip-27">NIP-27</a></li>
+      <li><a href="nip-08.html#nip-08" id="toc-nip-08">NIP-08</a></li>
+      <li><a href="nip-38.html#nip-38" id="toc-nip-38">NIP-38</a></li>
+      <li><a href="nip-58.html#nip-58" id="toc-nip-58">NIP-58</a></li>
+      <li><a href="nip-85.html#nip-85" id="toc-nip-85">NIP-85</a></li>
+      <li><a href="nip-88.html#nip-88" id="toc-nip-88">NIP-88</a></li>
+      <li><a href="nip-b0.html#nip-b0" id="toc-nip-b0">NIP-B0</a></li>
+      </ul></li>
+      <li><a href="groups.html#groups" id="toc-groups">Groups</a>
+      <ul>
+      <li><a href="nip-28.html#nip-28" id="toc-nip-28">NIP-28</a></li>
+      <li><a href="nip-29.html#nip-29" id="toc-nip-29">NIP-29</a></li>
+      <li><a href="nip-c7.html#nip-c7" id="toc-nip-c7">NIP-C7</a></li>
+      <li><a href="nip-7d.html#nip-7d" id="toc-nip-7d">NIP-7D</a></li>
+      </ul></li>
+      <li><a href="moderation.html#moderation"
+      id="toc-moderation">Moderation</a>
+      <ul>
+      <li><a href="nip-32.html#nip-32" id="toc-nip-32">NIP-32</a></li>
+      <li><a href="nip-51.html#nip-51" id="toc-nip-51">NIP-51</a></li>
+      <li><a href="nip-56.html#nip-56" id="toc-nip-56">NIP-56</a></li>
+      <li><a href="nip-36.html#nip-36" id="toc-nip-36">NIP-36</a></li>
+      <li><a href="nip-72.html#nip-72" id="toc-nip-72">NIP-72</a></li>
+      <li><a href="nip-13.html#nip-13" id="toc-nip-13">NIP-13</a></li>
+      </ul></li>
+      <li><a href="relays.html#relays" id="toc-relays">Relays</a>
+      <ul>
+      <li><a href="nip-11.html#nip-11" id="toc-nip-11">NIP-11</a></li>
+      <li><a href="nip-42.html#nip-42" id="toc-nip-42">NIP-42</a></li>
+      <li><a href="nip-70.html#nip-70" id="toc-nip-70">NIP-70</a></li>
+      <li><a href="nip-43.html#nip-43" id="toc-nip-43">NIP-43</a></li>
+      <li><a href="nip-65.html#nip-65" id="toc-nip-65">NIP-65</a></li>
+      <li><a href="nip-66.html#nip-66" id="toc-nip-66">NIP-66</a></li>
+      <li><a href="nip-50.html#nip-50" id="toc-nip-50">NIP-50</a></li>
+      <li><a href="nip-45.html#nip-45" id="toc-nip-45">NIP-45</a></li>
+      <li><a href="nip-67.html#nip-67" id="toc-nip-67">NIP-67</a></li>
+      <li><a href="nip-77.html#nip-77" id="toc-nip-77">NIP-77</a></li>
+      <li><a href="nip-86.html#nip-86" id="toc-nip-86">NIP-86</a></li>
+      <li><a href="nip-48.html#nip-48" id="toc-nip-48">NIP-48</a></li>
+      </ul></li>
+      <li><a href="clients.html#clients" id="toc-clients">Clients</a>
+      <ul>
+      <li><a href="nip-21.html#nip-21" id="toc-nip-21">NIP-21</a></li>
+      <li><a href="nip-19.html#nip-19" id="toc-nip-19">NIP-19</a></li>
+      <li><a href="nip-03.html#nip-03" id="toc-nip-03">NIP-03</a></li>
+      <li><a href="nip-be.html#nip-be" id="toc-nip-be">NIP-BE</a></li>
+      </ul></li>
+      <li><a href="payments.html#payments" id="toc-payments">Payments</a>
+      <ul>
+      <li><a href="nip-57.html#nip-57" id="toc-nip-57">NIP-57</a></li>
+      <li><a href="nip-75.html#nip-75" id="toc-nip-75">NIP-75</a></li>
+      <li><a href="nip-47.html#nip-47" id="toc-nip-47">NIP-47</a></li>
+      <li><a href="nip-60.html#nip-60" id="toc-nip-60">NIP-60</a></li>
+      <li><a href="nip-61.html#nip-61" id="toc-nip-61">NIP-61</a></li>
+      <li><a href="nip-87.html#nip-87" id="toc-nip-87">NIP-87</a></li>
+      <li><a href="nip-a3.html#nip-a3" id="toc-nip-a3">NIP-A3</a></li>
+      <li><a href="nip-69.html#nip-69" id="toc-nip-69">NIP-69</a></li>
+      </ul></li>
+      <li><a href="third-parties.html#third-parties"
+      id="toc-third-parties">Third Parties</a>
+      <ul>
+      <li><a href="nip-59.html#nip-59" id="toc-nip-59">NIP-59</a></li>
+      <li><a href="nip-46.html#nip-46" id="toc-nip-46">NIP-46</a></li>
+      <li><a href="nip-26.html#nip-26" id="toc-nip-26">NIP-26</a></li>
+      <li><a href="nip-90.html#nip-90" id="toc-nip-90">NIP-90</a></li>
+      </ul></li>
+      <li><a href="application-features.html#application-features"
+      id="toc-application-features">Application Features</a>
+      <ul>
+      <li><a href="nip-52.html#nip-52" id="toc-nip-52">NIP-52</a></li>
+      <li><a href="nip-53.html#nip-53" id="toc-nip-53">NIP-53</a></li>
+      <li><a href="nip-f4.html#nip-f4" id="toc-nip-f4">NIP-F4</a></li>
+      <li><a href="nip-84.html#nip-84" id="toc-nip-84">NIP-84</a></li>
+      <li><a href="nip-54.html#nip-54" id="toc-nip-54">NIP-54</a></li>
+      <li><a href="nip-c0.html#nip-c0" id="toc-nip-c0">NIP-C0</a></li>
+      <li><a href="nip-73.html#nip-73" id="toc-nip-73">NIP-73</a></li>
+      <li><a href="nip-34.html#nip-34" id="toc-nip-34">NIP-34</a></li>
+      <li><a href="nip-5a.html#nip-5a" id="toc-nip-5a">NIP-5A</a></li>
+      <li><a href="nip-15.html#nip-15" id="toc-nip-15">NIP-15</a></li>
+      <li><a href="nip-99.html#nip-99" id="toc-nip-99">NIP-99</a></li>
+      <li><a href="nip-94.html#nip-94" id="toc-nip-94">NIP-94</a></li>
+      <li><a href="nip-96.html#nip-96" id="toc-nip-96">NIP-96</a></li>
+      <li><a href="nip-b7.html#nip-b7" id="toc-nip-b7">NIP-B7</a></li>
+      <li><a href="nip-35.html#nip-35" id="toc-nip-35">NIP-35</a></li>
+      <li><a href="nip-64.html#nip-64" id="toc-nip-64">NIP-64</a></li>
+      <li><a href="nip-cc.html#nip-cc" id="toc-nip-cc">NIP-CC</a></li>
+      <li><a href="nip-78.html#nip-78" id="toc-nip-78">NIP-78</a></li>
+      </ul></li>
+      <li><a href="security.html#security" id="toc-security">Security</a>
+      <ul>
+      <li><a href="nip-44.html#nip-44" id="toc-nip-44">NIP-44</a></li>
+      <li><a href="nip-06.html#nip-06" id="toc-nip-06">NIP-06</a></li>
+      <li><a href="nip-49.html#nip-49" id="toc-nip-49">NIP-49</a></li>
+      <li><a href="nip-98.html#nip-98" id="toc-nip-98">NIP-98</a></li>
+      <li><a href="nip-62.html#nip-62" id="toc-nip-62">NIP-62</a></li>
+      </ul></li>
+      <li><a href="developers.html#developers"
+      id="toc-developers">Developers</a>
+      <ul>
+      <li><a href="nip-07.html#nip-07" id="toc-nip-07">NIP-07</a></li>
+      <li><a href="nip-55.html#nip-55" id="toc-nip-55">NIP-55</a></li>
+      <li><a href="nip-89.html#nip-89" id="toc-nip-89">NIP-89</a></li>
+      <li><a href="nip-31.html#nip-31" id="toc-nip-31">NIP-31</a></li>
+      </ul></li>
+      <li><a href="conclusion.html#conclusion"
+      id="toc-conclusion">Conclusion</a></li>
+      </ul>
+    </nav>
+    <div class="main">
+      <nav class="pager" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-32.html" accesskey="p" rel="prev">NIP-32</a>
+        <a class="pager-next" href="nip-56.html" accesskey="n" rel="next">NIP-56</a>
+      </nav>
+      <h2 data-number="8.2" id="nip-51">NIP-51</h2>
+      <h3 data-number="8.2.1" id="nip-51-lists">Lists</h3>
+      <p><code>draft</code> <code>optional</code></p>
+      <p>This NIP defines lists of things that users can create. Lists
+      can contain references to anything, and these references can be
+      <strong>public</strong> or <strong>private</strong>.</p>
+      <p>Public items in a list are specified in the event
+      <code>tags</code> array, while private items are specified in a
+      JSON array that mimics the structure of the event
+      <code>tags</code> array, but stringified and encrypted using the
+      same scheme from <a href="nip-44.html">NIP-44</a> (the shared key
+      is computed using the author’s public and private key) and stored
+      in the <code>.content</code>. An earlier version of this
+      specification used <a href="nip-04.html">NIP-04</a> for
+      encryptions. Those are now deprecated. For backward compatibility,
+      Clients can automatically discover if the encryption is NIP-04 or
+      NIP-44 by searching for “iv” in the ciphertext and decrypting
+      accordingly.</p>
+      <p>When new items are added to an existing list, clients SHOULD
+      append them to the end of the list, so they are stored in
+      chronological order.</p>
+      <h3 data-number="8.2.2" id="nip-51-types-of-lists">Types of
+      lists</h3>
+      <h4 data-number="8.2.2.1" id="nip-51-standard-lists">Standard
+      lists</h4>
+      <p>Standard lists use normal replaceable events, meaning users may
+      only have a single list of each kind. They have special meaning
+      and clients may rely on them to augment a user’s profile or
+      browsing experience.</p>
+      <p>For example, <em>mute list</em> can contain the public keys of
+      spammers and bad actors users don’t want to see in their feeds or
+      receive annoying notifications from.</p>
+      <table>
+      <colgroup>
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      </colgroup>
+      <thead>
+      <tr>
+      <th>name</th>
+      <th>kind</th>
+      <th>description</th>
+      <th>expected tag items</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Follow list</td>
+      <td>3</td>
+      <td>microblogging basic follow list, see <a
+      href="nip-02.html">NIP-02</a></td>
+      <td><code>"p"</code> (pubkeys – with optional relay hint and
+      petname)</td>
+      </tr>
+      <tr>
+      <td>Mute list</td>
+      <td>10000</td>
+      <td>things the user doesn’t want to see in their feeds</td>
+      <td><code>"p"</code> (pubkeys), <code>"t"</code> (hashtags),
+      <code>"word"</code> (lowercase string), <code>"e"</code>
+      (threads)</td>
+      </tr>
+      <tr>
+      <td>Pinned notes</td>
+      <td>10001</td>
+      <td>events the user intends to showcase in their profile page</td>
+      <td><code>"e"</code> (kind:1 notes)</td>
+      </tr>
+      <tr>
+      <td>Read/write relays</td>
+      <td>10002</td>
+      <td>where a user publishes to and where they expect mentions</td>
+      <td>see <a href="nip-65.html">NIP-65</a></td>
+      </tr>
+      <tr>
+      <td>Bookmarks</td>
+      <td>10003</td>
+      <td>uncategorized, “global” list of things a user wants to
+      save</td>
+      <td><code>"e"</code> (kind:1 notes), <code>"a"</code> (kind:30023
+      articles)</td>
+      </tr>
+      <tr>
+      <td>Communities</td>
+      <td>10004</td>
+      <td><a href="nip-72.html">NIP-72</a> communities the user belongs
+      to</td>
+      <td><code>"a"</code> (kind:34550 community definitions)</td>
+      </tr>
+      <tr>
+      <td>Public chats</td>
+      <td>10005</td>
+      <td><a href="nip-28.html">NIP-28</a> chat channels the user is
+      in</td>
+      <td><code>"e"</code> (kind:40 channel definitions)</td>
+      </tr>
+      <tr>
+      <td>Blocked relays</td>
+      <td>10006</td>
+      <td>relays clients should never connect to</td>
+      <td><code>"relay"</code> (relay URLs)</td>
+      </tr>
+      <tr>
+      <td>Search relays</td>
+      <td>10007</td>
+      <td>relays clients should use when performing search queries</td>
+      <td><code>"relay"</code> (relay URLs)</td>
+      </tr>
+      <tr>
+      <td>Profile badges</td>
+      <td>10008</td>
+      <td><a href="nip-58.html">NIP-58</a> badges a user has accepted
+      and chosen to display</td>
+      <td><code>"a"</code> (kind:30009 badge definitions) and
+      <code>"e"</code> (kind:8 badge awards), and <code>"a"</code>
+      (kind:30008 badge set)</td>
+      </tr>
+      <tr>
+      <td>Simple groups</td>
+      <td>10009</td>
+      <td><a href="nip-29.html">NIP-29</a> groups the user is in</td>
+      <td><code>"group"</code> (<a href="nip-29.html">NIP-29</a> group
+      id + relay URL + optional group name), <code>"r"</code> for each
+      relay in use</td>
+      </tr>
+      <tr>
+      <td>Favorite follow sets</td>
+      <td>10011</td>
+      <td>user favorite follow sets</td>
+      <td><code>"a"</code> (kind:30000 follow set)</td>
+      </tr>
+      <tr>
+      <td>Relay feeds</td>
+      <td>10012</td>
+      <td>user favorite browsable relays (and relay sets)</td>
+      <td><code>"relay"</code> (relay URLs) and <code>"a"</code>
+      (kind:30002 relay set)</td>
+      </tr>
+      <tr>
+      <td>Private relays</td>
+      <td>10013</td>
+      <td>(nip44-encrypted) <a href="nip-37.html">NIP-37</a> private
+      relays (drafts)</td>
+      <td><code>"relay"</code> (relay URL)</td>
+      </tr>
+      <tr>
+      <td>Interests</td>
+      <td>10015</td>
+      <td>topics a user may be interested in and pointers</td>
+      <td><code>"t"</code> (hashtags) and <code>"a"</code> (kind:30015
+      interest set)</td>
+      </tr>
+      <tr>
+      <td>Media follows</td>
+      <td>10020</td>
+      <td>multimedia (photos, short video) follow list</td>
+      <td><code>"p"</code> (pubkeys – with optional relay hint and
+      petname)</td>
+      </tr>
+      <tr>
+      <td>Emojis</td>
+      <td>10030</td>
+      <td>user preferred emojis and pointers to emoji sets</td>
+      <td><code>"emoji"</code> (see <a href="nip-30.html">NIP-30</a>)
+      and <code>"a"</code> (kind:30030 emoji set)</td>
+      </tr>
+      <tr>
+      <td>DM relays</td>
+      <td>10050</td>
+      <td>Where to receive <a href="nip-17.html">NIP-17</a> direct
+      messages</td>
+      <td><code>"relay"</code> (see <a
+      href="nip-17.html">NIP-17</a>)</td>
+      </tr>
+      <tr>
+      <td>Blossom servers</td>
+      <td>10063</td>
+      <td>Servers where to upload and look for images and other
+      blobs</td>
+      <td><code>"server"</code> (see <a
+      href="nip-b7.html">NIP-B7</a>)</td>
+      </tr>
+      <tr>
+      <td>Good wiki authors</td>
+      <td>10101</td>
+      <td><a href="nip-54.html">NIP-54</a> user recommended wiki
+      authors</td>
+      <td><code>"p"</code> (pubkeys)</td>
+      </tr>
+      <tr>
+      <td>Good wiki relays</td>
+      <td>10102</td>
+      <td><a href="nip-54.html">NIP-54</a> relays deemed to only host
+      useful articles</td>
+      <td><code>"relay"</code> (relay URLs)</td>
+      </tr>
+      <tr>
+      <td>Git authors</td>
+      <td>10017</td>
+      <td>code (people who produce NIP-34 events) follow list</td>
+      <td><code>"p"</code> (pubkeys – with optional relay hint and
+      petname)</td>
+      </tr>
+      <tr>
+      <td>Git repositories</td>
+      <td>10018</td>
+      <td><a href="nip-34.html">NIP-34</a> followed repositories</td>
+      <td><code>"a"</code> (kind:30617 repository announcement
+      event)</td>
+      </tr>
+      <tr>
+      <td>Favorite podcasts</td>
+      <td>10054</td>
+      <td>podcasts a user wants to bookmark as favorites</td>
+      <td><code>"p"</code> (<a href="nip-f4.html">NIP-F4</a> podcast
+      pubkeys), <code>"url"</code> (RSS/XML podcast URLs)</td>
+      </tr>
+      <tr>
+      <td>Authored podcasts</td>
+      <td>10064</td>
+      <td>podcasts the user authors</td>
+      <td><code>"p"</code> (<a href="nip-f4.html">NIP-F4</a> podcast
+      pubkeys)</td>
+      </tr>
+      </tbody>
+      </table>
+      <h4 data-number="8.2.2.2" id="nip-51-sets">Sets</h4>
+      <p>Sets are lists with well-defined meaning that can enhance the
+      functionality and the UI of clients that rely on them. Unlike
+      standard lists, users are expected to have more than one set of
+      each kind, therefore each of them must be assigned a different
+      <code>"d"</code> identifier.</p>
+      <p>For example, <em>relay sets</em> can be displayed in a dropdown
+      UI to give users the option to switch to which relays they will
+      publish an event or from which relays they will read the replies
+      to an event; <em>curation sets</em> can be used by apps to
+      showcase curations made by others tagged to different topics.</p>
+      <p>Aside from their main identifier, the <code>"d"</code> tag,
+      sets can optionally have a <code>"title"</code>, an
+      <code>"image"</code> and a <code>"description"</code> tags that
+      can be used to enhance their UI.</p>
+      <table>
+      <colgroup>
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      <col style="width: 25%" />
+      </colgroup>
+      <thead>
+      <tr>
+      <th>name</th>
+      <th>kind</th>
+      <th>description</th>
+      <th>expected tag items</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>Follow sets</td>
+      <td>30000</td>
+      <td>categorized groups of users a client may choose to check out
+      in different circumstances</td>
+      <td><code>"p"</code> (pubkeys)</td>
+      </tr>
+      <tr>
+      <td>Relay sets</td>
+      <td>30002</td>
+      <td>user-defined relay groups the user can easily pick and choose
+      from during various operations</td>
+      <td><code>"relay"</code> (relay URLs)</td>
+      </tr>
+      <tr>
+      <td>Bookmark sets</td>
+      <td>30003</td>
+      <td>user-defined bookmarks categories , for when bookmarks must be
+      in labeled separate groups</td>
+      <td><code>"e"</code> (kind:1 notes), <code>"a"</code> (kind:30023
+      articles)</td>
+      </tr>
+      <tr>
+      <td>Curation sets</td>
+      <td>30004</td>
+      <td>groups of articles picked by users as interesting and/or
+      belonging to the same category</td>
+      <td><code>"a"</code> (kind:30023 articles), <code>"e"</code>
+      (kind:1 notes)</td>
+      </tr>
+      <tr>
+      <td>Curation sets</td>
+      <td>30005</td>
+      <td>groups of videos picked by users as interesting and/or
+      belonging to the same category</td>
+      <td><code>"e"</code> (kind:21 videos)</td>
+      </tr>
+      <tr>
+      <td>Curation sets</td>
+      <td>30006</td>
+      <td>groups of pictures picked by users as interesting and/or
+      belonging to the same category</td>
+      <td><code>"e"</code> (kind:20 pictures)</td>
+      </tr>
+      <tr>
+      <td>Kind mute sets</td>
+      <td>30007</td>
+      <td>mute pubkeys by kinds<br><code>"d"</code> tag MUST be the kind
+      string</td>
+      <td><code>"p"</code> (pubkeys)</td>
+      </tr>
+      <tr>
+      <td>Badge sets</td>
+      <td>30008</td>
+      <td><a href="nip-58.html">NIP-58</a> categorized groups of
+      badges</td>
+      <td><code>"a"</code> (kind:30009 badge definitions) and
+      <code>"e"</code> (kind:8 badge awards)</td>
+      </tr>
+      <tr>
+      <td>Interest sets</td>
+      <td>30015</td>
+      <td>interest topics represented by a bunch of “hashtags”</td>
+      <td><code>"t"</code> (hashtags)</td>
+      </tr>
+      <tr>
+      <td>Emoji sets</td>
+      <td>30030</td>
+      <td>categorized emoji groups</td>
+      <td><code>"emoji"</code> (see <a
+      href="nip-30.html">NIP-30</a>)</td>
+      </tr>
+      <tr>
+      <td>Release artifact sets</td>
+      <td>30063</td>
+      <td>group of artifacts of a software release</td>
+      <td><code>"e"</code> (kind:1063 <a href="nip-94.html">file
+      metadata</a> events), <code>"a"</code> (software application
+      event)</td>
+      </tr>
+      <tr>
+      <td>App curation sets</td>
+      <td>30267</td>
+      <td>references to multiple software applications</td>
+      <td><code>"a"</code> (software application event)</td>
+      </tr>
+      <tr>
+      <td>Calendar</td>
+      <td>31924</td>
+      <td>a set of events categorized in any way</td>
+      <td><code>"a"</code> (calendar event event)</td>
+      </tr>
+      <tr>
+      <td>Starter packs</td>
+      <td>39089</td>
+      <td>a named set of profiles to be shared around with the goal of
+      being followed together</td>
+      <td><code>"p"</code> (pubkeys)</td>
+      </tr>
+      <tr>
+      <td>Media starter packs</td>
+      <td>39092</td>
+      <td>same as above, but specific to multimedia (photos, short
+      video) clients</td>
+      <td><code>"p"</code> (pubkeys)</td>
+      </tr>
+      </tbody>
+      </table>
+      <h4 data-number="8.2.2.3"
+      id="nip-51-deprecated-standard-lists">Deprecated standard
+      lists</h4>
+      <p>Some clients have used these lists in the past, but they should
+      work on transitioning to the <a
+      href="nip-51.html#nip-51-standard-lists">standard formats</a>
+      above.</p>
+      <table>
+      <thead>
+      <tr>
+      <th>kind</th>
+      <th>“d” tag</th>
+      <th>use instead</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr>
+      <td>30000</td>
+      <td><code>"mute"</code></td>
+      <td>kind 10000 <em>mute list</em></td>
+      </tr>
+      <tr>
+      <td>30001</td>
+      <td><code>"pin"</code></td>
+      <td>kind 10001 <em>pin list</em></td>
+      </tr>
+      <tr>
+      <td>30001</td>
+      <td><code>"bookmark"</code></td>
+      <td>kind 10003 <em>bookmarks list</em></td>
+      </tr>
+      <tr>
+      <td>30001</td>
+      <td><code>"communities"</code></td>
+      <td>kind 10004 <em>communities list</em></td>
+      </tr>
+      </tbody>
+      </table>
+      <h3 data-number="8.2.3" id="nip-51-examples">Examples</h3>
+      <h4 data-number="8.2.3.1"
+      id="nip-51-a-mute-list-with-some-public-items-and-some-encrypted-items">A
+      <em>mute list</em> with some public items and some encrypted
+      items</h4>
+      <pre class="json"><code>{
+  &quot;id&quot;: &quot;a92a316b75e44cfdc19986c634049158d4206fcc0b7b9c7ccbcdabe28beebcd0&quot;,
+  &quot;pubkey&quot;: &quot;854043ae8f1f97430ca8c1f1a090bdde6488bd5115c7a45307a2a212750ae4cb&quot;,
+  &quot;created_at&quot;: 1699597889,
+  &quot;kind&quot;: 10000,
+  &quot;tags&quot;: [
+    [&quot;p&quot;, &quot;07caba282f76441955b695551c3c5c742e5b9202a3784780f8086fdcdc1da3a9&quot;],
+    [&quot;p&quot;, &quot;a55c15f5e41d5aebd236eca5e0142789c5385703f1a7485aa4b38d94fd18dcc4&quot;]
+  ],
+  &quot;content&quot;: &quot;TJob1dQrf2ndsmdbeGU+05HT5GMnBSx3fx8QdDY/g3NvCa7klfzgaQCmRZuo1d3WQjHDOjzSY1+MgTK5WjewFFumCcOZniWtOMSga9tJk1ky00tLoUUzyLnb1v9x95h/iT/KpkICJyAwUZ+LoJBUzLrK52wNTMt8M5jSLvCkRx8C0BmEwA/00pjOp4eRndy19H4WUUehhjfV2/VV/k4hMAjJ7Bb5Hp9xdmzmCLX9+64+MyeIQQjQAHPj8dkSsRahP7KS3MgMpjaF8nL48Bg5suZMxJayXGVp3BLtgRZx5z5nOk9xyrYk+71e2tnP9IDvSMkiSe76BcMct+m7kGVrRcavDI4n62goNNh25IpghT+a1OjjkpXt9me5wmaL7fxffV1pchdm+A7KJKIUU3kLC7QbUifF22EucRA9xiEyxETusNludBXN24O3llTbOy4vYFsq35BeZl4v1Cse7n2htZicVkItMz3wjzj1q1I1VqbnorNXFgllkRZn4/YXfTG/RMnoK/bDogRapOV+XToZ+IvsN0BqwKSUDx+ydKpci6htDRF2WDRkU+VQMqwM0CoLzy2H6A2cqyMMMD9SLRRzBg==?iv=S3rFeFr1gsYqmQA7bNnNTQ==&quot;,
+  &quot;sig&quot;: &quot;1173822c53261f8cffe7efbf43ba4a97a9198b3e402c2a1df130f42a8985a2d0d3430f4de350db184141e45ca844ab4e5364ea80f11d720e36357e1853dba6ca&quot;
+}</code></pre>
+      <h4 data-number="8.2.3.2"
+      id="nip-51-a-curation-set-of-articles-and-notes-about-yaks">A
+      <em>curation set</em> of articles and notes about yaks</h4>
+      <pre class="json"><code>{
+  &quot;id&quot;: &quot;567b41fc9060c758c4216fe5f8d3df7c57daad7ae757fa4606f0c39d4dd220ef&quot;,
+  &quot;pubkey&quot;: &quot;d6dc95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c&quot;,
+  &quot;created_at&quot;: 1695327657,
+  &quot;kind&quot;: 30004,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;jvdy9i4&quot;],
+    [&quot;title&quot;, &quot;Yaks&quot;],
+    [&quot;image&quot;, &quot;https://cdn.britannica.com/40/188540-050-9AC748DE/Yak-Himalayas-Nepal.jpg&quot;],
+    [&quot;description&quot;, &quot;The domestic yak, also known as the Tartary ox, grunting ox, or hairy cattle, is a species of long-haired domesticated cattle found throughout the Himalayan region of the Indian subcontinent, the Tibetan Plateau, Gilgit-Baltistan, Tajikistan and as far north as Mongolia and Siberia.&quot;],
+    [&quot;a&quot;, &quot;30023:26dc95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c:95ODQzw3ajNoZ8SyMDOzQ&quot;],
+    [&quot;a&quot;, &quot;30023:54af95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c:1-MYP8dAhramH9J5gJWKx&quot;],
+    [&quot;a&quot;, &quot;30023:f8fe95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c:D2Tbd38bGrFvU0bIbvSMt&quot;],
+    [&quot;e&quot;, &quot;d78ba0d5dce22bfff9db0a9e996c9ef27e2c91051de0c4e1da340e0326b4941e&quot;]
+  ],
+  &quot;content&quot;: &quot;&quot;,
+  &quot;sig&quot;: &quot;a9a4e2192eede77e6c9d24ddfab95ba3ff7c03fbd07ad011fff245abea431fb4d3787c2d04aad001cb039cb8de91d83ce30e9a94f82ac3c5a2372aa1294a96bd&quot;
+}</code></pre>
+      <h4 data-number="8.2.3.3"
+      id="nip-51-a-release-artifact-set-of-an-example-app">A <em>release
+      artifact set</em> of an Example App</h4>
+      <pre class="yaml"><code>{
+  &quot;id&quot;: &quot;567b41fc9060c758c4216fe5f8d3df7c57daad7ae757fa4606f0c39d4dd220ef&quot;,
+  &quot;pubkey&quot;: &quot;d6dc95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c&quot;,
+  &quot;created_at&quot;: 1695327657,
+  &quot;kind&quot;: 30063,
+  &quot;content&quot;: &quot;Release notes in markdown&quot;,
+  &quot;tags&quot;: [
+    [&quot;d&quot;, &quot;com.example.app@0.0.1&quot;],
+    [&quot;e&quot;, &quot;d78ba0d5dce22bfff9db0a9e996c9ef27e2c91051de0c4e1da340e0326b4941e&quot;], // Windows exe
+    [&quot;e&quot;, &quot;f27e2c91051de0c4e1da0d5dce22bfff9db0a9340e0326b4941ed78bae996c9e&quot;], // MacOS dmg
+    [&quot;e&quot;, &quot;9d24ddfab95ba3ff7c03fbd07ad011fff245abea431fb4d3787c2d04aad02332&quot;], // Linux AppImage
+    [&quot;e&quot;, &quot;340e0326b340e0326b4941ed78ba340e0326b4941ed78ba340e0326b49ed78ba&quot;], // PWA
+    [&quot;a&quot;, &quot;32267:d6dc95542e18b8b7aec2f14610f55c335abebec76f3db9e58c254661d0593a0c:com.example.app&quot;] // Reference to parent software application
+  ],
+  &quot;sig&quot;: &quot;a9a4e2192eede77e6c9d24ddfab95ba3ff7c03fbd07ad011fff245abea431fb4d3787c2d04aad001cb039cb8de91d83ce30e9a94f82ac3c5a2372aa1294a96bd&quot;
+}</code></pre>
+      <h4 data-number="8.2.3.4" id="nip-51-an-app-curation-set">An
+      <em>app curation set</em></h4>
+      <pre class="yaml"><code>{
+    &quot;id&quot;: &quot;d8037fa866eb5acd2159960b3ada7284172f7d687b5289cc72a96ca2b431b611&quot;,
+    &quot;pubkey&quot;: &quot;78ce6faa72264387284e647ba6938995735ec8c7d5c5a65737e55130f026307d&quot;,
+    &quot;sig&quot;: &quot;c1ce0a04521c020ae7485307cd86285530c1f778766a3fd594d662a73e7c28f307d7cd9a9ab642ae749fce62abbabb3a32facfe8d19a21fba551b60fae863d95&quot;,
+    &quot;kind&quot;: 30267,
+    &quot;created_at&quot;: 1729302793,
+    &quot;content&quot;: &quot;My nostr app selection&quot;,
+    &quot;tags&quot;: [
+        [&quot;d&quot;, &quot;nostr&quot;],
+        [&quot;a&quot;, &quot;32267:7579076d9aff0a4cfdefa7e2045f2486c7e5d8bc63bfc6b45397233e1bbfcb19:com.example.app1&quot;],
+        [&quot;a&quot;, &quot;32267:045f2486c7e5d8bc63bfc6b45397233e1bbfcb197579076d9aff0a4cfdefa7e2:net.example.app2&quot;],
+        [&quot;a&quot;, &quot;32267:264387284e647ba6938995735ec8c7d5c5a6f026307d78ce6faa725737e55130:pl.code.app3&quot;]
+    ]
+}</code></pre>
+      <h3 data-number="8.2.4"
+      id="nip-51-encryption-process-pseudocode">Encryption process
+      pseudocode</h3>
+      <pre class="scala"><code>val private_items = [
+  [&quot;p&quot;, &quot;07caba282f76441955b695551c3c5c742e5b9202a3784780f8086fdcdc1da3a9&quot;],
+  [&quot;a&quot;, &quot;a55c15f5e41d5aebd236eca5e0142789c5385703f1a7485aa4b38d94fd18dcc4&quot;],
+]
+val base64blob = nip44.encrypt(json.encode_to_string(private_items))
+event.content = base64blob</code></pre>
+      <nav class="pager pager-bottom" aria-label="Nearby sections">
+        <a class="pager-prev" href="nip-32.html" rel="prev">NIP-32</a>
+        <a class="pager-next" href="nip-56.html" rel="next">NIP-56</a>
+      </nav>
+    </div>
+  </div>
+  <script>
+    (function () {
+      var btn = document.getElementById("toc-toggle");
+      var toc = document.getElementById("TOC");
+      var page = (location.pathname.split("/").pop() || "index.html");
+      if (toc) {
+        toc.querySelectorAll("a").forEach(function (a) {
+          var href = a.getAttribute("href") || "";
+          if (href.split("#")[0] === page) a.classList.add("current");
+        });
+        var current = toc.querySelector("a.current");
+        if (current) current.scrollIntoView({ block: "center" });
+      }
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        var open = document.body.classList.toggle("toc-open");
+        btn.setAttribute("aria-expanded", open ? "true" : "false");
+      });
+      toc && toc.addEventListener("click", function (e) {
+        if (e.target.closest("a") && window.matchMedia("(max-width: 879px)").matches) {
+          document.body.classList.remove("toc-open");
+          btn.setAttribute("aria-expanded", "false");
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
