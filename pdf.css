@@ -1,0 +1,32 @@
+@page {
+  size: letter;
+  margin: 0.75in;
+}
+html {
+  font-family: Palatino, "Palatino Linotype", Georgia, serif;
+  font-size: 10pt;
+  line-height: 1.45;
+}
+code, pre, kbd, samp {
+  font-family: Menlo, Monaco, Consolas, monospace;
+  font-size: 8.5pt;
+}
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+img {
+  max-width: 100%;
+}
+h1, h2, h3 {
+  page-break-after: avoid;
+}
+table {
+  border-collapse: collapse;
+  max-width: 100%;
+}
+th, td {
+  border: 1px solid #ccc;
+  padding: 0.2em 0.4em;
+  vertical-align: top;
+}

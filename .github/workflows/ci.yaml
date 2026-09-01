@@ -34,34 +34,22 @@ jobs:
   pdf:
     name: PDF
     runs-on: macos-latest
-    continue-on-error: true
     steps:
       - name: Check out code
         uses: actions/checkout@v7
 
       - name: Install dependencies
-        run: |
-          brew update
-          brew install pandoc
-          brew install --cask basictex
-          eval "$(/usr/libexec/path_helper)"
-          export PATH="/Library/TeX/texbin:$PATH"
-          sudo tlmgr update --self
-          sudo tlmgr install soul xcolor
+        run: brew install pandoc weasyprint
 
       - name: Download NIPs
         run: make setup
 
       - name: Build PDF
-        timeout-minutes: 5
-        continue-on-error: true
-        run: |
-          export PATH="/Library/TeX/texbin:$PATH"
-          make pdf
+        timeout-minutes: 10
+        run: make pdf
 
       - name: Upload PDF
         uses: actions/upload-artifact@v4
         with:
           name: nostr-book.pdf
           path: nostr-book.pdf
-          if-no-files-found: warn

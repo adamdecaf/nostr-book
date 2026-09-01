@@ -2,7 +2,7 @@ name: Publish Book
 
 on:
   schedule:
-    - cron: "0 12 * * *" # "12:00 UTC" - https://crontab.guru/#0_12_*_*_*e
+    - cron: "0 12 * * *"
   workflow_dispatch:
 
 permissions:
@@ -13,45 +13,51 @@ jobs:
     name: Publish Book
     runs-on: macos-latest
     steps:
-    - name: Check out code
-      uses: actions/checkout@v7
+      - name: Check out code
+        uses: actions/checkout@v7
 
-    - name: Install Dependencies
-      run: |
-        brew update
-        brew install pandoc
-        brew install --cask basictex
-        eval "$(/usr/libexec/path_helper)"
-        export PATH="/Library/TeX/texbin:$PATH"
-        sudo tlmgr update --self
-        sudo tlmgr install soul xcolor
+      - name: Install dependencies
+        run: brew install pandoc weasyprint
 
-    - name: Download NIPs
-      run: |
-        make setup
-        cd nips/
-        git log -n1
-        cd ../
+      - name: Download NIPs
+        run: |
+          make setup
+          git -C nips log -n1
 
-    - name: Build EPUB
-      run: make epub
+      - name: Build EPUB
+        run: make epub
 
-    - name: Build PDF
-      timeout-minutes: 5
-      continue-on-error: true
-      run: |
-        export PATH="/Library/TeX/texbin:$PATH"
-        make pdf
+      - name: Build PDF
+        timeout-minutes: 10
+        run: make pdf
 
-    - name: Commit and Push
-      run: |
-        git config user.name "github-actions[bot]"
-        git config user.email "support@github.com"
+      - name: Require outputs
+        run: |
+          test -s nostr-book.epub
+          test -s nostr-book.pdf
 
-        git add -A nostr-book.* ./include/git.md
-        if git diff --cached --quiet; then
-          echo "No published book changes"
-        else
-          git commit -m "chore: automated publishing"
-          git push origin master
-        fi
+      - name: Commit and Push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "support@github.com"
+          git add -A nostr-book.epub nostr-book.pdf ./include/git.md
+          if git diff --cached --quiet; then
+            echo "No published book changes"
+          else
+            git commit -m "chore: automated publishing"
+            git push origin master
+          fi
+
+      - name: GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: book-${{ github.run_id }}
+          name: Nostr Book of NIPs (${{ github.run_number }})
+          body: |
+            Automated EPUB and PDF from master.
+            Site: https://adamdecaf.github.io/nostr-book/
+          files: |
+            nostr-book.epub
+            nostr-book.pdf
+          fail_on_unmatched_files: true
+          make_latest: true

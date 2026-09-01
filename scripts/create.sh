@@ -145,12 +145,15 @@ if [[ "$missing" -ne 0 ]]; then
     exit 1
 fi
 
+pdf_engine=xelatex
+if command -v weasyprint >/dev/null 2>&1; then
+    pdf_engine=weasyprint
+fi
+
 chapters=()
 for input in "${inputs[@]}"
 do
-    if [[ "$format" == "pdf" && "$input" == include/* && "$input" != include/pagebreak.md ]]; then
-        # Page-break at chapter wrappers only. Breaking before every spec
-        # makes xelatex blow up on shipout and produces a jumpy book.
+    if [[ "$format" == "pdf" && "$pdf_engine" == "xelatex" && "$input" == include/* && "$input" != include/pagebreak.md ]]; then
         chapters+=("include/pagebreak.md" "$input")
     else
         chapters+=("$input")
@@ -169,6 +172,15 @@ function create_epub() {
 }
 
 function create_pdf() {
+    if [[ "$pdf_engine" == "weasyprint" ]]; then
+        pandoc --metadata-file=metadata.yml \
+               --pdf-engine=weasyprint \
+               --css=pdf.css \
+               --resource-path=.:nips \
+               -s -o nostr-book.pdf \
+               "${chapters[@]}"
+        return
+    fi
     pandoc --metadata-file=metadata.yml \
            --pdf-engine=xelatex \
            --wrap=none \
