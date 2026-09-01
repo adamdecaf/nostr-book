@@ -703,6 +703,15 @@ event.content = base64blob</code></pre>
         var current = toc.querySelector("a.current");
         if (current) current.scrollIntoView({ block: "center" });
       }
+      document.querySelectorAll(".main h1[id], .main h2[id], .main h3[id], .main h4[id], .main h5[id], .main h6[id]").forEach(function (h) {
+        if (h.querySelector(".header-anchor")) return;
+        var a = document.createElement("a");
+        a.className = "header-anchor";
+        a.href = "#" + h.id;
+        a.setAttribute("aria-label", "Link to this heading");
+        a.textContent = "\u00B6";
+        h.appendChild(a);
+      });
       if (!btn) return;
       btn.addEventListener("click", function () {
         var open = document.body.classList.toggle("toc-open");

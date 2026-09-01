@@ -265,9 +265,45 @@ body.toc-open #TOC { display: block; }
   padding: 1.25rem 1.25rem 4rem;
 }
 
-.main h1, .main h2, .main h3, .main h4 {
+.main h1, .main h2, .main h3, .main h4, .main h5, .main h6 {
   line-height: 1.25;
   page-break-after: avoid;
+  position: relative;
+  padding-right: 1.5rem;
+  scroll-margin-top: 4rem;
+}
+
+.main h1:target, .main h2:target, .main h3:target,
+.main h4:target, .main h5:target, .main h6:target {
+  background: color-mix(in srgb, var(--link) 10%, transparent);
+}
+
+.header-anchor {
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: var(--muted);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 0.85em;
+  line-height: inherit;
+  opacity: 0;
+  padding: 0 0.15rem;
+}
+
+.main h1:hover .header-anchor,
+.main h2:hover .header-anchor,
+.main h3:hover .header-anchor,
+.main h4:hover .header-anchor,
+.main h5:hover .header-anchor,
+.main h6:hover .header-anchor,
+.header-anchor:focus,
+.header-anchor:hover {
+  opacity: 1;
+}
+
+@media (hover: none) {
+  .header-anchor { opacity: 0.4; }
 }
 
 .main h1 {
