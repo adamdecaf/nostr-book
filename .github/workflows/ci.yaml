@@ -53,6 +53,7 @@ jobs:
         run: make setup
 
       - name: Build PDF
+        timeout-minutes: 5
         run: |
           export PATH="/Library/TeX/texbin:$PATH"
           make pdf
