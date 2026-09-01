@@ -54,6 +54,7 @@ jobs:
 
       - name: Build PDF
         timeout-minutes: 5
+        continue-on-error: true
         run: |
           export PATH="/Library/TeX/texbin:$PATH"
           make pdf

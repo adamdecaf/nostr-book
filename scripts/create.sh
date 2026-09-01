@@ -168,9 +168,8 @@ function create_epub() {
 
 function create_pdf() {
     pandoc --metadata-file=metadata.yml \
-           --toc --toc-depth 2 \
            --pdf-engine=xelatex \
-           --columns=72 --wrap=auto \
+           --wrap=none \
            -f markdown-strikeout-footnotes \
            --syntax-highlighting=none \
            --resource-path=.:nips \
