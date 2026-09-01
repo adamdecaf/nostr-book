@@ -160,6 +160,8 @@ done
 function create_epub() {
     pandoc --metadata-file=metadata.yml \
            --epub-metadata=./metadata-epub.yml \
+           --split-level=1 \
+           --toc --toc-depth=2 \
            --syntax-highlighting=monochrome \
            --resource-path=.:nips \
            -s -o nostr-book.epub \

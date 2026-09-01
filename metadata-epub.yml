@@ -1,15 +1,13 @@
 ---
-# See https://pandoc.org/MANUAL.html#epub-metadata for full set of options
----
 cover-image: ./images/cover.png
 creator:
 - role: collector
   text: Adam Shannon
-# identifier:
-# - scheme: DOI
-#   text: doi:10.234234.234/33
+identifier:
+- scheme: URL
+  text: https://adamdecaf.github.io/nostr-book/
 publisher: https://adamdecaf.github.io/nostr-book/
-# rights: © 2007 John Smith, CC BY-NC
+rights: Compilation released into the public domain (Unlicense). NIP text follows the license of nostr-protocol/nips (public domain).
 ibooks:
-  version: 0.1.0
+  version: 1.0.0
 ---
