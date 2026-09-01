@@ -1,0 +1,40 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [master]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build book
+    runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v7
+
+      - name: Install dependencies
+        run: |
+          brew update
+          brew install pandoc
+          brew install --cask basictex
+          eval "$(/usr/libexec/path_helper)"
+
+      - name: Download NIPs
+        run: make setup
+
+      - name: Build EPUB and PDF
+        run: |
+          export PATH="/Library/TeX/texbin:$PATH"
+          make all
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: books
+          path: |
+            nostr-book.epub
+            nostr-book.pdf

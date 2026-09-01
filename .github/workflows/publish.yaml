@@ -41,5 +41,9 @@ jobs:
         git config user.email "support@github.com"
 
         git add -A nostr-book.* ./include/git.md
-        git commit -m "chore: automated publishing"
-        git push origin master
+        if git diff --cached --quiet; then
+          echo "No published book changes"
+        else
+          git commit -m "chore: automated publishing"
+          git push origin master
+        fi
