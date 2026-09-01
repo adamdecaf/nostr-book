@@ -3,9 +3,9 @@
 This book was built from the following commit of [nostr-protocol/nips](https://github.com/nostr-protocol/nips). If something here disagrees with upstream, upstream wins.
 
 ```
-commit e65954922b28eff0e04b4e9020a5474f493793d2
-Author: fiatjaf <fiatjaf@gmail.com>
-Date:   Tue Sep 1 09:32:55 2026 -0300
+commit 488b787848fcf1c6c3498c253264b8121b1a9692
+Author: hodlbod <jstaab@protonmail.com>
+Date:   Tue Sep 1 10:12:31 2026 -0700
 
-    NIP-67: "auth" hint (#2371)
+    Add i tags to highlights, clarify that r is whatever (#2454)
 ```
