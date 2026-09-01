@@ -148,8 +148,9 @@ fi
 chapters=()
 for input in "${inputs[@]}"
 do
-    if [[ "$format" == "pdf" ]]; then
-        # The PDF engine needs page breaks inserted so each section is separated a bit more.
+    if [[ "$format" == "pdf" && "$input" == include/* && "$input" != include/pagebreak.md ]]; then
+        # Page-break at chapter wrappers only. Breaking before every spec
+        # makes xelatex blow up on shipout and produces a jumpy book.
         chapters+=("include/pagebreak.md" "$input")
     else
         chapters+=("$input")
@@ -170,6 +171,7 @@ function create_pdf() {
            --toc --toc-depth 2 \
            --pdf-engine=xelatex \
            --columns=72 --wrap=auto \
+           -f markdown-strikeout-footnotes \
            --syntax-highlighting=none \
            --resource-path=.:nips \
            -V fontsize="10pt" \
