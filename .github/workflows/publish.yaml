@@ -36,7 +36,8 @@ jobs:
     - name: Create books
       run: |
         export PATH="/Library/TeX/texbin:$PATH"
-        make all
+        make epub
+        make pdf || echo "PDF build failed; publishing EPUB anyway"
 
     - name: Commit and Push
       run: |
