@@ -9,9 +9,32 @@ permissions:
   contents: read
 
 jobs:
-  build:
-    name: Build book
+  epub:
+    name: EPUB
     runs-on: macos-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v7
+
+      - name: Install pandoc
+        run: brew install pandoc
+
+      - name: Download NIPs
+        run: make setup
+
+      - name: Build EPUB
+        run: make epub
+
+      - name: Upload EPUB
+        uses: actions/upload-artifact@v4
+        with:
+          name: nostr-book.epub
+          path: nostr-book.epub
+
+  pdf:
+    name: PDF
+    runs-on: macos-latest
+    continue-on-error: true
     steps:
       - name: Check out code
         uses: actions/checkout@v7
@@ -29,15 +52,14 @@ jobs:
       - name: Download NIPs
         run: make setup
 
-      - name: Build EPUB and PDF
+      - name: Build PDF
         run: |
           export PATH="/Library/TeX/texbin:$PATH"
-          make all
+          make pdf
 
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v7
+      - name: Upload PDF
+        uses: actions/upload-artifact@v4
         with:
-          name: books
-          path: |
-            nostr-book.epub
-            nostr-book.pdf
+          name: nostr-book.pdf
+          path: nostr-book.pdf
+          if-no-files-found: warn
