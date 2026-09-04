@@ -438,6 +438,11 @@
       the initial response. Returning fewer events is acceptable, but
       returning (much) more should be avoided to prevent overwhelming
       clients.</p>
+      <p>When <code>limit</code> is zero, the relay MUST NOT return
+      stored events for that filter. After the initial queries for all
+      filters are complete, the relay MUST send <code>EOSE</code> and
+      MUST keep the subscription active for newly received matching
+      events.</p>
       <h4 data-number="4.1.3.2"
       id="nip-01-from-relay-to-client-sending-events-and-notices">From
       relay to client: sending events and notices</h4>
