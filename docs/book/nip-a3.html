@@ -245,6 +245,7 @@
       <li><code>bip352</code> (silent payments)</li>
       <li><code>bip353</code> (DNS addresses)</li>
       <li><code>bitcoin</code></li>
+      <li><code>bitcoincash</code></li>
       <li><code>cashme</code> (Cash App <code>$</code>-prefixed
       cashtag)</li>
       <li><code>ethereum</code></li>
@@ -255,11 +256,16 @@
       <li><code>paypal</code></li>
       <li><code>revolut</code></li>
       <li><code>solana</code></li>
+      <li><code>tron</code></li>
       <li><code>venmo</code></li>
       <li><code>zcash</code></li>
       </ul>
       <p>New widely deployed formats can be added to this list
       later.</p>
+      <p>For an unknown payment <code>type</code>, in case of
+      ambiguities, a specific address URI scheme may be used when one is
+      available (such as <code>bitcoincash</code> from
+      <code>bitcoincash:&lt;address&gt;</code>).</p>
       <nav class="pager pager-bottom" aria-label="Nearby sections">
         <a class="pager-prev" href="nip-87.html" rel="prev">NIP-87</a>
         <a class="pager-next" href="nip-69.html" rel="next">NIP-69</a>
