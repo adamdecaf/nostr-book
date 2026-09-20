@@ -249,32 +249,28 @@
       censorship-resistance.</p>
       <h4 data-number="6.1.2.4" id="nip-02-petname-scheme">Petname
       scheme</h4>
-      <p>The data from these follow lists can be used by clients to
-      construct local <a
-      href="http://www.skyhunter.com/marcs/petnames/IntroPetNames.html">“petname”</a>
-      tables derived from other people’s follow lists. This alleviates
-      the need for global human-readable names. For example:</p>
-      <p>A user has an internal follow list that says</p>
-      <pre class="json"><code>[
-  [&quot;p&quot;, &quot;21df6d143fb96c2ec9d63726bf9edc71&quot;, &quot;&quot;, &quot;erin&quot;]
-]</code></pre>
-      <p>And receives two follow lists, one from
-      <code>21df6d143fb96c2ec9d63726bf9edc71</code> that says</p>
-      <pre class="json"><code>[
-  [&quot;p&quot;, &quot;a8bb3d884d5d90b413d9891fe4c4e46d&quot;, &quot;&quot;, &quot;david&quot;]
-]</code></pre>
-      <p>and another from <code>a8bb3d884d5d90b413d9891fe4c4e46d</code>
-      that says</p>
-      <pre class="json"><code>[
-  [&quot;p&quot;, &quot;f57f54057d2a7af0efecc8b0b66f5708&quot;, &quot;&quot;, &quot;frank&quot;]
-]</code></pre>
-      <p>When the user sees
-      <code>21df6d143fb96c2ec9d63726bf9edc71</code> the client can show
-      <em>erin</em> instead; When the user sees
-      <code>a8bb3d884d5d90b413d9891fe4c4e46d</code> the client can show
-      <em>david.erin</em> instead; When the user sees
-      <code>f57f54057d2a7af0efecc8b0b66f5708</code> the client can show
-      <em>frank.david.erin</em> instead.</p>
+      <p>Clients can use follow-list <a
+      href="http://www.skyhunter.com/marcs/petnames/IntroPetNames.html">petnames</a>
+      as local names for profiles. A petname is stored as the fourth
+      value in a <code>p</code> tag:</p>
+      <pre class="json"><code>[&quot;p&quot;, &quot;21df6d143fb96c2ec9d63726bf9edc7121df6d143fb96c2ec9d63726bf9edc71&quot;, &quot;&quot;, &quot;erin&quot;]</code></pre>
+      <p>Here, the pubkey is known and can be displayed as
+      <code>erin</code> in the current user’s context. Likewise, if Erin
+      has a petname of <code>charlie</code> assigned to one of her
+      contacts, that Charlie can be displayed as
+      <code>~/erin/charlie</code> in the current user’s context.</p>
+      <p>Petnames can also work on the other direction and resolve a
+      pubkey from a name path. A path is resolved one component at a
+      time: each component is looked up in the follow list of the
+      profile resolved by the previous component.</p>
+      <p>For example, if the current user’s follow list gives a profile
+      the petname <code>erin</code>, and Erin’s follow list gives
+      another profile the petname <code>charlie</code>, then
+      <code>~/erin/charlie</code> resolves to Charlie.</p>
+      <p>If no user is logged in or the current user context is not
+      relevant, an absolute root can be specified:</p>
+      <pre class="text"><code>~npub1.../erin/charlie
+~carol@names.com/erin/charlie</code></pre>
       <nav class="pager pager-bottom" aria-label="Nearby sections">
         <a class="pager-prev" href="social.html" rel="prev">Social</a>
         <a class="pager-next" href="nip-05.html" rel="next">NIP-05</a>
