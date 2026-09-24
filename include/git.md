@@ -3,9 +3,9 @@
 This book was built from the following commit of [nostr-protocol/nips](https://github.com/nostr-protocol/nips). If something here disagrees with upstream, upstream wins.
 
 ```
-commit 01e707bacdc87cf262db80545aecaa8f17ac2a4f
-Author: Seydi Charyyev <seydi.charyev@gmail.com>
-Date:   Mon Sep 21 16:37:37 2026 +0500
+commit 62d5feddb1a12f4d454af3890af5253e7292f1d2
+Author: hodlbod <jstaab@protonmail.com>
+Date:   Wed Sep 23 18:14:11 2026 -0700
 
-    README: fix broken Marmot links and table of contents anchor (#2474)
+    Add claim management to nip 86 (#2408)
 ```

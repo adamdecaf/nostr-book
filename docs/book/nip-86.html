@@ -219,173 +219,288 @@
 }</code></pre>
       <p>This is the list of <strong>methods</strong> that may be
       supported:</p>
-      <ul>
-      <li><code>supportedmethods</code>:
+      <h4 data-number="9.11.1.1"
+      id="nip-86-supportedmethods"><code>supportedmethods</code></h4>
+      <p>Lists the methods supported by the relay. May be customized to
+      match permissions assigned to the authenticated user.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>["&lt;method-name&gt;", "&lt;method-name&gt;", ...]</code>
       (an array with the names of all the other supported methods)</li>
-      </ul></li>
-      <li><code>banpubkey</code>:
+      </ul>
+      <h4 data-number="9.11.1.2"
+      id="nip-86-banpubkey"><code>banpubkey</code></h4>
+      <p>Bans a pubkey from the relay. Should automatically remove the
+      pubkey from the allow list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>unbanpubkey</code>:
+      </ul>
+      <h4 data-number="9.11.1.3"
+      id="nip-86-unbanpubkey"><code>unbanpubkey</code></h4>
+      <p>Removes a pubkey from the relay’s ban list. Should not
+      automatically add the pubkey to the allow list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listbannedpubkeys</code>:
+      </ul>
+      <h4 data-number="9.11.1.4"
+      id="nip-86-listbannedpubkeys"><code>listbannedpubkeys</code></h4>
+      <p>Lists pubkeys banned from the relay.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>[{"pubkey": "&lt;32-byte-hex&gt;", "reason": "&lt;optional-reason&gt;"}, ...]</code>,
       an array of objects</li>
-      </ul></li>
-      <li><code>allowpubkey</code>:
+      </ul>
+      <h4 data-number="9.11.1.5"
+      id="nip-86-allowpubkey"><code>allowpubkey</code></h4>
+      <p>Adds a pubkey to the relay’s allow list. Should automatically
+      remove the pubkey from the ban list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>unallowpubkey</code>:
+      </ul>
+      <h4 data-number="9.11.1.6"
+      id="nip-86-unallowpubkey"><code>unallowpubkey</code></h4>
+      <p>Removes a pubkey from the relay’s allow list. Should not
+      automatically add the pubkey to the ban list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listallowedpubkeys</code>:
+      </ul>
+      <h4 data-number="9.11.1.7"
+      id="nip-86-listallowedpubkeys"><code>listallowedpubkeys</code></h4>
+      <p>Lists pubkeys on the relay’s allow list.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>[{"pubkey": "&lt;32-byte-hex&gt;", "reason": "&lt;optional-reason&gt;"}, ...]</code>,
       an array of objects</li>
-      </ul></li>
-      <li><code>createrole</code>:
+      </ul>
+      <h4 data-number="9.11.1.8"
+      id="nip-86-createrole"><code>createrole</code></h4>
+      <p>Creates a new role.</p>
       <ul>
       <li>params:
       <code>[id, label, description, color, order]</code></li>
       <li>result: <code>true</code> (boolean true)</li>
-      </ul></li>
-      <li><code>editrole</code>:
+      </ul>
+      <h4 data-number="9.11.1.9"
+      id="nip-86-editrole"><code>editrole</code></h4>
+      <p>Updates an existing role.</p>
       <ul>
       <li>params:
       <code>[id, label, description, color, order]</code></li>
       <li>result: <code>true</code> (boolean true)</li>
-      </ul></li>
-      <li><code>deleterole</code>:
+      </ul>
+      <h4 data-number="9.11.1.10"
+      id="nip-86-deleterole"><code>deleterole</code></h4>
+      <p>Deletes a role.</p>
       <ul>
       <li>params: <code>[id]</code></li>
       <li>result: <code>true</code> (boolean true)</li>
-      </ul></li>
-      <li><code>assignrole</code>:
+      </ul>
+      <h4 data-number="9.11.1.11"
+      id="nip-86-assignrole"><code>assignrole</code></h4>
+      <p>Assigns a role to a pubkey.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;role-id&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>unassignrole</code>:
+      </ul>
+      <h4 data-number="9.11.1.12"
+      id="nip-86-unassignrole"><code>unassignrole</code></h4>
+      <p>Removes a role from a pubkey.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-public-key&gt;", "&lt;role-id&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listeventsneedingmoderation</code>:
+      </ul>
+      <h4 data-number="9.11.1.13"
+      id="nip-86-listclaims"><code>listclaims</code></h4>
+      <p>Lists <a href="nip-43.html">NIP 43</a> invite codes currently
+      accepted by the relay.</p>
+      <ul>
+      <li>params: <code>[]</code></li>
+      <li>result: <code>[claim, ...]</code>, an array of NIP 43 invite
+      codes</li>
+      </ul>
+      <h4 data-number="9.11.1.14"
+      id="nip-86-createclaim"><code>createclaim</code></h4>
+      <p>Creates a new <a href="nip-43.html">NIP 43</a> invite code.</p>
+      <ul>
+      <li>params: <code>[claim]</code></li>
+      <li>result: <code>true</code> (boolean true)</li>
+      </ul>
+      <h4 data-number="9.11.1.15"
+      id="nip-86-deleteclaim"><code>deleteclaim</code></h4>
+      <p>Revokes a <a href="nip-43.html">NIP 43</a> invite code.</p>
+      <ul>
+      <li>params: <code>[claim]</code></li>
+      <li>result: <code>true</code> (boolean true)</li>
+      </ul>
+      <h4 data-number="9.11.1.16"
+      id="nip-86-listeventsneedingmoderation"><code>listeventsneedingmoderation</code></h4>
+      <p>Lists events awaiting moderation.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>[{"id": "&lt;32-byte-hex&gt;", "reason": "&lt;optional-reason&gt;"}]</code>,
       an array of objects</li>
-      </ul></li>
-      <li><code>allowevent</code>:
+      </ul>
+      <h4 data-number="9.11.1.17"
+      id="nip-86-allowevent"><code>allowevent</code></h4>
+      <p>Adds an event to the relay’s allow list. Should automatically
+      remove the event from the ban list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-event-id&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>banevent</code>:
+      </ul>
+      <h4 data-number="9.11.1.18"
+      id="nip-86-unallowevent"><code>unallowevent</code></h4>
+      <p>Removes an event from the relay’s allow list. Should not
+      automatically add the event to the ban list.</p>
       <ul>
       <li>params:
       <code>["&lt;32-byte-hex-event-id&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listbannedevents</code>:
+      </ul>
+      <h4 data-number="9.11.1.19"
+      id="nip-86-banevent"><code>banevent</code></h4>
+      <p>Bans an event from the relay. Should automatically remove the
+      event from the allow list.</p>
+      <ul>
+      <li>params:
+      <code>["&lt;32-byte-hex-event-id&gt;", "&lt;optional-reason&gt;"]</code></li>
+      <li>result: <code>true</code> (a boolean always set to
+      <code>true</code>)</li>
+      </ul>
+      <h4 data-number="9.11.1.20"
+      id="nip-86-unbanevent"><code>unbanevent</code></h4>
+      <p>Removes an event from the relay’s ban list. Should not
+      automatically add the event to the allow list.</p>
+      <ul>
+      <li>params:
+      <code>["&lt;32-byte-hex-event-id&gt;", "&lt;optional-reason&gt;"]</code></li>
+      <li>result: <code>true</code> (a boolean always set to
+      <code>true</code>)</li>
+      </ul>
+      <h4 data-number="9.11.1.21"
+      id="nip-86-listbannedevents"><code>listbannedevents</code></h4>
+      <p>Lists events banned from the relay.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>[{"id": "&lt;32-byte hex&gt;", "reason": "&lt;optional-reason&gt;"}, ...]</code>,
       an array of objects</li>
-      </ul></li>
-      <li><code>changerelayname</code>:
+      </ul>
+      <h4 data-number="9.11.1.22"
+      id="nip-86-listallowedevents"><code>listallowedevents</code></h4>
+      <p>Lists events on the relay’s allow list.</p>
+      <ul>
+      <li>params: <code>[]</code></li>
+      <li>result:
+      <code>[{"id": "&lt;32-byte-hex&gt;", "reason": "&lt;optional-reason&gt;"}, ...]</code>,
+      an array of objects</li>
+      </ul>
+      <h4 data-number="9.11.1.23"
+      id="nip-86-changerelayname"><code>changerelayname</code></h4>
+      <p>Changes the relay’s name.</p>
       <ul>
       <li>params: <code>["&lt;new-name&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>changerelaydescription</code>:
+      </ul>
+      <h4 data-number="9.11.1.24"
+      id="nip-86-changerelaydescription"><code>changerelaydescription</code></h4>
+      <p>Changes the relay’s description.</p>
       <ul>
       <li>params: <code>["&lt;new-description&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>changerelayicon</code>:
+      </ul>
+      <h4 data-number="9.11.1.25"
+      id="nip-86-changerelayicon"><code>changerelayicon</code></h4>
+      <p>Changes the relay’s icon.</p>
       <ul>
       <li>params: <code>["&lt;new-icon-url&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>allowkind</code>:
+      </ul>
+      <h4 data-number="9.11.1.26"
+      id="nip-86-allowkind"><code>allowkind</code></h4>
+      <p>Adds an event kind to the relay’s allow list.</p>
       <ul>
       <li>params: <code>[&lt;kind-number&gt;]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>disallowkind</code>:
+      </ul>
+      <h4 data-number="9.11.1.27"
+      id="nip-86-disallowkind"><code>disallowkind</code></h4>
+      <p>Disallows an event kind.</p>
       <ul>
       <li>params: <code>[&lt;kind-number&gt;]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listallowedkinds</code>:
+      </ul>
+      <h4 data-number="9.11.1.28"
+      id="nip-86-listallowedkinds"><code>listallowedkinds</code></h4>
+      <p>Lists event kinds on the relay’s allow list.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result: <code>[&lt;kind-number&gt;, ...]</code>, an array of
       numbers</li>
-      </ul></li>
-      <li><code>blockip</code>:
+      </ul>
+      <h4 data-number="9.11.1.29"
+      id="nip-86-listdisallowedkinds"><code>listdisallowedkinds</code></h4>
+      <p>Lists event kinds the relay disallows.</p>
+      <ul>
+      <li>params: <code>[]</code></li>
+      <li>result: <code>[&lt;kind-number&gt;, ...]</code>, an array of
+      numbers</li>
+      </ul>
+      <h4 data-number="9.11.1.30"
+      id="nip-86-blockip"><code>blockip</code></h4>
+      <p>Adds an IP address to the relay’s block list.</p>
       <ul>
       <li>params:
       <code>["&lt;ip-address&gt;", "&lt;optional-reason&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>unblockip</code>:
+      </ul>
+      <h4 data-number="9.11.1.31"
+      id="nip-86-unblockip"><code>unblockip</code></h4>
+      <p>Removes an IP address from the relay’s block list.</p>
       <ul>
       <li>params: <code>["&lt;ip-address&gt;"]</code></li>
       <li>result: <code>true</code> (a boolean always set to
       <code>true</code>)</li>
-      </ul></li>
-      <li><code>listblockedips</code>:
+      </ul>
+      <h4 data-number="9.11.1.32"
+      id="nip-86-listblockedips"><code>listblockedips</code></h4>
+      <p>Lists IP addresses blocked by the relay.</p>
       <ul>
       <li>params: <code>[]</code></li>
       <li>result:
       <code>[{"ip": "&lt;ip-address&gt;", "reason": "&lt;optional-reason&gt;"}, ...]</code>,
       an array of objects</li>
-      </ul></li>
       </ul>
-      <h4 data-number="9.11.1.1"
+      <h4 data-number="9.11.1.33"
       id="nip-86-authorization">Authorization</h4>
       <p>The request must contain an <code>Authorization</code> header
       with a valid <a href="nip-98.html">NIP-98</a> event, except the

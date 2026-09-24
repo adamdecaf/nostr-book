@@ -334,27 +334,9 @@
 [&quot;OK&quot;, &lt;event-id&gt;, false, &quot;restricted: that is an invalid invite code.&quot;]
 [&quot;OK&quot;, &lt;event-id&gt;, true, &quot;duplicate: you are already a member of this relay.&quot;]
 [&quot;OK&quot;, &lt;event-id&gt;, true, &quot;info: welcome to wss://relay.bunk.skunk!&quot;]</code></pre>
-      <h3 data-number="9.4.7" id="nip-43-invite-request">Invite
-      Request</h3>
-      <p>Users may request a claim string from a relay by making a
-      request for <code>kind 28935</code> events. This event MUST be
-      signed by the pubkey specified in the <code>self</code> field of
-      the relay’s <a href="nip-11.html">NIP 11</a> document.</p>
-      <pre class="yaml"><code>{
-  &quot;kind&quot;: 28935,
-  &quot;pubkey&quot;: &quot;&lt;nip11.self&gt;&quot;,
-  &quot;tags&quot;: [
-    [&quot;-&quot;],
-    [&quot;claim&quot;, &quot;&lt;invite code&gt;&quot;],
-  ],
-  // ...other fields
-}</code></pre>
-      <p>Note that these events are in the <code>ephemeral</code> range,
-      which means relays must explicitly opt-in to this behavior by
-      generating claims on the fly when requested. This allows relays to
-      improve security by issuing a different claim for each request,
-      only issuing claims to certain users, or expiring claims.</p>
-      <h3 data-number="9.4.8" id="nip-43-leave-request">Leave
+      <p>Users can request a <code>claim</code> using the <a
+      href="nip-86.html">NIP 86</a> <code>createclaim</code> method.</p>
+      <h3 data-number="9.4.7" id="nip-43-leave-request">Leave
       Request</h3>
       <p>A user MAY send a <code>kind 28936</code> to a relay in order
       to request that their access be revoked. The event’s
@@ -369,7 +351,7 @@
       <p>Relays SHOULD update their <code>kind 13534</code> member list
       and MAY publish a <code>kind 8001</code> “remove member”
       event.</p>
-      <h3 data-number="9.4.9"
+      <h3 data-number="9.4.8"
       id="nip-43-implementation">Implementation</h3>
       <p>Clients MUST only request <code>kind 28935</code> events from
       and send <code>kind 28934</code> events to relays which include
