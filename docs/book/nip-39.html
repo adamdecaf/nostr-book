@@ -210,7 +210,7 @@
   &quot;tags&quot;: [
     [&quot;i&quot;, &quot;github:semisol&quot;, &quot;9721ce4ee4fceb91c9711ca2a6c9a5ab&quot;],
     [&quot;i&quot;, &quot;twitter:semisol_public&quot;, &quot;1619358434134196225&quot;],
-    [&quot;i&quot;, &quot;mastodon:bitcoinhackers.org/@semisol&quot;, &quot;109775066355589974&quot;]
+    [&quot;i&quot;, &quot;mastodon:bitcoinhackers.org/@semisol&quot;, &quot;109775066355589974&quot;],
     [&quot;i&quot;, &quot;telegram:1087295469&quot;, &quot;nostrdirectory/770&quot;]
   ],
   // other fields...
@@ -228,33 +228,41 @@
       names SHOULD be normalized if possible by replacing uppercase
       letters with lowercase letters, and if there are multiple aliases
       for an entity the primary one should be used.</p>
-      <h3 data-number="6.3.3" id="nip-39-claim-types">Claim types</h3>
-      <h4 data-number="6.3.3.1"
+      <h3 data-number="6.3.3" id="nip-39-verification-text">Verification
+      text</h3>
+      <p>For every claim type, the proof SHOULD have the text:</p>
+      <pre><code>Verifying that I control the following Nostr public key: &lt;npub encoded public key&gt;</code></pre>
+      <p>Clients verifying a claim SHOULD accept any proof published by
+      <code>&lt;identity&gt;</code> that contains the user’s npub,
+      because proofs created under earlier versions of this NIP use
+      different text.</p>
+      <h3 data-number="6.3.4" id="nip-39-claim-types">Claim types</h3>
+      <h4 data-number="6.3.4.1"
       id="nip-39-github"><code>github</code></h4>
       <p>Identity: A GitHub username.</p>
       <p>Proof: A GitHub Gist ID. This Gist should be created by
-      <code>&lt;identity&gt;</code> with a single file that has the text
-      <code>Verifying that I control the following Nostr public key: &lt;npub encoded public key&gt;</code>.
+      <code>&lt;identity&gt;</code> with a single file that has the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
       This can be located at
       <code>https://gist.github.com/&lt;identity&gt;/&lt;proof&gt;</code>.</p>
-      <h4 data-number="6.3.3.2"
+      <h4 data-number="6.3.4.2"
       id="nip-39-twitter"><code>twitter</code></h4>
       <p>Identity: A Twitter username.</p>
       <p>Proof: A Tweet ID. The tweet should be posted by
-      <code>&lt;identity&gt;</code> and have the text
-      <code>Verifying my account on nostr My Public Key: "&lt;npub encoded public key&gt;"</code>.
+      <code>&lt;identity&gt;</code> and have the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
       This can be located at
       <code>https://twitter.com/&lt;identity&gt;/status/&lt;proof&gt;</code>.</p>
-      <h4 data-number="6.3.3.3"
+      <h4 data-number="6.3.4.3"
       id="nip-39-mastodon"><code>mastodon</code></h4>
       <p>Identity: A Mastodon instance and username in the format
       <code>&lt;instance&gt;/@&lt;username&gt;</code>.</p>
       <p>Proof: A Mastodon post ID. This post should be published by
-      <code>&lt;username&gt;@&lt;instance&gt;</code> and have the text
-      <code>Verifying that I control the following Nostr public key: "&lt;npub encoded public key&gt;"</code>.
+      <code>&lt;username&gt;@&lt;instance&gt;</code> and have the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
       This can be located at
       <code>https://&lt;identity&gt;/&lt;proof&gt;</code>.</p>
-      <h4 data-number="6.3.3.4"
+      <h4 data-number="6.3.4.4"
       id="nip-39-telegram"><code>telegram</code></h4>
       <p>Identity: A Telegram user ID.</p>
       <p>Proof: A string in the format
@@ -262,10 +270,34 @@
       published in the public channel or group with name
       <code>&lt;ref&gt;</code> and message ID <code>&lt;id&gt;</code>.
       This message should be sent by user ID
-      <code>&lt;identity&gt;</code> and have the text
-      <code>Verifying that I control the following Nostr public key: "&lt;npub encoded public key&gt;"</code>.
+      <code>&lt;identity&gt;</code> and have the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
       This can be located at
       <code>https://t.me/&lt;proof&gt;</code>.</p>
+      <h4 data-number="6.3.4.5"
+      id="nip-39-bluesky"><code>bluesky</code></h4>
+      <p>Identity: A Bluesky handle, without the leading <code>@</code>
+      (for example <code>alice.bsky.social</code>).</p>
+      <p>Proof: The record key of a Bluesky post. This post should be
+      published by <code>&lt;identity&gt;</code> and have the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
+      This can be located at
+      <code>https://bsky.app/profile/&lt;identity&gt;/post/&lt;proof&gt;</code>.</p>
+      <h4 data-number="6.3.4.6"
+      id="nip-39-discord"><code>discord</code></h4>
+      <p>Identity: A Discord username.</p>
+      <p>Proof: A string in the format
+      <code>&lt;guild&gt;/&lt;channel&gt;/&lt;message&gt;</code> which
+      points to a message with ID <code>&lt;message&gt;</code> in the
+      channel with ID <code>&lt;channel&gt;</code> of the server with ID
+      <code>&lt;guild&gt;</code>. This message should be sent by
+      <code>&lt;identity&gt;</code> and have the <a
+      href="nip-39.html#nip-39-verification-text">verification text</a>.
+      This can be located at
+      <code>https://discord.com/channels/&lt;proof&gt;</code>.</p>
+      <p>Discord messages can only be read by members of the server they
+      were posted in, so clients that cannot access the server will not
+      be able to verify this claim.</p>
       <nav class="pager pager-bottom" aria-label="Nearby sections">
         <a class="pager-prev" href="nip-05.html" rel="prev">NIP-05</a>
         <a class="pager-next" href="nip-25.html" rel="next">NIP-25</a>
