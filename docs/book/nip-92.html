@@ -242,6 +242,49 @@
       sent.</p>
       <p>The client MAY ignore <code>imeta</code> tags that do not match
       the URL in the event content.</p>
+      <h3 data-number="5.9.4" id="nip-92-profile-metadata">Profile
+      metadata</h3>
+      <p>A kind <code>0</code> event MAY carry <code>imeta</code> tags
+      describing the images named by the <code>picture</code> and
+      <code>banner</code> fields of its stringified JSON content (<a
+      href="nip-01.html">NIP-01</a>, <a href="nip-24.html">NIP-24</a>).
+      This gives profile images the same <code>fallback</code>,
+      <code>blurhash</code>, <code>dim</code>, <code>alt</code>, and
+      other <a href="nip-94.html">NIP-94</a> fields available to any
+      other attachment.</p>
+      <p>An <code>imeta</code> tag describes a field only when its
+      <code>url</code> is exactly equal to that field’s value. Tags
+      whose <code>url</code> matches neither field SHOULD be
+      ignored.</p>
+      <pre class="json"><code>{
+  &quot;kind&quot;: 0,
+  &quot;content&quot;: &quot;{\&quot;name\&quot;:\&quot;luna\&quot;,\&quot;picture\&quot;:\&quot;https://blossom.example/1f2e...a9.jpg\&quot;,\&quot;banner\&quot;:\&quot;https://blossom.example/7c3d...04.webp\&quot;}&quot;,
+  &quot;tags&quot;: [
+    [
+      &quot;imeta&quot;,
+      &quot;url https://blossom.example/1f2e...a9.jpg&quot;,
+      &quot;m image/jpeg&quot;,
+      &quot;x 1f2e...a9&quot;,
+      &quot;dim 400x400&quot;,
+      &quot;blurhash LEHV6nWB2yk8pyo0adR*.7kCMdnj&quot;,
+      &quot;fallback https://mirror.example/1f2e...a9.jpg&quot;
+    ],
+    [
+      &quot;imeta&quot;,
+      &quot;url https://blossom.example/7c3d...04.webp&quot;,
+      &quot;m image/webp&quot;,
+      &quot;x 7c3d...04&quot;,
+      &quot;dim 1500x500&quot;
+    ]
+  ]
+}</code></pre>
+      <p>Clients SHOULD try the declared <code>fallback</code> URLs when
+      the primary URL fails to load.</p>
+      <p>Since kind <code>0</code> is replaceable, clients publishing a
+      new kind <code>0</code> SHOULD carry over the <code>imeta</code>
+      tags for a <code>picture</code> or <code>banner</code> that hasn’t
+      changed, and drop the tags for images that are no longer in
+      use.</p>
       <nav class="pager pager-bottom" aria-label="Nearby sections">
         <a class="pager-prev" href="nip-a0.html" rel="prev">NIP-A0</a>
         <a class="pager-next" href="nip-37.html" rel="next">NIP-37</a>
