@@ -407,6 +407,9 @@
       the case of tag attributes such as <code>#e</code>, for which an
       event may have multiple values, the event and filter condition
       values must have at least one item in common.</p>
+      <p>If any of these lists is empty, no event can satisfy that
+      condition, so the filter MUST NOT match any events. An empty list
+      MUST NOT be treated as if the attribute were absent.</p>
       <p>The <code>ids</code>, <code>authors</code>, <code>#e</code> and
       <code>#p</code> filter lists MUST contain exact 64-character
       lowercase hex values.</p>
