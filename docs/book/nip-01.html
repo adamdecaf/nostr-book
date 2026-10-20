@@ -399,17 +399,19 @@
       case a new subscription is created, replacing the old one).</p>
       <p>Filter attributes containing lists (<code>ids</code>,
       <code>authors</code>, <code>kinds</code> and tag filters like
-      <code>#e</code>) are JSON arrays with one or more values. At least
-      one of the arrays’ values must match the relevant field in an
-      event for the condition to be considered a match. For scalar event
-      attributes such as <code>authors</code> and <code>kind</code>, the
-      attribute from the event must be contained in the filter list. In
-      the case of tag attributes such as <code>#e</code>, for which an
-      event may have multiple values, the event and filter condition
-      values must have at least one item in common.</p>
+      <code>#e</code>) are JSON arrays. At least one of the arrays’
+      values must match the relevant field in an event for the condition
+      to be considered a match. For scalar event attributes such as
+      <code>authors</code> and <code>kind</code>, the attribute from the
+      event must be contained in the filter list. In the case of tag
+      attributes such as <code>#e</code>, for which an event may have
+      multiple values, the event and filter condition values must have
+      at least one item in common.</p>
       <p>If any of these lists is empty, no event can satisfy that
       condition, so the filter MUST NOT match any events. An empty list
-      MUST NOT be treated as if the attribute were absent.</p>
+      MUST NOT be treated as if the attribute were absent. Since such a
+      filter can never match anything, clients SHOULD NOT send empty
+      lists.</p>
       <p>The <code>ids</code>, <code>authors</code>, <code>#e</code> and
       <code>#p</code> filter lists MUST contain exact 64-character
       lowercase hex values.</p>
