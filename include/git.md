@@ -3,9 +3,11 @@
 This book was built from the following commit of [nostr-protocol/nips](https://github.com/nostr-protocol/nips). If something here disagrees with upstream, upstream wins.
 
 ```
-commit 0b5532c0355ab27f447e071a93c09cf3a2b4aad5
-Author: mattn <mattn.jp@gmail.com>
-Date:   Tue Oct 20 01:09:36 2026 +0000
+commit 7b5ea85479c0b4efce3c246abefa1dae8f8f91e4
+Author: hodlbod <jstaab@protonmail.com>
+Date:   Wed Oct 21 11:36:06 2026 -0700
 
-    NIP-01: drop "one or more values" and ask clients not to send empty lists (#2511)
+    Add slash commands (#2462)
+    
+    Co-authored-by: fiatjaf <fiatjaf@gmail.com>
 ```
