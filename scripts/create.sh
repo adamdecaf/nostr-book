@@ -93,6 +93,7 @@ inputs=(
     nips/46.md # Nostr Remote Signing
     nips/26.md # Delegated Event Signing --- unrecommended
     nips/90.md # Data Vending Machines --- unrecommended
+    nips/CD.md # Slash Commands
 
     include/10-application-features.md
     nips/52.md # Calendar Events

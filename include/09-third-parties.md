@@ -8,9 +8,12 @@ NIP-46 is remote signing, often called Nostr Connect. A bunker or a signer holds
 
 NIP-90 is data vending machines: a general job market where you pay a service to produce an event (transcription, translation, image generation, and so on). It is unrecommended. The spec grew until it was trying to be every API at once. Prefer a small, use-case-specific convention over a universal machine.
 
+NIP-CD is one of those smaller conventions: slash commands. A service publishes a kind 31992 event that defines a command, its arguments, and where it listens. Anyone can then invoke it by typing `/command` in the content of an ordinary event, with no extra tags and no special client support.
+
 **In this chapter**
 
 - NIP-59 — Gift wrap
 - NIP-46 — Nostr remote signing
 - NIP-26 — Delegated event signing (unrecommended; little gain for the complexity)
 - NIP-90 — Data vending machines (unrecommended; prefer smaller, specific standards)
+- NIP-CD — Slash commands

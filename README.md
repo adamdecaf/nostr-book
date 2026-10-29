@@ -26,7 +26,7 @@ Chapters, not NIP numbers:
 6. Relays — info documents, auth, discovery, sync
 7. Clients — `nostr:` URIs, bech32 encodings
 8. Payments — zaps, wallet connect, Cashu
-9. Third Parties — gift wrap, remote signers
+9. Third Parties — gift wrap, remote signers, slash commands
 10. Application Features — calendars, live streams, files, git, and other kinds
 11. Security — keys, encryption, HTTP auth, vanish
 12. Developers — browser and Android signers, app handlers
