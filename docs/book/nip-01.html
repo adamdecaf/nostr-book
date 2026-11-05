@@ -456,13 +456,13 @@
       <ul>
       <li><code>["EVENT", &lt;subscription_id&gt;, &lt;event JSON as defined above&gt;]</code>,
       used to send events requested by clients.</li>
-      <li><code>["OK", &lt;event_id&gt;, &lt;true|false&gt;, &lt;message&gt;]</code>,
+      <li><code>["OK", &lt;event_id&gt;, &lt;true|false&gt;, &lt;message&gt;, &lt;?params&gt;]</code>,
       used to indicate acceptance or denial of an <code>EVENT</code>
       message.</li>
       <li><code>["EOSE", &lt;subscription_id&gt;]</code>, used to
       indicate the <em>end of stored events</em> and the beginning of
       events newly received in real-time.</li>
-      <li><code>["CLOSED", &lt;subscription_id&gt;, &lt;message&gt;]</code>,
+      <li><code>["CLOSED", &lt;subscription_id&gt;, &lt;message&gt;, &lt;?params&gt;]</code>,
       used to indicate that a subscription was ended on the server
       side.</li>
       <li><code>["NOTICE", &lt;message&gt;]</code>, used to send
@@ -481,14 +481,16 @@
       parameter MUST always be present, but MAY be an empty string when
       the 3rd is <code>true</code>, otherwise it MUST be a string formed
       by a machine-readable single-word prefix followed by a
-      <code>:</code> and then a human-readable message. Some examples:
+      <code>:</code> and then a human-readable message. The 5th
+      parameter is an optional stringified value whose meaning depends
+      on the message prefix. Some examples:
       <ul>
       <li><code>["OK", "b1a649ebe8...", true, ""]</code></li>
       <li><code>["OK", "b1a649ebe8...", true, "pow: difficulty 25&gt;=24"]</code></li>
       <li><code>["OK", "b1a649ebe8...", true, "duplicate: already have this event"]</code></li>
       <li><code>["OK", "b1a649ebe8...", false, "blocked: you are banned from posting here"]</code></li>
       <li><code>["OK", "b1a649ebe8...", false, "blocked: please register your pubkey at https://my-expensive-relay.example.com"]</code></li>
-      <li><code>["OK", "b1a649ebe8...", false, "rate-limited: slow down there chief"]</code></li>
+      <li><code>["OK", "b1a649ebe8...", false, "rate-limited: slow down there chief", "1000"]</code></li>
       <li><code>["OK", "b1a649ebe8...", false, "invalid: event creation date is too far off from the current time"]</code></li>
       <li><code>["OK", "b1a649ebe8...", false, "pow: difficulty 26 is less than 30"]</code></li>
       <li><code>["OK", "b1a649ebe8...", false, "restricted: not allowed to write."]</code></li>
@@ -500,18 +502,27 @@
       be sent when a relay decides to kill a subscription on its side
       before a client has disconnected or sent a <code>CLOSE</code>.
       This message uses the same pattern of <code>OK</code> messages
-      with the machine-readable prefix and human-readable message. Some
-      examples:
+      with the machine-readable prefix and human-readable message. The
+      optional 4th parameter has the same form of the <code>OK</code>
+      messages’ 5th one. Some examples:
       <ul>
       <li><code>["CLOSED", "sub1", "unsupported: filter contains unknown elements"]</code></li>
       <li><code>["CLOSED", "sub1", "error: could not connect to the database"]</code></li>
       <li><code>["CLOSED", "sub1", "error: shutting down idle subscription"]</code></li>
+      <li><code>["CLOSED", "sub1...", "rate-limited: slow down there chief", "2500"]</code></li>
       </ul></li>
       <li>The standardized machine-readable prefixes for <code>OK</code>
       and <code>CLOSED</code> are: <code>duplicate</code>,
       <code>pow</code>, <code>blocked</code>, <code>rate-limited</code>,
       <code>invalid</code>, <code>restricted</code>, <code>mute</code>
       and <code>error</code> for when none of that fits.</li>
+      <li>The <code>rate-limited</code> message <code>params</code> is a
+      zero-free decimal string of a positive integer in milliseconds
+      (examples are “1000”, “2500”), that tells the client to back off
+      for a period before sending to the relay the same message type
+      that triggered the rate limit. The value MAY be approximate. Its
+      absence MUST NOT be read as an instruction to retry
+      immediately.</li>
       </ul>
       <nav class="pager pager-bottom" aria-label="Nearby sections">
         <a class="pager-prev" href="nostr-overview.html" rel="prev">Nostr Overview</a>
