@@ -21,7 +21,7 @@ inputs=(
     nips/71.md # Video Events
     nips/A0.md # Voice Messages
     nips/92.md # Media Attachments Metadata
-    nips/37.md # Draft Events
+    nips/37.md # Draft Wraps
     nips/A4.md # Public Messages
     nips/17.md # Private Direct Messages
     nips/04.md # Encrypted Direct Message --- unrecommended
@@ -64,7 +64,7 @@ inputs=(
     nips/70.md # Protected Events
     nips/43.md # Relay Access Metadata and Requests
     nips/65.md # Relay List Metadata
-    nips/66.md # Relay Discovery and Liveness Monitoring
+    nips/66.md # Relay Liveness Monitoring
     nips/50.md # Search Capability
     nips/45.md # Counting results
     nips/67.md # EOSE Completeness Hint

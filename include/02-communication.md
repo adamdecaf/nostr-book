@@ -19,7 +19,7 @@ Two housekeeping NIPs round out the chapter. NIP-40 lets an event expire so rela
 - NIP-71 — Video events
 - NIP-A0 — Voice messages
 - NIP-92 — Media attachments
-- NIP-37 — Draft events
+- NIP-37 — Draft wraps
 - NIP-A4 — Public messages
 - NIP-17 — Private direct messages
 - NIP-04 — Encrypted direct messages (unrecommended; use NIP-17)
