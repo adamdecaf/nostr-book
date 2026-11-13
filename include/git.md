@@ -3,9 +3,9 @@
 This book was built from the following commit of [nostr-protocol/nips](https://github.com/nostr-protocol/nips). If something here disagrees with upstream, upstream wins.
 
 ```
-commit b587c619c2ea662d40b40976aeccf6ac8d6ba9eb
+commit 1fb3a95f112920a05092ae030adf3d490fc2e9d1
 Author: Seydi Charyyev <seydi.charyev@gmail.com>
-Date:   Sat Nov 7 18:37:05 2026 +0500
+Date:   Thu Nov 12 19:44:22 2026 +0500
 
-    README: rename the NIP-37 entry to Draft Wraps (#2538)
+    README: rename the NIP-66 entry to Relay Liveness Monitoring (#2542)
 ```
