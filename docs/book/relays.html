@@ -214,15 +214,15 @@
       when access is not wide open.</p>
       <p>Finding and choosing relays is its own problem. NIP-65 is how a
       user publishes the relays they write to and read from, so other
-      people can find their notes. NIP-66 is relay discovery and
-      liveness monitoring: events that say “this relay exists and I
-      probed it.” Search (NIP-50) and counting (NIP-45) are optional
-      extras a relay may offer. NIP-67 lets a relay hint whether an
-      <code>EOSE</code> means “that’s all I have” or “that’s all for
-      now.” NIP-77 is negentropy, a set-reconciliation trick so a client
-      and a relay can sync missing events without downloading
-      everything. NIP-86 is an HTTP API for relay operators to manage
-      bans, allow lists, and other admin work.</p>
+      people can find their notes. NIP-66 is relay liveness monitoring:
+      events that say “this relay exists and I probed it.” Search
+      (NIP-50) and counting (NIP-45) are optional extras a relay may
+      offer. NIP-67 lets a relay hint whether an <code>EOSE</code> means
+      “that’s all I have” or “that’s all for now.” NIP-77 is negentropy,
+      a set-reconciliation trick so a client and a relay can sync
+      missing events without downloading everything. NIP-86 is an HTTP
+      API for relay operators to manage bans, allow lists, and other
+      admin work.</p>
       <p>NIP-48 covers bridged events — notes that originated somewhere
       else (another protocol, another network) and landed on Nostr with
       enough metadata to point back at the source.</p>
@@ -233,7 +233,7 @@
       <li>NIP-70 — Protected events</li>
       <li>NIP-43 — Relay access metadata and requests</li>
       <li>NIP-65 — Relay list metadata</li>
-      <li>NIP-66 — Relay discovery and liveness</li>
+      <li>NIP-66 — Relay liveness monitoring</li>
       <li>NIP-50 — Search</li>
       <li>NIP-45 — Counting results</li>
       <li>NIP-67 — EOSE completeness hint</li>
