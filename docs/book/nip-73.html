@@ -244,6 +244,21 @@
       <td>“geo”</td>
       </tr>
       <tr>
+      <td>OSM Way</td>
+      <td>“osm:way:<code>&lt;POI id&gt;</code>”</td>
+      <td>“osm”</td>
+      </tr>
+      <tr>
+      <td>OSM Node</td>
+      <td>“osm:node:<code>&lt;Node id&gt;</code>”</td>
+      <td>“osm”</td>
+      </tr>
+      <tr>
+      <td>OSM Relation</td>
+      <td>“osm:relation:<code>&lt;Relation id&gt;</code>”</td>
+      <td>“osm”</td>
+      </tr>
+      <tr>
       <td>Countries</td>
       <td>“iso3166:<code>&lt;code, uppercase&gt;</code>”</td>
       <td>“iso3166”</td>
@@ -308,7 +323,25 @@
       <p>Geohashes are a geocoding system that encodes geographic
       locations into short strings of letters and digits. They MUST be
       lowercase.</p>
-      <h4 data-number="13.7.3.3" id="nip-73-countries">Countries:</h4>
+      <h4 data-number="13.7.3.3"
+      id="nip-73-openstreetmap-object-references">OpenStreetMap Object
+      References:</h4>
+      <ul>
+      <li>Node: <code>["i", "osm:node:240949599"]</code> –
+      https://www.openstreetmap.org/node/240949599<br />
+      </li>
+      <li>Way: <code>["i", "osm:way:5013364"]</code> –
+      https://www.openstreetmap.org/way/5013364<br />
+      </li>
+      <li>Relation: <code>["i", "osm:relation:62422"]</code> –
+      https://www.openstreetmap.org/relation/62422</li>
+      </ul>
+      <p>OpenStreetMap object IDs are globally unique identifiers. They
+      use the lowercase format <code>osm:&lt;type&gt;:&lt;id&gt;</code>
+      where <code>&lt;type&gt;</code> is one of <code>node</code>,
+      <code>way</code>, or <code>relation</code>, and
+      <code>&lt;id&gt;</code> is a numeric identifier.</p>
+      <h4 data-number="13.7.3.4" id="nip-73-countries">Countries:</h4>
       <p>ISO 3166 codes can reference countries (ISO 3166-1 alpha-2) or
       subdivisions like states/provinces (ISO 3166-2).</p>
       <ul>
@@ -318,7 +351,7 @@
       </ul>
       <p>ISO 3166 codes MUST be uppercase. More info:
       https://en.wikipedia.org/wiki/ISO_3166</p>
-      <h4 data-number="13.7.3.4" id="nip-73-books">Books:</h4>
+      <h4 data-number="13.7.3.5" id="nip-73-books">Books:</h4>
       <ul>
       <li>Book ISBN: <code>["i", "isbn:9780765382030"]</code> -
       https://isbnsearch.org/isbn/9780765382030</li>
@@ -327,7 +360,7 @@
       hyphens</strong></em> as many book search APIs return the ISBNs
       without hyphens. Removing hyphens from ISBNs is trivial, whereas
       adding the hyphens back in is non-trivial requiring a library.</p>
-      <h4 data-number="13.7.3.5" id="nip-73-podcasts">Podcasts:</h4>
+      <h4 data-number="13.7.3.6" id="nip-73-podcasts">Podcasts:</h4>
       <ul>
       <li>Podcast RSS Feed GUID:
       <code>["i", "podcast:guid:c90e609a-df1e-596a-bd5e-57bcc8aad6cc"]</code>
@@ -338,7 +371,7 @@
       <li>Podcast RSS Publisher GUID:
       <code>["i", "podcast:publisher:guid:18bcbf10-6701-4ffb-b255-bc057390d738"]</code></li>
       </ul>
-      <h4 data-number="13.7.3.6" id="nip-73-movies">Movies:</h4>
+      <h4 data-number="13.7.3.7" id="nip-73-movies">Movies:</h4>
       <ul>
       <li>Movie ISAN: <code>["i", "isan:0000-0000-401A-0000-7"]</code> -
       https://web.isan.org/public/en/isan/0000-0000-401A-0000-7</li>
@@ -347,12 +380,12 @@
       version part</strong></em> as the versions / edits of movies are
       not relevant. More info on ISAN parts here -
       https://support.isan.org/hc/en-us/articles/360002783131-Records-relations-and-hierarchies-in-the-ISAN-Registry</p>
-      <h4 data-number="13.7.3.7" id="nip-73-blockchain">Blockchain</h4>
+      <h4 data-number="13.7.3.8" id="nip-73-blockchain">Blockchain</h4>
       <p><code>&lt;blockchain&gt;</code> can be any layer 1 chain
       (<code>bitcoin</code>, <code>ethereum</code>, <code>solana</code>,
       …). If necessary (e.g. for ethereum), you can specify a
       <code>&lt;chainId&gt;</code>.</p>
-      <h5 data-number="13.7.3.7.1" id="nip-73-bitcoin">Bitcoin</h5>
+      <h5 data-number="13.7.3.8.1" id="nip-73-bitcoin">Bitcoin</h5>
       <pre><code>bitcoin:address:&lt;bech32, lowercase | base58, case sensitive&gt;
 bitcoin:tx:&lt;txid, hex, lowercase&gt;</code></pre>
       <p>E.g.
@@ -367,7 +400,7 @@ bitcoin:tx:&lt;txid, hex, lowercase&gt;</code></pre>
   [&quot;i&quot;, &quot;bitcoin:address:1HQ3Go3ggs8pFnXuHVHRytPCq5fGG8Hbhx&quot;],
   [&quot;k&quot;, &quot;bitcoin:address&quot;]
 ]</code></pre>
-      <h5 data-number="13.7.3.7.2"
+      <h5 data-number="13.7.3.8.2"
       id="nip-73-ethereum-and-other-evm-chains">Ethereum (and other EVM
       chains)</h5>
       <pre><code>ethereum:&lt;chainId, integer&gt;:tx:&lt;txHash, hex, lowercase&gt;
@@ -385,7 +418,7 @@ ethereum:&lt;chainId, integer&gt;:address:&lt;hex, lowercase&gt;</code></pre>
   [&quot;k&quot;, &quot;ethereum:tx&quot;]
 ]</code></pre>
       <hr />
-      <h4 data-number="13.7.3.8" id="nip-73-optional-url-hints">Optional
+      <h4 data-number="13.7.3.9" id="nip-73-optional-url-hints">Optional
       URL Hints</h4>
       <p>Each <code>i</code> tag MAY have a url hint as the second
       argument to redirect people to a website if the client isn’t
